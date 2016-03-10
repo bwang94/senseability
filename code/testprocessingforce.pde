@@ -21,14 +21,17 @@ int xPos = 1;
 int lastxPos = 1;
 int lastheight = 0;
 
+int scrn_width = 1200;
+int scrn_height = 700;
+
 void setup(){
   port = new Serial(this,Serial.list()[3],57600);
   port.clear();
   port.bufferUntil('\n');
-  size(1400,700);
+  size(1200,700);
   frameRate(120);
   f = createFont("Arial",32,true);
-  background(0);
+  background(255);
   println(arduino.list());
 }
 
@@ -48,19 +51,42 @@ void draw(){
   text(str(maxforce_trun),30,140);
   stroke(255,255,255);
   strokeWeight(2);
-  line(lastxPos, lastheight, xPos, height - forcedraw);
-  lastxPos = xPos;
-  lastheight = int(height - forcedraw);
-  if (xPos >= width){
-    xPos = 0;
-    lastxPos = 0;
-    background(0);
-  }
-  else{
-    xPos++;
-  }
-  if (forcedraw == 0){
-    lastheight = height;
-  }
+  
+  float ypos = height - forcedraw;
+  float xposA = 200;
+  float xposB = 850;
+  
+  rect(xposA,ypos,200,forcedraw);    //left hand bar graph
+  fill(0);        
+  text("Left Hand",xposA + 25,350);    //left hand text
+  rect(xposA,forcedraw,200,300);
+  fill(255);
+
+  rect(xposB,forcedraw,200,300);
+  fill(255);
+  
+  rect(xposB,ypos,200,forcedraw);      //right hand bar graph
+  fill(0);
+  text("Right Hand",xposB + 25,350);   //right hand text
+  rect(xposB,forcedraw,200,300);
+  fill(255);
+  
+  rect(scrn_width/2,0,5,scrn_height);   //divider line
+  fill(0);
+  
+  //line(lastxPos, lastheight, xPos, height - forcedraw);
+  //lastxPos = xPos;
+  //lastheight = int(height - forcedraw);
+  //if (xPos >= width){
+    //xPos = 0;
+    //lastxPos = 0;
+    //background(0);
+  //}
+  //else{
+  //  xPos++;
+  //}
+  //if (forcedraw == 0){
+  //  lastheight = height;
+  //}
   //println(resist);
 }
