@@ -12,11 +12,11 @@ void serialEvent(Serial port){
   }
   if (int(inData) == 0){
     force = 0;
-    forcedraw = map(force, 0, 150, 0, height - textheight);
+    forcedraw = map(force, 0, forcelimit, 0, height - textheight);
   }
   if (float(inData) > 0){
     force = k/(pow(float(inData),c));
-    forcedraw = map(force, 0, 150, 0, height - textheight);
+    forcedraw = map(force, 0, forcelimit, 0, height - textheight);
     resist = float(inData);
   }
   if (force > maxforce){
