@@ -16,7 +16,6 @@ float k = 54725.2;
 float c = 1.2054;
 int textheight = 200;
 int textwidth = 250;
-int forcelimit = 150;
 
 int xPos = 1;
 int lastxPos = 1;
@@ -26,15 +25,14 @@ int scrn_width = 1200;
 int scrn_height = 700;
 
 void setup(){
-  port = new Serial(this,Serial.list()[0],57600);
+  port = new Serial(this,Serial.list()[3],57600);
   port.clear();
   port.bufferUntil('\n');
-  //size(1200,700);
-  fullScreen();
+  size(1200,700);
   frameRate(120);
   f = createFont("Arial",32,true);
   background(255);
-  //println(arduino.list());
+  println(arduino.list());
 }
 
 void draw(){
@@ -58,20 +56,17 @@ void draw(){
   float xposA = 200;
   float xposB = 850;
   
+  fill(0); 
   rect(xposA,ypos,200,forcedraw);    //left hand bar graph
-  fill(0);        
   text("Left Hand",xposA + 25,350);    //left hand text
-  rect(xposA,forcedraw,200,300);
   fill(255);
-
-  rect(xposB,forcedraw,200,300);
-  fill(255);
+  rect(xposA,300,200,300 - forcedraw);
   
-  rect(xposB,ypos,200,forcedraw);      //right hand bar graph
   fill(0);
+  rect(xposB,ypos,200,forcedraw);      //right hand bar graph
   text("Right Hand",xposB + 25,350);   //right hand text
-  rect(xposB,forcedraw,200,300);
   fill(255);
+  rect(xposB,300,200,300 - forcedraw);
   
   rect(scrn_width/2,0,5,scrn_height);   //divider line
   fill(0);
