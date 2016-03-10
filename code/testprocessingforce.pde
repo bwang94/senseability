@@ -16,6 +16,7 @@ float k = 54725.2;
 float c = 1.2054;
 int textheight = 200;
 int textwidth = 250;
+int forcelimit = 150;
 
 int xPos = 1;
 int lastxPos = 1;
@@ -25,14 +26,15 @@ int scrn_width = 1200;
 int scrn_height = 700;
 
 void setup(){
-  port = new Serial(this,Serial.list()[3],57600);
+  port = new Serial(this,Serial.list()[0],57600);
   port.clear();
   port.bufferUntil('\n');
-  size(1200,700);
+  //size(1200,700);
+  fullScreen();
   frameRate(120);
   f = createFont("Arial",32,true);
   background(255);
-  println(arduino.list());
+  //println(arduino.list());
 }
 
 void draw(){
