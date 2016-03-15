@@ -21,6 +21,8 @@ int forcelimit = 150;
 int xPos = 1;
 int lastxPos = 1;
 int lastheight = 0;
+float xposA = 200;
+float xposB = 850;
 
 int scrn_width = 1200;
 int scrn_height = 700;
@@ -54,23 +56,26 @@ void draw(){
   stroke(255,255,255);
   strokeWeight(2);
   
-  float ypos = height - forcedraw;
-  float xposA = 200;
-  float xposB = 850;
+  drawBar(0,200,forcedraw);
+  drawBar(1,200,forcedraw);
   
-  fill(255);
-  rect(xposA,400,200,height - forcedraw);
   
-  fill(0);
-  rect(xposA,ypos,200,forcedraw);    //left hand bar graph
-  text("Left Hand",xposA + 25,350);    //left hand text
+  
+  //float ypos = height - forcedraw;
+  
+  //fill(255);
+  //rect(xposA,400,200,height - forcedraw);
+  
+  //fill(0);
+  //rect(xposA,ypos,200,forcedraw);    //left hand bar graph
+  //text("Left Hand",xposA + 25,350);    //left hand text
 
-  fill(255);
-  rect(xposB,400,200,height - forcedraw);
+  //fill(255);
+  //rect(xposB,400,200,height - forcedraw);
   
-  fill(0);
-  rect(xposB,ypos,200,forcedraw);      //right hand bar graph
-  text("Right Hand",xposB + 25,350);   //right hand text
+  //fill(0);
+  //rect(xposB,ypos,200,forcedraw);      //right hand bar graph
+  //text("Right Hand",xposB + 25,350);   //right hand text
   
   rect(scrn_width/2,0,5,scrn_height);   //divider line
   fill(0);
