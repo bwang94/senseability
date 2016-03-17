@@ -24,6 +24,9 @@ int lastheight = 0;
 float xposA = 200;
 float xposB = 850;
 
+int scrn_width = 1200;
+int scrn_height = 700;
+
 
 void setup(){
   port = new Serial(this,Serial.list()[0],57600);
