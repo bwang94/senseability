@@ -10,11 +10,11 @@ void drawBar(int side, int barWidth, float barHeight){
     text = "Right Side";
   }
   
-  float ypos = height = barHeight;
+  float ypos = height - barHeight;
   //Draw graph and display text
   fill(255);
-  rect(pos,400,barWidth,height - barHeight); 
+  rect(pos,400,barWidth,height - barHeight); //Draw white rectangle
   fill(0);
-  rect(pos,ypos,barWidth,barHeight);
+  rect(pos,ypos,barWidth,barHeight); //Draw the force bar
   text(text,pos + 25,350);
 }

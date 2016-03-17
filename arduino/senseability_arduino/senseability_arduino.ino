@@ -14,7 +14,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  val = analogRead(analogPin); //Gets the voltage value from analog pin 0 (on a scale of 0 to 1023)
+  val = (double) analogRead(analogPin); //Gets the voltage value from analog pin 0 (on a scale of 0 to 1023)
   voltage = val/1023*v_in; //Converts val to voltage in volts
   r = r_m * v_in/voltage - r_m; //Calculate resistance of FSR from voltage
   if (r > r_cutoff) //Ignore all resistance values above 100kohm

@@ -59,24 +59,6 @@ void draw(){
   drawBar(0,200,forcedraw);
   drawBar(1,200,forcedraw);
   
-  
-  
-  //float ypos = height - forcedraw;
-  
-  //fill(255);
-  //rect(xposA,400,200,height - forcedraw);
-  
-  //fill(0);
-  //rect(xposA,ypos,200,forcedraw);    //left hand bar graph
-  //text("Left Hand",xposA + 25,350);    //left hand text
-
-  //fill(255);
-  //rect(xposB,400,200,height - forcedraw);
-  
-  //fill(0);
-  //rect(xposB,ypos,200,forcedraw);      //right hand bar graph
-  //text("Right Hand",xposB + 25,350);   //right hand text
-  
   rect(scrn_width/2,0,5,scrn_height);   //divider line
   fill(0);
   
