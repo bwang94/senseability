@@ -31,7 +31,7 @@ void setup(){
   port = new Serial(this,Serial.list()[0],57600);
   port.clear();
   port.bufferUntil('\n');
-  size(1200,700);
+  size(scrn_width,scrn_height);
   //fullScreen();
   frameRate(120);
   f = createFont("Arial",32,true);
