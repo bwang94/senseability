@@ -16,11 +16,11 @@ float k = 54725.2;
 float c = 1.2054;
 int textheight = 200;
 int textwidth = 250;
-int forcelimit = 150;
+int forcelimit = 100;
 
 int xPos = 1;
 int lastxPos = 1;
-int lastheight = 0;
+int lastheight = 350;
 float xposA = 200;
 float xposB = 850;
 
@@ -42,40 +42,54 @@ void setup(){
 
 void draw(){
   textFont(f,32);
+  
   fill(255);
   beginShape();
   noStroke();
-  rect(0,0,textwidth,textheight);
+  rect(0,300,textwidth,textheight);
   fill(0);
   endShape();
-  text("Force (N)",30,50);
+  text("Force (N)",30,350);
   force_trun = truncate(force);
-  text(str(force_trun),30,80);
-  text("Max Force (N)",30,110);
+  text(str(force_trun),30,380);
+  text("Max (N)",30,410);
   maxforce_trun = truncate(maxforce);
-  text(str(maxforce_trun),30,140);
-  stroke(255,255,255);
-  strokeWeight(2);
+  text(str(maxforce_trun),30,440);
+  
+  fill(255);
+  beginShape();
+  noStroke();
+  rect(600,300,textwidth,textheight);
+  fill(0);
+  endShape();
+  text("Force (N)",630,350);
+  force_trun = truncate(force);
+  text(str(force_trun),630,380);
+  text("Max (N)",630,410);
+  maxforce_trun = truncate(maxforce);
+  text(str(maxforce_trun),630,440);
   
   drawBar(0,200,forcedraw);
   drawBar(1,200,forcedraw);
   
-  rect(scrn_width/2,0,5,scrn_height);   //divider line
+  rect(scrn_width/2,scrn_height/2 - 50,5,scrn_height/2 + 50);   //divider line
   fill(0);
   
-  //line(lastxPos, lastheight, xPos, height - forcedraw);
-  //lastxPos = xPos;
-  //lastheight = int(height - forcedraw);
-  //if (xPos >= width){
-    //xPos = 0;
-    //lastxPos = 0;
-    //background(0);
-  //}
-  //else{
-  //  xPos++;
-  //}
-  //if (forcedraw == 0){
-  //  lastheight = height;
-  //}
-  //println(resist);
+  stroke(0,0,0);
+  strokeWeight(2);
+  line(lastxPos, lastheight, xPos, height - forcedraw);
+  lastxPos = xPos;
+  lastheight = int(height - forcedraw);
+  if (xPos >= width){
+   xPos = 0;
+   lastxPos = 0;
+   background(255);
+  }
+  else{
+  xPos++;
+  }
+  if (forcedraw == 0){
+  lastheight = height;
+  }
+  println(resist);
 }
