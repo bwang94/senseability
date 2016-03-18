@@ -29,7 +29,7 @@ int scrn_height = 700;
 
 
 void setup(){
-  port = new Serial(this,Serial.list()[0],57600);
+  port = new Serial(this,Serial.list()[3],57600);
   port.clear();
   port.bufferUntil('\n');
   size(1200,700);
@@ -75,11 +75,13 @@ void draw(){
   rect(scrn_width/2,scrn_height/2 - 50,5,scrn_height/2 + 50);   //divider line
   fill(0);
   
+  //**Line Graph*************//
+  
   stroke(0,0,0);
   strokeWeight(2);
-  line(lastxPos, lastheight, xPos, height - forcedraw);
+  line(lastxPos, lastheight, xPos,height/2 -100 - forcedraw);
   lastxPos = xPos;
-  lastheight = int(height - forcedraw);
+  lastheight = int(height/2 -100 - forcedraw);
   if (xPos >= width){
    xPos = 0;
    lastxPos = 0;
@@ -89,7 +91,7 @@ void draw(){
   xPos++;
   }
   if (forcedraw == 0){
-  lastheight = height;
+  lastheight = height/2 -100;
   }
-  println(resist);
+  println(forcedraw);
 }
