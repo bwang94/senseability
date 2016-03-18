@@ -8,7 +8,8 @@ double r_m = 4700;
 double voltage_flt = 0;
 double voltage_frt = 0;
 double r_flt = 0;
-double r_frt = 0;
+double r_frt = 0;g 
+String toSerial = "";
 
 void setup() {
   // put your setup code here, to run once:
@@ -34,5 +35,6 @@ void loop() {
   {
     r_frt = 0;
   }
-  Serial.println(r);
+  toDisplay = "FLT" + r_flt + "FRT" + r_frt;
+  Serial.println(toDisplay);
 }
