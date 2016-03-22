@@ -1,16 +1,23 @@
-import processing.serial.*;
+  ximport processing.serial.*;
 import cc.arduino.*;
 Arduino arduino;
 
 Serial port;
 PFont f;
 
-float force;
-float force_trun;
-float forcedraw;
-float resist;
-float maxforce = 0;
-float maxforce_trun;
+float flt;
+float flt_trun;
+float fltdraw;
+float resist_flt;
+float maxflt = 0;
+float maxflt_trun;
+
+float frt;
+float frt_trun;
+float frtdraw;
+float resist_frt;
+float maxfrt = 0;
+float maxfrt_trun;
 
 float k = 54725.2;
 float c = 1.2054;
@@ -18,9 +25,14 @@ int textheight = 200;
 int textwidth = 250;
 int forcelimit = 100;
 
-int xPos = 1;
-int lastxPos = 1;
-int lastheight = 350;
+int xPos_lt = 1;
+int lastxPos_lt = 1;
+int lastheight_lt = 350;
+
+int xPos_rt = 1;
+int lastxPos_rt = 1;
+int lastheight_rt = 350;
+
 float xposA = 200;
 float xposB = 850;
 
@@ -50,12 +62,13 @@ void draw(){
   fill(0);
   endShape();
   text("Force (N)",30,350);
-  force_trun = truncate(force);
-  text(str(force_trun),30,380);
+  flt_trun = truncate(flt);
+  text(str(flt_trun),30,380);
   text("Max (N)",30,410);
-  maxforce_trun = truncate(maxforce);
-  text(str(maxforce_trun),30,440);
+  maxflt_trun = truncate(maxflt);
+  text(str(maxflt_trun),30,440);
   
+  // Display numerical force values for left hand
   fill(255);
   beginShape();
   noStroke();
@@ -63,35 +76,54 @@ void draw(){
   fill(0);
   endShape();
   text("Force (N)",630,350);
-  force_trun = truncate(force);
-  text(str(force_trun),630,380);
+  flt_trun = truncate(flt);
+  text(str(flt_trun),630,380);
   text("Max (N)",630,410);
-  maxforce_trun = truncate(maxforce);
-  text(str(maxforce_trun),630,440);
+  maxflt_trun = truncate(maxflt);
+  text(str(maxflt_trun),630,440);
   
-  drawBar(0,200,forcedraw);
-  drawBar(1,200,forcedraw);
+  //TODO: Display numberical forces values for right hand
   
-  rect(scrn_width/2,scrn_height/2 - 50,5,scrn_height/2 + 50);   //divider line
+  // Draws bar graphs for forces
+  drawBar(0,200,fltdraw);
+  drawBar(1,200,frtdraw);
+  
+  // Draw divider line
+  rect(scrn_width/2,scrn_height/2 - 50,5,scrn_height/2 + 50);
   fill(0);
   
-  //**Line Graph*************//
-  
-  stroke(0,0,0);
+  // Line Graph for left hand
+  stroke(255,153,153);
   strokeWeight(2);
-  line(lastxPos, lastheight, xPos,height/2 -100 - forcedraw);
-  lastxPos = xPos;
-  lastheight = int(height/2 -100 - forcedraw);
-  if (xPos >= width){
-   xPos = 0;
-   lastxPos = 0;
+  line(lastxPos_lt, lastheight_lt, xPos_lt,height/2 -100 - fltdraw);
+  lastxPos_lt = xPos_lt;
+  lastheight_lt = int(height/2 -100 - fltdraw);
+  if (xPos_lt >= width){
+   xPos_lt = 0;
+   lastxPos_lt = 0;
    background(255);
   }
   else{
-  xPos++;
+  xPos_lt++;
   }
-  if (forcedraw == 0){
-  lastheight = height/2 -100;
+  if (fltdraw == 0){
+  lastheight_lt = height/2 -100;
   }
-  println(forcedraw);
+  
+  // Line Graph for right hand 
+  stroke(153,204,205);
+  strokeWeight(2);
+  line(lastxPos_rt, lastheight_rt, xPos_lt,height/2 -100 - frtdraw);
+  lastxPos_rt = xPos_rt;
+  lastheight_rt = int(height/2 -100 - frtdraw);
+  if (xPos_rt >= width){
+   xPos_rt = 0;
+   lastxPos_rt = 0;
+  }
+  else{
+  xPos_rt++;
+  }
+  if (frtdraw == 0){
+  lastheight_rt = height/2 -100;
+  }
 }

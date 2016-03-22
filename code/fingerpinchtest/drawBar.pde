@@ -1,3 +1,5 @@
+//SUMMARY: drawBar draws a bar graph given the side of the screen it should draw, the width, and height of the bar
+
 void drawBar(int side, int barWidth, float barHeight){
   float pos = 0;
   String text = "";
