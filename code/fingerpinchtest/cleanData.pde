@@ -1,14 +1,16 @@
 // SUMMARY: cleanData makes sure the input is not null, not empty, non-zero, and readable.
 
-void cleanData(String data){
+String cleanData(String data){
   if (data == null){
-    return;
+    return "";
   }
   if (data.isEmpty()){
-    return;
+    return "";
   }   
   data = trim(data);
   if(data.length() <= 0){
-    return;
-  } 
+    return "";
+  }
+  //println("Cleaned");
+  return data;
 }

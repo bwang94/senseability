@@ -6,9 +6,9 @@ void computeForce(){
     flt = 0;
     fltdraw = map(flt, 0, forcelimit, 0, height/2 - 50);
   }
-  if (resist_flt == 0){
-    flt = 0;
-    fltdraw = map(flt, 0, forcelimit, 0, height/2 - 50);
+  if (resist_frt == 0){
+    frt = 0;
+    frtdraw = map(frt, 0, forcelimit, 0, height/2 - 50);
   }
   
   // Calculate forces

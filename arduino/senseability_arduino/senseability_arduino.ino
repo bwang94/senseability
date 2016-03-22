@@ -31,7 +31,15 @@ void loop() {
   {
     r_flt = 0;
   }
+  if (r_flt < 0)
+  {
+    r_flt = 0;
+  }
   if (r_frt > r_cutoff)
+  {
+    r_frt = 0;
+  }
+  if (r_frt < 0)
   {
     r_frt = 0;
   }

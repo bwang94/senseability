@@ -5,11 +5,11 @@ void drawBar(int side, int barWidth, float barHeight){
   String text = "";
   if (side == 0){
     pos = xposA;
-    text = "Left Hand";
+    text = "Left Hand (red)";
   }
   if (side == 1){
     pos = xposB;
-    text = "Right Hand";
+    text = "Right Hand (blue)";
   }
   
   float ypos = height - barHeight;
@@ -19,7 +19,7 @@ void drawBar(int side, int barWidth, float barHeight){
   fill(0);
   rect(pos,ypos,barWidth,barHeight); //Draw the force bar
   fill(255);
-  rect(pos + 10,300,150,50);
+  rect(pos + 10,300,270,70);
   fill(0);
   text(text,pos + 25,350);
 }

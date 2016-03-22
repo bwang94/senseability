@@ -1,9 +1,12 @@
-  ximport processing.serial.*;
+import processing.serial.*;
 import cc.arduino.*;
 Arduino arduino;
 
 Serial port;
 PFont f;
+
+int flt_index;
+int frt_index;
 
 float flt;
 float flt_trun;
@@ -41,7 +44,7 @@ int scrn_height = 700;
 
 
 void setup(){
-  port = new Serial(this,Serial.list()[3],57600);
+  port = new Serial(this,Serial.list()[0],57600);
   port.clear();
   port.bufferUntil('\n');
   size(1200,700);
@@ -55,6 +58,7 @@ void setup(){
 void draw(){
   textFont(f,32);
   
+  // Display numerical force values for left hand
   fill(255);
   beginShape();
   noStroke();
@@ -68,7 +72,7 @@ void draw(){
   maxflt_trun = truncate(maxflt);
   text(str(maxflt_trun),30,440);
   
-  // Display numerical force values for left hand
+  // Display numerical force values for right hand
   fill(255);
   beginShape();
   noStroke();
@@ -76,13 +80,11 @@ void draw(){
   fill(0);
   endShape();
   text("Force (N)",630,350);
-  flt_trun = truncate(flt);
-  text(str(flt_trun),630,380);
+  frt_trun = truncate(frt);
+  text(str(frt_trun),630,380);
   text("Max (N)",630,410);
-  maxflt_trun = truncate(maxflt);
-  text(str(maxflt_trun),630,440);
-  
-  //TODO: Display numberical forces values for right hand
+  maxfrt_trun = truncate(maxfrt);
+  text(str(maxfrt_trun),630,440);
   
   // Draws bar graphs for forces
   drawBar(0,200,fltdraw);
@@ -113,12 +115,13 @@ void draw(){
   // Line Graph for right hand 
   stroke(153,204,205);
   strokeWeight(2);
-  line(lastxPos_rt, lastheight_rt, xPos_lt,height/2 -100 - frtdraw);
+  line(lastxPos_rt, lastheight_rt, xPos_rt,height/2 -100 - frtdraw);
   lastxPos_rt = xPos_rt;
   lastheight_rt = int(height/2 -100 - frtdraw);
   if (xPos_rt >= width){
    xPos_rt = 0;
    lastxPos_rt = 0;
+   background(255);
   }
   else{
   xPos_rt++;
