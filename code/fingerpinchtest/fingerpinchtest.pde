@@ -7,6 +7,7 @@ PFont f;
 
 int flt_index;
 int frt_index;
+int dist_index;
 
 float flt;
 float flt_trun;
@@ -44,7 +45,7 @@ int scrn_height = 700;
 
 
 void setup(){
-  port = new Serial(this,Serial.list()[0],57600);
+  port = new Serial(this,Serial.list()[3],57600);
   port.clear();
   port.bufferUntil('\n');
   size(1200,700);
