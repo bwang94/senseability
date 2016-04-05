@@ -3,7 +3,7 @@
 void serialEvent(Serial port){
   String inData = port.readStringUntil('\n');
   inData = cleanData(inData);
-  println(inData);
+  //println(inData);
   
   // Find index positions that indicate where each flt/distance value starts
   // inData will have the flt/distance values in the following order: FLT, FRT, FLF, FRF, DLH, DRH

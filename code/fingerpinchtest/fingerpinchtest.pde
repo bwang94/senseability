@@ -26,7 +26,7 @@ float k = 54725.2;
 float c = 1.2054;
 int textheight = 200;
 int textwidth = 250;
-int forcelimit = 100;
+int forcelimit = 50;
 
 int xPos_lt = 1;
 int lastxPos_lt = 1;
@@ -91,7 +91,7 @@ void draw(){
   drawBar(1,200,frtdraw);
   
   // Draw divider line
-  rect(scrn_width/2,scrn_height/2 - 50,5,scrn_height/2 + 50);
+  rect(scrn_width/2,scrn_height/2 - 50,3,scrn_height/2 + 50);
   fill(0);
   
   // Line Graph for left hand
