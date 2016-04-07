@@ -23,13 +23,6 @@ float resist_frt;
 float maxfrt = 0;
 float maxfrt_trun;
 
-float dlh;
-float dlh_trun;
-float dlhdraw;
-float resist_dlh;
-float maxdlh = 0;
-float maxdlh_trun;
-
 float k = 54725.2;
 float c = 1.2054;
 int textheight = 200;
@@ -54,7 +47,6 @@ int scrn_height = 700;
 boolean isForce = false;
 boolean isDist = false;
 boolean isMain = true;
-boolean isFirstRun = true;
 
 int force_x = 200;
 int force_y = 300;
@@ -66,7 +58,7 @@ int dist_y = 300;
 int dist_width = 200;
 int dist_height = 100;
 
-int back_x = 1000;
+int back_x = 0;
 int back_y = 0;
 int back_width = 200;
 int back_height = 100;
@@ -75,7 +67,7 @@ int text_x_pad = 25;
 int text_y_pad = 60;
 
 void setup(){
-  port = new Serial(this,Serial.list()[0],57600);
+  port = new Serial(this,Serial.list()[3],57600);
   port.clear();
   port.bufferUntil('\n');
   size(1200,700);
@@ -83,7 +75,6 @@ void setup(){
   frameRate(120);
   f = createFont("Arial",32,true);
   //println(arduino.list());
-  background(255);
 }
 
 void draw(){
@@ -100,18 +91,9 @@ void draw(){
     rect(dist_x, dist_y, dist_width, dist_height);
     fill(0);
     text("Dist Test",dist_x + text_x_pad,force_y + text_y_pad);
-    isFirstRun = true;
   }
-  
   if (isForce){
-    if (isFirstRun){
-      background(255);
-      isFirstRun = false;
-    }
-    fill(200);
-    rect(back_x, back_y, back_width, back_height);
-    fill(0);
-    text("Go Back", back_x + text_x_pad, back_y + text_y_pad);
+    background(255);
     // Display numerical force values for left hand
     fill(255);
     beginShape();
@@ -183,16 +165,13 @@ void draw(){
     if (frtdraw == 0){
       lastheight_rt = height/2 -100;
     }
-  }
-  
-  if (isDist){
-    if (isFirstRun){
-      background(255);
-      isFirstRun = false;
-    }
     fill(200);
     rect(back_x, back_y, back_width, back_height);
     fill(0);
     text("Go Back", back_x + text_x_pad, back_y + text_y_pad);
+  }
+  
+  if (isDist){
+      
   }
 }

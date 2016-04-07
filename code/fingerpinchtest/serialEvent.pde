@@ -16,9 +16,11 @@ void serialEvent(Serial port){
   // Get the resistances and calculate the forces
   resist_flt = float(inData.substring(flt_index + 3,frt_index)); //TODO: Blackbox this and the next line
   resist_frt = float(inData.substring(frt_index + 3,dist_index));
+  resist_dlh = float(inData.substring(dist_index + 3));
   //println("Got resistances");
   
   // Calculate force, mapped force, and max force values
   computeForce(); 
+  computeDist();
   }
 }
