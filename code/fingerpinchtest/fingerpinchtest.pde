@@ -94,7 +94,6 @@ void setup(){
 
 void draw(){
   textFont(f,32);
-  
   if (isMain){
     background(255);
     noStroke();
