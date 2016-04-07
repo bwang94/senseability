@@ -11,6 +11,9 @@ String cleanData(String data){
   if(data.length() <= 0){
     return "";
   }
+  if(data.indexOf("FLT") == -1 || data.indexOf("FRT") == -1 || data.indexOf("DLH") == -1){
+    return "";
+  }
   //println("Cleaned");
   return data;
 }

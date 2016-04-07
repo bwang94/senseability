@@ -29,6 +29,8 @@ float dlhdraw;
 float resist_dlh;
 float maxdlh = 0;
 float maxdlh_trun;
+int textheight_dist = 100;
+int textwidth_dist = 450;
 
 float k = 54725.2;
 float c = 1.2054;
@@ -43,6 +45,10 @@ int lastheight_lt = 350;
 int xPos_rt = 1;
 int lastxPos_rt = 1;
 int lastheight_rt = 350;
+
+int xPos_dlh = 1;
+int lastxPos_dlh = 1;
+int lastheight_dlh = 0;
 
 float xposA = 200;
 float xposB = 850;
@@ -69,7 +75,7 @@ int dist_height = 100;
 int back_x = 1000;
 int back_y = 0;
 int back_width = 200;
-int back_height = 100;
+int back_height = 50;
 
 int text_x_pad = 25;
 int text_y_pad = 60;
@@ -91,6 +97,7 @@ void draw(){
   
   if (isMain){
     background(255);
+    noStroke();
     fill(200);
     rect(force_x, force_y, force_width, force_height);
     fill(0);
@@ -107,11 +114,18 @@ void draw(){
     if (isFirstRun){
       background(255);
       isFirstRun = false;
+      xPos_lt = 1;
+      lastxPos_lt = 1;
+      lastheight_lt = 350;
+      xPos_rt = 1;
+      lastxPos_rt = 1;
+      lastheight_rt = 350;
     }
+    noStroke();
     fill(200);
     rect(back_x, back_y, back_width, back_height);
     fill(0);
-    text("Go Back", back_x + text_x_pad, back_y + text_y_pad);
+    text("Go Back", back_x + text_x_pad, back_y + text_y_pad/2);
     // Display numerical force values for left hand
     fill(255);
     beginShape();
@@ -189,10 +203,42 @@ void draw(){
     if (isFirstRun){
       background(255);
       isFirstRun = false;
+      xPos_dlh = 1;
+      lastxPos_dlh = 1;
+      lastheight_dlh = 0;
     }
+    noStroke();
     fill(200);
     rect(back_x, back_y, back_width, back_height);
     fill(0);
-    text("Go Back", back_x + text_x_pad, back_y + text_y_pad);
+    text("Go Back", back_x + text_x_pad, back_y + text_y_pad/2);
+    
+    fill(255);
+    beginShape();
+    noStroke();
+    rect(0,300,textwidth_dist,textheight_dist);
+    fill(0);
+    endShape();
+    text("Potentiometer Resistance (ohm)",30,350);
+    dlh_trun = truncate(resist_dlh);
+    text(str(resist_dlh),30,380);
+    
+  // Line Graph for left hand
+    stroke(255,153,153);
+    strokeWeight(2);
+    line(lastxPos_dlh, lastheight_dlh, xPos_dlh,height - dlhdraw);
+    lastxPos_dlh = xPos_dlh;
+    lastheight_dlh = int(height - dlhdraw);
+    if (xPos_dlh >= width){
+     xPos_dlh = 0;
+     lastxPos_dlh = 0;
+     background(255);
+    }
+    else{
+    xPos_dlh++;
+    }
+    if (dlhdraw == 0){
+      lastheight_dlh = 0;
+    }
   }
 }
