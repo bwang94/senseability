@@ -21,6 +21,7 @@ void update(){
     isForceSelection = false;
     isMain = false;
     isDist = false;
+    isFirstRun = true;
   }
   
   //BACK BUTTONS
@@ -30,6 +31,7 @@ void update(){
     isMain = true;
     isDist = false;
     isForceSelection = false;
+    isFirstRun = true;
   }
   //Clicked back button on free force --> go to force selection
   else if(overTestButton(back_x, back_y, back_width, back_height) && isForce){
@@ -37,6 +39,7 @@ void update(){
     isMain = false;
     isDist = false;
     isForceSelection = true;
+    isFirstRun = true;
   }
   //Clicked on back button on free distance --> go to main
   else if(overTestButton(back_x, back_y, back_width, back_height) && isDist){
@@ -44,6 +47,7 @@ void update(){
     isMain = true;
     isDist = false;
     isForceSelection = false;
+    isFirstRun = true;
   }
   else{
 

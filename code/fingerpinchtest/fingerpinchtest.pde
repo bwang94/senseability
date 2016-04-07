@@ -62,6 +62,7 @@ boolean isForceSelection = false;
 boolean isIncrement = false;
 boolean isDist = false;
 boolean isMain = true;
+boolean isFirstRun = true;
 
 int incforce_x = 180;
 int incforce_y = 300;
@@ -125,17 +126,23 @@ void draw(){
   }
   
   else if (isIncrement){
-    resetScreen("increment");
+    if (isFirstRun){
+      resetScreen("increment");
+    }
     drawScreen("freeforce");
     drawScreen("increment");
   }
   else if (isForce){
-    resetScreen("freeforce");
+    if (isFirstRun){
+      resetScreen("freeforce");
+    }
     drawScreen("freeforce");
   }
   
   else if (isDist){
-    resetScreen("freedist");
+    if (isFirstRun){  
+      resetScreen("freedist");
+    }
     drawScreen("freedist");
   }
   else{
