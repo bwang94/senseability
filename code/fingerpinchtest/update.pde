@@ -19,6 +19,15 @@ void update(){
   else if (overTestButton(freeforce_x,freeforce_y,freeforce_width,freeforce_height) && isForceSelection){
     isForce = true;
     isForceSelection = false;
+    isIncrement = false;
+    isMain = false;
+    isDist = false;
+    isFirstRun = true;
+  }
+  else if (overTestButton(incforce_x,incforce_y,incforce_width,incforce_height) && isForceSelection){
+    isForce = false;
+    isIncrement = true;
+    isForceSelection = false;
     isMain = false;
     isDist = false;
     isFirstRun = true;
@@ -32,14 +41,16 @@ void update(){
     isDist = false;
     isForceSelection = false;
     isFirstRun = true;
+    isIncrement = false;
   }
-  //Clicked back button on free force --> go to force selection
-  else if(overTestButton(back_x, back_y, back_width, back_height) && isForce){
+  //Clicked back button during any force test --> go to force selection
+  else if(overTestButton(back_x, back_y, back_width, back_height) && (isForce || isIncrement)){
     isForce = false;
     isMain = false;
     isDist = false;
     isForceSelection = true;
     isFirstRun = true;
+    isIncrement = false;
   }
   //Clicked on back button on free distance --> go to main
   else if(overTestButton(back_x, back_y, back_width, back_height) && isDist){
@@ -48,6 +59,7 @@ void update(){
     isDist = false;
     isForceSelection = false;
     isFirstRun = true;
+    isIncrement = false;
   }
   else{
 
