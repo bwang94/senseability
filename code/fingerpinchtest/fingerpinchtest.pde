@@ -81,7 +81,7 @@ int text_x_pad = 25;
 int text_y_pad = 60;
 
 void setup(){
-  port = new Serial(this,Serial.list()[0],57600);
+  port = new Serial(this,Serial.list()[0],57600);    //Computer USB Port input from Arduino
   port.clear();
   port.bufferUntil('\n');
   size(1200,700);
@@ -89,31 +89,31 @@ void setup(){
   frameRate(120);
   f = createFont("Arial",32,true);
   //println(arduino.list());
-  background(255);
+  background(255);     //Makes background white
 }
 
 void draw(){
   textFont(f,32);
   
-  if (isMain){
+  if (isMain){   //determines if the main page is loaded
     background(255);
     noStroke();
     fill(200);
-    rect(force_x, force_y, force_width, force_height);
+    rect(force_x, force_y, force_width, force_height);              //Creates textbox to select Force test 
     fill(0);
-    text("Force Test",force_x + text_x_pad, force_y + text_y_pad);
+    text("Force Test",force_x + text_x_pad, force_y + text_y_pad);   //Inputs text to Force test
     
     fill(200);
-    rect(dist_x, dist_y, dist_width, dist_height);
+    rect(dist_x, dist_y, dist_width, dist_height);     //Creates textbox to select Distance test
     fill(0);
-    text("Dist Test",dist_x + text_x_pad,force_y + text_y_pad);
+    text("Dist Test",dist_x + text_x_pad,force_y + text_y_pad);    //Inputs text to Distance test
     isFirstRun = true;
   }
   
-  if (isForce){
-    if (isFirstRun){
+  if (isForce){           //determines if the Force test is selected         
+    if (isFirstRun){   
       background(255);
-      isFirstRun = false;
+      isFirstRun = false;     //
       xPos_lt = 1;
       lastxPos_lt = 1;
       lastheight_lt = 350;
@@ -123,122 +123,123 @@ void draw(){
     }
     noStroke();
     fill(200);
-    rect(back_x, back_y, back_width, back_height);
+    rect(back_x, back_y, back_width, back_height);    //textbox for Go Back button
     fill(0);
-    text("Go Back", back_x + text_x_pad, back_y + text_y_pad/2);
-    // Display numerical force values for left hand
+    text("Go Back", back_x + text_x_pad, back_y + text_y_pad/2);     //adds Go Back text
+  
+  // Display numerical force values for left hand
     fill(255);
     beginShape();
     noStroke();
-    rect(0,300,textwidth,textheight);
+    rect(0,300,textwidth,textheight);      //Textbox for displaying force values
     fill(0);
     endShape();
-    text("Force (N)",30,350);
+    text("Force (N)",30,350);     //Force label
     flt_trun = truncate(flt);
-    text(str(flt_trun),30,380);
-    text("Max (N)",30,410);
+    text(str(flt_trun),30,380);    //Writes force value in textbox
+    text("Max (N)",30,410);     //Max Force label 
     maxflt_trun = truncate(maxflt);
-    text(str(maxflt_trun),30,440);
+    text(str(maxflt_trun),30,440);     //Writes Max Force value in textbox
     
-    // Display numerical force values for right hand
+  // Display numerical force values for right hand
     fill(255);
     beginShape();
     noStroke();
-    rect(600,300,textwidth,textheight);
+    rect(600,300,textwidth,textheight);      //creates textbox
     fill(0);
     endShape();
-    text("Force (N)",630,350);
+    text("Force (N)",630,350);     //writes force label
     frt_trun = truncate(frt);
-    text(str(frt_trun),630,380);
-    text("Max (N)",630,410);
+    text(str(frt_trun),630,380);   //writes force value
+    text("Max (N)",630,410);   //writes max force label
     maxfrt_trun = truncate(maxfrt);
-    text(str(maxfrt_trun),630,440);
+    text(str(maxfrt_trun),630,440);   //writes max force value
     
-    // Draws bar graphs for forces
+  // Draws bar graphs for forces
     drawBar(0,200,fltdraw);
     drawBar(1,200,frtdraw);
     
-    // Draw divider line
+  // Draw divider line
     rect(scrn_width/2,scrn_height/2 - 50,3,scrn_height/2 + 50);
     fill(0);
     
     // Line Graph for left hand
     stroke(255,153,153);
     strokeWeight(2);
-    line(lastxPos_lt, lastheight_lt, xPos_lt,height/2 -100 - fltdraw);
-    lastxPos_lt = xPos_lt;
-    lastheight_lt = int(height/2 -100 - fltdraw);
-    if (xPos_lt >= width){
-     xPos_lt = 0;
-     lastxPos_lt = 0;
-     background(255);
+    line(lastxPos_lt, lastheight_lt, xPos_lt,height/2 -100 - fltdraw);    //draws line. starting points (x,y) then end points (x,y)
+    lastxPos_lt = xPos_lt;                                                //makes current x position the last x position
+    lastheight_lt = int(height/2 -100 - fltdraw);                         //makes current y position the last y position
+    if (xPos_lt >= width){                             //if the current x position is greater than the screen width
+     xPos_lt = 0;                  //x position resests to zero
+     lastxPos_lt = 0;              //last x position resets to zero
+     background(255);               //background reset to white
     }
     else{
-      xPos_lt++;
+      xPos_lt++;    //increments current x position
     }
-    if (fltdraw == 0){
-      lastheight_lt = height/2 -100;
+    if (fltdraw == 0){                    //checks if left hand force is zero
+      lastheight_lt = height/2 -100;      //sets last height = 0
     }
     
-    // Line Graph for right hand 
+  // Line Graph for right hand 
     stroke(153,204,205);
     strokeWeight(2);
-    line(lastxPos_rt, lastheight_rt, xPos_rt,height/2 -100 - frtdraw);
-    lastxPos_rt = xPos_rt;
-    lastheight_rt = int(height/2 -100 - frtdraw);
-    if (xPos_rt >= width){
-     xPos_rt = 0;
-     lastxPos_rt = 0;
-     background(255);
+    line(lastxPos_rt, lastheight_rt, xPos_rt,height/2 -100 - frtdraw);     //draws line. starting points (x,y) then end points (x,y)
+    lastxPos_rt = xPos_rt;                                                 //makes current x position the last x position
+    lastheight_rt = int(height/2 -100 - frtdraw);                          //makes current y position the last y position
+    if (xPos_rt >= width){                                                 //if the current x position is greater than the screen width
+     xPos_rt = 0;                                   //x position resests to zero
+     lastxPos_rt = 0;                               //last x position resets to zero
+     background(255);                               //background reset to white
     }
     else{
-      xPos_rt++;
+      xPos_rt++;                      //increment x position
     }
-    if (frtdraw == 0){
-      lastheight_rt = height/2 -100;
+    if (frtdraw == 0){           //checks if incremented force is zero
+      lastheight_rt = height/2 -100;       //plots zero  
     }
   }
   
-  if (isDist){
-    if (isFirstRun){
-      background(255);
+  if (isDist){                        //if distance is selected
+    if (isFirstRun){                     //if it's the first time running this page
+      background(255);                   //background is white
       isFirstRun = false;
-      xPos_dlh = 1;
+      xPos_dlh = 1;                      //sets starting points for line graph
       lastxPos_dlh = 1;
       lastheight_dlh = 0;
     }
     noStroke();
     fill(200);
-    rect(back_x, back_y, back_width, back_height);
+    rect(back_x, back_y, back_width, back_height);     //textbox for Go Back
     fill(0);
-    text("Go Back", back_x + text_x_pad, back_y + text_y_pad/2);
+    text("Go Back", back_x + text_x_pad, back_y + text_y_pad/2);        //Writes text for Go Back
     
     fill(255);
     beginShape();
     noStroke();
-    rect(0,300,textwidth_dist,textheight_dist);
+    rect(0,300,textwidth_dist,textheight_dist);                 //textbox for Distance Reading
     fill(0);
     endShape();
-    text("Potentiometer Resistance (ohm)",30,350);
+    text("Potentiometer Resistance (ohm)",30,350);              //Writes Distance label
     dlh_trun = truncate(resist_dlh);
-    text(str(resist_dlh),30,380);
+    text(str(resist_dlh),30,380);               //Writes distance values
     
   // Line Graph for left hand
     stroke(255,153,153);
     strokeWeight(2);
-    line(lastxPos_dlh, lastheight_dlh, xPos_dlh,height - dlhdraw);
-    lastxPos_dlh = xPos_dlh;
-    lastheight_dlh = int(height - dlhdraw);
-    if (xPos_dlh >= width){
-     xPos_dlh = 0;
-     lastxPos_dlh = 0;
-     background(255);
+    line(lastxPos_dlh, lastheight_dlh, xPos_dlh,height - dlhdraw);        //draws line. starting points (x,y) then end points (x,y)
+    lastxPos_dlh = xPos_dlh;                                               //makes current x position the last x position
+    lastheight_dlh = int(height - dlhdraw);                                //makes current y position the last y position
+    if (xPos_dlh >= width){                                                //if the current x position is greater than the screen width
+     xPos_dlh = 0;                         //x position resests to zero
+     lastxPos_dlh = 0;                       //last x position resets to zero
+     background(255);                        //background reset to white
     }
     else{
-    xPos_dlh++;
+    xPos_dlh++;                      //increment x position
     }
-    if (dlhdraw == 0){
-      lastheight_dlh = 0;
-    }
+    if (dlhdraw == 0){             //checks if incremented force is zero
+      lastheight_dlh = 0;          //plots zero
+    }  
   }
 }
