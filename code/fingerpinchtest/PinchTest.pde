@@ -70,13 +70,20 @@ class PinchTest{
     teststarttime = millis();
   }
   
-  void startRound(){
-    if (!roundStarted){
-      roundStarted = true;
-      currentroundtarget = roundtargets[currentround - 1];
-      starttime = millis();
-      resetstarttime = millis();
+  boolean isRoundStarted(){
+    if (roundStarted){
+      return true;
     }
+    else{
+      return false;
+    }
+  }
+  
+  void startRound(){
+    roundStarted = true;
+    currentroundtarget = roundtargets[currentround - 1];
+    starttime = millis();
+    resetstarttime = millis();
   }
   
   void checkTarget(){
@@ -200,6 +207,7 @@ class PinchTest{
     testStarted = false;
     testCompleted = true;
   }
+  
   void displaySummary(){
     background(255);
     beginShape();

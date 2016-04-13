@@ -99,7 +99,9 @@ void drawScreen(String screen){
     }
     if (force_leftinc.isActive()){
       background(255);
-      force_leftinc.startRound();
+      if (!force_leftinc.isRoundStarted()){
+        force_leftinc.startRound();
+      }
       force_leftinc.drawForceBar();
       force_leftinc.displayTimeElapsed();
       force_leftinc.drawCurrentTarget();
