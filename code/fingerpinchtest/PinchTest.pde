@@ -1,31 +1,31 @@
 class PinchTest{
   String type; //Force or Angle
   String mode; //Increment, Random, or Custom
+  String hand; //Which hand
   
-  String hand;
-  int numrounds;
-  int currentround;
-  float currentroundtarget;
-  int passcounter;
-  boolean passround;
+  int numrounds; //How many rounds in the test
+  int currentround; //Which round you currently are on
+  float currentroundtarget; //Target of current round
+  int passcounter; //Number of rounds passed
+  boolean passround; //Has the current round passed
   int roundduration; // In milliseconds, how much time a user needs to hold the force/angle within tolerance of currentroundtarget to pass the round
   int timeoutduration; // In milliseconds, how long each round will last before moving on
   int starttime; // In ms;
   int currenttime; // In ms
   int numskips; //Number of rounds skipped;
   int skipcutoff; //Number of rounds that, when skipped, will cause test to end;
-  float[] roundtargets;
+  float[] roundtargets; //Array that holds targets of each round
   float tolerance; // What tolerance level is in decimal form
-  int inthresholdstart;
-  boolean testStarted = false;
-  boolean testCompleted = false;
-  boolean roundStarted = false;
-  boolean meetingTarget = false;
-  int timemet = 0;
-  int timeelapsed = 0;
-  int mettimestart = 0;
-  int resetstarttime = 0;
-  int teststarttime = 0;
+  int inthresholdstart; //Time in ms when the force/angle is within +/- of the threshold of currentroundtarget NOT USED
+  boolean testStarted = false; //Has the test started
+  boolean testCompleted = false; //Is the test complete
+  boolean roundStarted = false; //Has the round started
+  boolean meetingTarget = false; //IS the target currently being met
+  int timemet = 0; ///How much time the target is being met in ms
+  int timeelapsed = 0; //How much time has passed in ms since test started
+  int mettimestart = 0; //What time the target started to be met in ms NOT USED
+  int resetstarttime = 0; //Time of the last reset (when the force/angle fell out of threshold)
+  int teststarttime = 0; //Time when test started in ms
   
   //TODO - PAUSE DURATION
   
@@ -44,7 +44,8 @@ class PinchTest{
     currentround = 0;
   }
   
-  PinchTest(String t, String m, String h, int rounds, int duration, float start, float increment, float tol, int tod){ //Force OR Angle and Increment
+  //Force OR Angle Increment Test
+  PinchTest(String t, String m, String h, int rounds, int duration, float start, float increment, float tol, int tod){ 
     type = t;
     mode = m;
     hand = h;
