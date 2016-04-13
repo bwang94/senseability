@@ -5,9 +5,10 @@ Arduino arduino;
 Serial port;
 PFont f;
 
+//Variables for calculating/processing forces and distances
+//Force
 int flt_index;
 int frt_index;
-int dist_index;
 
 float flt;
 float flt_trun;
@@ -23,21 +24,6 @@ float resist_frt;
 float maxfrt = 0;
 float maxfrt_trun;
 
-float dlh;
-float dlh_trun;
-float dlhdraw;
-float resist_dlh;
-float maxdlh = 0;
-float maxdlh_trun;
-int textheight_dist = 100;
-int textwidth_dist = 450;
-
-float k = 54725.2;
-float c = 1.2054;
-int textheight = 200;
-int textwidth = 250;
-int forcelimit = 50;
-
 int xPos_lt = 1;
 int lastxPos_lt = 1;
 int lastheight_lt = 350;
@@ -46,13 +32,65 @@ int xPos_rt = 1;
 int lastxPos_rt = 1;
 int lastheight_rt = 350;
 
-int xPos_dlh = 1;
-int lastxPos_dlh = 1;
-int lastheight_dlh = 0;
+float k = 54725.2;
+float c = 1.2054;
+int forcelimit = 50;
 
 float xposA = 200;
 float xposB = 850;
 
+//Distance
+int dist_index;
+
+float dlh;
+float dlh_trun;
+float dlhdraw = 0;
+float resist_dlh;
+float maxdlh = 0;
+float maxdlh_trun;
+
+  //Set up curved bars
+  CurveBar distbar_left;
+  CurveBar distbar_right;
+  
+  CurveBar coverbar_left;
+  CurveBar coverbar_right;
+  //Set up Tests
+  PinchTest force_leftinc;
+  PinchTest force_rightinc;
+
+//Distance text boxes
+int textheight_dist = 100;
+int textwidth_dist = 270;
+
+//Force text boxes
+int textheight = 250;
+int textwidth = 250;
+
+int xPos_dlh = 1;
+int lastxPos_dlh = 1;
+int lastheight_dlh = 0;
+
+float dlh_xstart = 100;
+float drh_xstart = 300;
+float dist_ystart = 700;
+float distdraw_width = 700;
+float distdraw_height = 700;
+int default_shade = 0; //black
+float angleend_left = 2*PI;
+float anglestart_left = 3*PI/2;
+float angleend_right = 3*PI/2;
+float anglestart_right = PI;
+int default_thickness = 20;
+
+int dlh_textx = 20;
+int drh_textx = 1000;
+int dist_texty = 600;
+
+float dist_intercept = -253.0379;
+float dist_slope = 100.4499;
+
+//General
 int scrn_width = 1200;
 int scrn_height = 700;
 
@@ -64,6 +102,7 @@ boolean isDist = false;
 boolean isMain = true;
 boolean isFirstRun = true;
 
+//Variables defining button dimensions and locations
 int incforce_x = 180;
 int incforce_y = 300;
 int incforce_width = 200;
@@ -97,21 +136,35 @@ int dist_height = 100;
 int back_x = 1000;
 int back_y = 0;
 int back_width = 200;
-int back_height = 50;
+int back_height = 100;
 
 int text_x_pad = 25;
 int text_y_pad = 60;
+
+int startx = 0;
+int starty = 0;
+int startwidth = 150;
+int startheight = 100;
 
 void setup(){
   port = new Serial(this,Serial.list()[0],57600);
   port.clear();
   port.bufferUntil('\n');
   size(1200,700);
-  //fullScreen();
   frameRate(120);
   f = createFont("Arial",32,true);
   //println(arduino.list());
   background(255);
+  
+  distbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_left, angleend_left);
+  distbar_right = new CurveBar(drh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_right, angleend_right);
+  force_leftinc = new PinchTest("Force","Increment","Left",10,2000,5,2,.1,10000);
+  force_rightinc = new PinchTest("Force","Increment","Right",10,2000,5,2,.1,10000);
+  
+  //coverbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, 3*PI/2, 2*PI);
+  //coverbar_left.changeColor(255,255,255);
+  //coverbar_right = new CurveBar(drh_xstart, dist_ystart, distdraw_width, distdraw_height, PI, 3*PI/2);
+  //coverbar_right.changeColor(255,255,255);
 }
 
 void draw(){
@@ -129,7 +182,6 @@ void draw(){
     if (isFirstRun){
       resetScreen("increment");
     }
-    drawScreen("freeforce");
     drawScreen("increment");
   }
   else if (isForce){
@@ -146,6 +198,6 @@ void draw(){
     drawScreen("freedist");
   }
   else{
-    
+    println("You broke the code :(");  
   }
 }

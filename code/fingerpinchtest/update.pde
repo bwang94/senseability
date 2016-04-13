@@ -3,6 +3,7 @@ void update(){
   //Clicked the force test button on main screen --> go to force selection
   if (overTestButton(force_x,force_y,force_width, force_height) && isMain){
     isForce = false;
+    isIncrement = false;
     isForceSelection = true;
     isMain = false;
     isDist = false;
@@ -10,6 +11,7 @@ void update(){
   //Clicked distance test button on main screen --> go to free distance 
   else if (overTestButton(dist_x, dist_y, dist_width, dist_height) && isMain){
     isForce = false;
+    isIncrement = false;
     isForceSelection = false;
     isMain = false;
     isDist = true;
@@ -31,6 +33,15 @@ void update(){
     isMain = false;
     isDist = false;
     isFirstRun = true;
+  }
+  
+  else if(overTestButton(startx,starty,startwidth,startheight) && isIncrement && !force_leftinc.isActive()){
+    if (!force_leftinc.isCompleted()){
+      force_leftinc.startTest();
+    }
+    else{
+      force_rightinc.startTest();  
+    }
   }
   
   //BACK BUTTONS

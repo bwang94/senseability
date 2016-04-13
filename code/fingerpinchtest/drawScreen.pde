@@ -2,52 +2,23 @@ void drawScreen(String screen){
   if (screen.equals("main")){
     background(255);
     noStroke();
-    fill(200);
-    rect(force_x, force_y, force_width, force_height);
-    fill(0);
-    text("Force Test",force_x + text_x_pad, force_y + text_y_pad);
-    
-    fill(200);
-    rect(dist_x, dist_y, dist_width, dist_height);
-    fill(0);
-    text("Dist Test",dist_x + text_x_pad,force_y + text_y_pad);
+    makeButton(force_x,force_y,force_width,force_height,"Force Test",200,0);
+    makeButton(dist_x,dist_y,dist_width,dist_height,"Dist Test",200,0);
   }
   
   if (screen.equals("forceselect")){
     noStroke();
-    fill(200);
-    rect(back_x, back_y, back_width, back_height);
-    fill(0);
-    text("Go Back", back_x + text_x_pad, back_y + text_y_pad/2);
-
-    noStroke();
-    fill(200);
-    rect(incforce_x, incforce_y, incforce_width, incforce_height);
-    fill(0);
-    text("Increment",incforce_x + text_x_pad, incforce_y + text_y_pad);
-    
-    fill(200);
-    rect(ranforce_x, ranforce_y, ranforce_width, ranforce_height);
-    fill(0);
-    text("Random",ranforce_x + text_x_pad, ranforce_y + text_y_pad);
-    
-    fill(200);
-    rect(cusforce_x, cusforce_y, cusforce_width, cusforce_height);
-    fill(0);
-    text("Custom",cusforce_x + text_x_pad, cusforce_y + text_y_pad);
-    
-    fill(200);
-    rect(freeforce_x, freeforce_y, freeforce_width, freeforce_height);
-    fill(0);
-    text("Free",freeforce_x + text_x_pad, freeforce_y + text_y_pad);
+    makeButton(back_x,back_y,back_width, back_height,"Go Back",200,0);
+    makeButton(incforce_x,incforce_y,incforce_width,incforce_height,"Increment",200,0);
+    makeButton(ranforce_x,ranforce_y,ranforce_width,ranforce_height,"Random",200,0);
+    makeButton(cusforce_x,cusforce_y,cusforce_width,cusforce_height,"Custom",200,0);
+    makeButton(freeforce_x,freeforce_y,freeforce_width,freeforce_height,"Free",200,0);
   }
   
   if (screen.equals("freeforce")){
     noStroke();
-    fill(200);
-    rect(back_x, back_y, back_width, back_height);
-    fill(0);
-    text("Go Back", back_x + text_x_pad, back_y + text_y_pad/2);
+    makeButton(back_x,back_y,back_width, back_height,"Go Back",200,0);
+    
     // Display numerical force values for left hand
     fill(255);
     beginShape();
@@ -122,42 +93,70 @@ void drawScreen(String screen){
   }
   
   if (screen.equals("increment")){
-    
+    if (!force_leftinc.isActive()){
+      noStroke();
+      makeButton(startx,starty,startwidth,startheight,"Start",200,0);
+    }
+    if (force_leftinc.isActive()){
+      background(255);
+      force_leftinc.startRound();
+      force_leftinc.drawForceBar();
+      force_leftinc.displayTimeElapsed();
+      force_leftinc.drawCurrentTarget();
+      force_leftinc.checkTarget();
+      force_leftinc.displayMessage();
+      if (force_leftinc.checkRoundComplete()){
+        force_leftinc.nextRound();
+      }
+      if (force_leftinc.checkTestComplete()){
+        force_leftinc.endTest();
+      }
+    }
+    else if (force_leftinc.isCompleted()){
+      force_leftinc.displaySummary();
+      noStroke();
+      makeButton(back_x,back_y,back_width, back_height,"Go Back",200,0);
+    }
   }
   
   if (screen.equals("freedist")){
     noStroke();
-    fill(200);
-    rect(back_x, back_y, back_width, back_height);
+    makeButton(back_x,back_y,back_width, back_height,"Go Back",200,0);
+    
+    // Draw divider line
+    rect(scrn_width/2,scrn_height/2 - 50,3,scrn_height/2 + 50);
     fill(0);
-    text("Go Back", back_x + text_x_pad, back_y + text_y_pad/2);
     
     fill(255);
+    rect(0,height/2-50,width/2, height/2+50);
     beginShape();
     noStroke();
-    rect(0,300,textwidth_dist,textheight_dist);
-    fill(0);
+    makeButton(dlh_textx,dist_texty,textwidth_dist,textheight_dist,"Left Hand",255,0);
+    dlh_trun = truncate(dlh);
+    text(str(dlh_trun) + " (deg)",dlh_textx + text_x_pad,dist_texty+90);
     endShape();
-    text("Potentiometer Resistance (ohm)",30,350);
-    dlh_trun = truncate(resist_dlh);
-    text(str(resist_dlh),30,380);
-    
-  // Line Graph for left hand
+        
+    float temp_start = map(dlh,0,90,0,PI/2);
+    distbar_left.changeAngleStart(2*PI - temp_start);
+    distbar_left.changeColor(0,0,0);
+    distbar_left.drawCurve();
+
+    // Line Graph for left hand
     stroke(255,153,153);
     strokeWeight(2);
-    line(lastxPos_dlh, lastheight_dlh, xPos_dlh,height - dlhdraw);
+    line(lastxPos_dlh, lastheight_dlh, xPos_dlh,height/2 - 100 - dlhdraw);
     lastxPos_dlh = xPos_dlh;
-    lastheight_dlh = int(height - dlhdraw);
+    lastheight_dlh = int(height/2 - 100 - dlhdraw);
     if (xPos_dlh >= width){
-     xPos_dlh = 0;
-     lastxPos_dlh = 0;
-     background(255);
+    xPos_dlh = 0;
+    lastxPos_dlh = 0;
+    background(255);
     }
     else{
     xPos_dlh++;
     }
     if (dlhdraw == 0){
-      lastheight_dlh = 0;
+     lastheight_dlh = height/2-100;
     }
   }
 }

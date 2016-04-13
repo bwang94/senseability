@@ -11,6 +11,8 @@ void resetScreen(String screen){
     lastxPos_rt = 1;
     lastheight_rt = 350;
     isFirstRun = false;
+    maxflt = 0;
+    maxfrt = 0;
   }
   if (screen.equals("freedist")){
     background(255);
