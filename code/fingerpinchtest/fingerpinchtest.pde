@@ -4,11 +4,19 @@ Arduino arduino;
 
 Serial port;
 PFont f;
+PFont F;
 
 //Variables for calculating/processing forces and distances
 //Force
 int flt_index;
 int frt_index;
+
+
+color b1 = color(255);
+  color b2 = color(0);
+  color c1 = color(39, 170, 138);
+  color c2 = color(102, 224, 194);
+
 
 float flt;
 float flt_trun;
@@ -123,13 +131,13 @@ int freeforce_y = 300;
 int freeforce_width = 200;
 int freeforce_height = 100;
 
-int force_x = 200;
-int force_y = 300;
+int force_x = 275;
+int force_y = 350;
 int force_width = 200;
 int force_height = 100;
 
-int dist_x = 750;
-int dist_y = 300;
+int dist_x = 675;
+int dist_y = 350;
 int dist_width = 200;
 int dist_height = 100;
 
@@ -152,7 +160,8 @@ void setup(){
   port.bufferUntil('\n');
   size(1200,700);
   frameRate(120);
-  f = createFont("Arial",32,true);
+  f = createFont("InaiMathi",32,true);
+  F = createFont("Monaco",32,true);
   //println(arduino.list());
   background(255);
   

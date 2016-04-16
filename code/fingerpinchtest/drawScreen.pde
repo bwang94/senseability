@@ -1,23 +1,62 @@
 void drawScreen(String screen){
   if (screen.equals("main")){
-    background(255);
+    background(200);
+    beginShape();
+    fill(255);
+    rect(100,0,1000,700);
+    endShape();
     noStroke();
-    makeButton(force_x,force_y,force_width,force_height,"Force Test",200,0);
-    makeButton(dist_x,dist_y,dist_width,dist_height,"Dist Test",200,0);
+    fill(0);
+    makeButton(675,350,dist_width,dist_height,"Dist Test",99,172,185,60,144,160,0);
+    makeButton(275,350,force_width,force_height,"Force Test",99,172,185,60,144,160,0);
+    PImage logo;
+    logo = loadImage("BurkeLogo.png");
+    image(logo,380,390);
+    
+    beginShape();
+    //fill(0);
+    //rect(0,0,1200,200);
+    fill(255);
+    rect(0,0,1200,150);
+    endShape();
+    
+    //void setGradient(int x, int y, float w, float h, color c1, color c2, int axis ) {
+
+  noFill();
+
+  //if (axis == Y_AXIS) {  // Top to bottom gradient
+    for (int i = 50; i <= 200; i++) {
+      float inter = map(i, 50, 200, 0, 1);
+      color c = lerpColor(c1, c2, inter);
+      stroke(c);
+      line(0, i, 1200, i);
+    //}
+  }  
+    
+    stroke(0);
+    fill(0);
+    textFont(F,56);
+    text("SENSE-ABILITY",375,150);
+    textFont(f,48);
+    text("A Custom Device for",370,280);
+    text("Finger-Pinch Rehabilitation",325,330);
+    textFont(f,26);
+    text("The City College of New York | Department of Biomedical Engineering",10,35);
+    textFont(f,14);
   }
   
   if (screen.equals("forceselect")){
     noStroke();
-    makeButton(back_x,back_y,back_width, back_height,"Go Back",200,0);
-    makeButton(incforce_x,incforce_y,incforce_width,incforce_height,"Increment",200,0);
-    makeButton(ranforce_x,ranforce_y,ranforce_width,ranforce_height,"Random",200,0);
-    makeButton(cusforce_x,cusforce_y,cusforce_width,cusforce_height,"Custom",200,0);
-    makeButton(freeforce_x,freeforce_y,freeforce_width,freeforce_height,"Free",200,0);
+    makeButton(back_x,back_y,back_width, back_height,"Go Back",99,172,185,60,144,160,0);
+    makeButton(incforce_x,incforce_y,incforce_width,incforce_height,"Increment",99,172,185,60,144,160,0);
+    makeButton(ranforce_x,ranforce_y,ranforce_width,ranforce_height,"Random",99,172,185,60,144,160,0);
+    makeButton(cusforce_x,cusforce_y,cusforce_width,cusforce_height,"Custom",99,172,185,60,144,160,0);
+    makeButton(freeforce_x,freeforce_y,freeforce_width,freeforce_height,"Free",99,172,185,60,144,160,0);
   }
   
   if (screen.equals("freeforce")){
     noStroke();
-    makeButton(back_x,back_y,back_width, back_height,"Go Back",200,0);
+    makeButton(back_x,back_y,back_width, back_height,"Go Back",99,172,185,60,144,160,0);
     
     // Display numerical force values for left hand
     fill(255);
@@ -95,7 +134,7 @@ void drawScreen(String screen){
   if (screen.equals("increment")){
     if (!force_leftinc.isActive()){
       noStroke();
-      makeButton(startx,starty,startwidth,startheight,"Start",200,0);
+      makeButton(startx,starty,startwidth,startheight,"Start",99,172,185,60,144,160,0);
     }
     if (force_leftinc.isActive()){
       background(255);
@@ -117,13 +156,13 @@ void drawScreen(String screen){
     else if (force_leftinc.isCompleted()){
       force_leftinc.displaySummary();
       noStroke();
-      makeButton(back_x,back_y,back_width, back_height,"Go Back",200,0);
+      makeButton(back_x,back_y,back_width, back_height,"Go Back",99,172,185,60,144,160,0);
     }
   }
   
   if (screen.equals("freedist")){
     noStroke();
-    makeButton(back_x,back_y,back_width, back_height,"Go Back",200,0);
+    makeButton(back_x,back_y,back_width, back_height,"Go Back",99,172,185,60,144,160,0);
     
     // Draw divider line
     rect(scrn_width/2,scrn_height/2 - 50,3,scrn_height/2 + 50);
@@ -133,7 +172,7 @@ void drawScreen(String screen){
     rect(0,height/2-50,width/2, height/2+50);
     beginShape();
     noStroke();
-    makeButton(dlh_textx,dist_texty,textwidth_dist,textheight_dist,"Left Hand",255,0);
+    makeButton(dlh_textx,dist_texty,textwidth_dist,textheight_dist,"Left Hand",99,172,185,60,144,160,0);
     dlh_trun = truncate(dlh);
     text(str(dlh_trun) + " (deg)",dlh_textx + text_x_pad,dist_texty+90);
     endShape();
