@@ -128,7 +128,8 @@ void drawScreen(String screen){
     drawBar(1,200,frtdraw);
     
     // Draw divider line
-    rect(scrn_width/2,scrn_height/2 - 50,3,scrn_height/2 + 50);
+    fill(0);
+    rect(scrn_width/2,scrn_height/2 - 50,3,scrn_height/2 + 50,5);
     fill(0);
     
     // Line Graph for left hand

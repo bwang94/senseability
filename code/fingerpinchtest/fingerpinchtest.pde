@@ -163,7 +163,7 @@ int startwidth = 150;
 int startheight = 100;
 
 void setup(){
-  port = new Serial(this,Serial.list()[0],57600);
+  port = new Serial(this,Serial.list()[3],57600);
   port.clear();
   port.bufferUntil('\n');
   size(1200,700);
