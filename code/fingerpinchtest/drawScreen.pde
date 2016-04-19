@@ -1,62 +1,97 @@
 void drawScreen(String screen){
   if (screen.equals("main")){
-    background(200);
-    beginShape();
-    fill(255);
-    rect(100,0,1000,700);
-    endShape();
+    background(255);
     noStroke();
-    fill(0);
-    makeButton(675,350,dist_width,dist_height,"Dist Test",99,172,185,60,144,160,0);
-    makeButton(275,350,force_width,force_height,"Force Test",99,172,185,60,144,160,0);
+    //beginShape();
+    //fill(39, 170, 138);
+    //rect(0,150,1200,350);
+    //endShape();
+     //noFill();
+
+  //if (axis == Y_AXIS) {  // Top to bottom gradient
+    //for (int i = 50; i <= 500; i++) {
+      //float inter = map(i, 50, 200, 0, 1);
+      //color c = lerpColor(c1, c2, inter);
+      //stroke(c);
+      //line(0, i, 1200, i);
+    //}
+    
+    //fill(225);
+    //rect(0,175,150,325);
+    
+    //fill(225);
+    //rect(1050,175,150,325);
+    
+    fill(70,129,105);
+    rect(0,50,1200,420);
+    
+    //fill(255);
+    //rect(225,300,675,200);
+    
+    //fill(c1,50);
+    //rect(225,300,675,200);
+
+    
+    noStroke();
+    fill(255);
+    makeButton(dist_x,dist_y,dist_width,dist_height,"Distance",70,129,105,60,144,160,255);
+    fill(255);
+    makeButton(force_x,force_y,force_width,force_height,"Force",70,129,105,60,144,160,255);
+    fill(255);
     PImage logo;
     logo = loadImage("BurkeLogo.png");
-    image(logo,380,390);
+    image(logo,400,390);
     
     beginShape();
     //fill(0);
     //rect(0,0,1200,200);
     fill(255);
-    rect(0,0,1200,150);
+    rect(0,0,1200,50);
     endShape();
     
     //void setGradient(int x, int y, float w, float h, color c1, color c2, int axis ) {
 
-  noFill();
-
-  //if (axis == Y_AXIS) {  // Top to bottom gradient
-    for (int i = 50; i <= 200; i++) {
-      float inter = map(i, 50, 200, 0, 1);
-      color c = lerpColor(c1, c2, inter);
-      stroke(c);
-      line(0, i, 1200, i);
-    //}
-  }  
+ 
+  //}  
     
     stroke(0);
+    textFont(F,96);
+    fill(255);
+    text("SENSE-ABILITY",260,200);
+    //text("A Custom Device for",550,600);
+    //text("Finger-Pinch Rehabilitation",550,650);
+    textFont(F,26);
     fill(0);
-    textFont(F,56);
-    text("SENSE-ABILITY",375,150);
-    textFont(f,48);
-    text("A Custom Device for",370,280);
-    text("Finger-Pinch Rehabilitation",325,330);
-    textFont(f,26);
     text("The City College of New York | Department of Biomedical Engineering",10,35);
-    textFont(f,14);
   }
   
   if (screen.equals("forceselect")){
+    background(255);
     noStroke();
-    makeButton(back_x,back_y,back_width, back_height,"Go Back",99,172,185,60,144,160,0);
-    makeButton(incforce_x,incforce_y,incforce_width,incforce_height,"Increment",99,172,185,60,144,160,0);
-    makeButton(ranforce_x,ranforce_y,ranforce_width,ranforce_height,"Random",99,172,185,60,144,160,0);
-    makeButton(cusforce_x,cusforce_y,cusforce_width,cusforce_height,"Custom",99,172,185,60,144,160,0);
-    makeButton(freeforce_x,freeforce_y,freeforce_width,freeforce_height,"Free",99,172,185,60,144,160,0);
-  }
+    beginShape();
+    fill(70,129,105);
+    rect(0,50,1200,420);
+    endShape();
+    fill(0);
+    textFont(F,26);
+    text("The City College of New York | Department of Biomedical Engineering",10,35);
+    fill(255);
+    makeButton(back_mid_x,back_mid_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
+    fill(255);
+    makeButton(incforce_x,incforce_y,incforce_width,incforce_height,"Increment",70,129,105,60,144,160,255);
+    fill(255);
+    makeButton(ranforce_x,ranforce_y,ranforce_width,ranforce_height,"Random",70,129,105,60,144,160,255);
+    fill(255);
+    makeButton(cusforce_x,cusforce_y,cusforce_width,cusforce_height,"Custom",70,129,105,60,144,160,255);
+    fill(255);
+    makeButton(freeforce_x,freeforce_y,freeforce_width,freeforce_height,"Free",70,129,105,60,144,160,255);
+    fill(0);  
+}
   
   if (screen.equals("freeforce")){
     noStroke();
-    makeButton(back_x,back_y,back_width, back_height,"Go Back",99,172,185,60,144,160,0);
+    fill(255);
+    makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
     
     // Display numerical force values for left hand
     fill(255);
@@ -65,9 +100,11 @@ void drawScreen(String screen){
     rect(0,300,textwidth,textheight);
     fill(0);
     endShape();
+    textFont(F,36);
     text("Force (N)",30,350);
     flt_trun = truncate(flt);
     text(str(flt_trun),30,380);
+    textFont(F,36);
     text("Max (N)",30,410);
     maxflt_trun = truncate(maxflt);
     text(str(maxflt_trun),30,440);
@@ -134,7 +171,8 @@ void drawScreen(String screen){
   if (screen.equals("increment")){
     if (!force_leftinc.isActive()){
       noStroke();
-      makeButton(startx,starty,startwidth,startheight,"Start",99,172,185,60,144,160,0);
+      fill(255);
+      makeButton(startx,starty,startwidth,startheight,"Start",70,129,105,60,144,160,255);
     }
     if (force_leftinc.isActive()){
       background(255);
@@ -156,13 +194,15 @@ void drawScreen(String screen){
     else if (force_leftinc.isCompleted()){
       force_leftinc.displaySummary();
       noStroke();
-      makeButton(back_x,back_y,back_width, back_height,"Go Back",99,172,185,60,144,160,0);
+      makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
+      fill(255);
     }
   }
   
   if (screen.equals("freedist")){
     noStroke();
-    makeButton(back_x,back_y,back_width, back_height,"Go Back",99,172,185,60,144,160,0);
+    fill(255);
+    makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
     
     // Draw divider line
     rect(scrn_width/2,scrn_height/2 - 50,3,scrn_height/2 + 50);
@@ -172,7 +212,8 @@ void drawScreen(String screen){
     rect(0,height/2-50,width/2, height/2+50);
     beginShape();
     noStroke();
-    makeButton(dlh_textx,dist_texty,textwidth_dist,textheight_dist,"Left Hand",99,172,185,60,144,160,0);
+    makeButton(dlh_textx,dist_texty,textwidth_dist,textheight_dist,"Left Hand",255,255,255,255,255,255,0);
+    fill(0);
     dlh_trun = truncate(dlh);
     text(str(dlh_trun) + " (deg)",dlh_textx + text_x_pad,dist_texty+90);
     endShape();

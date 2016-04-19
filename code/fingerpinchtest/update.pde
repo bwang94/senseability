@@ -46,7 +46,7 @@ void update(){
   
   //BACK BUTTONS
   //Clicked back button on force selection screen --> go to main
-  else if(overTestButton(back_x, back_y, back_width, back_height) && isForceSelection){
+  else if(overTestButton(back_mid_x, back_mid_y, back_width, back_height) && isForceSelection){
     isForce = false;
     isMain = true;
     isDist = false;

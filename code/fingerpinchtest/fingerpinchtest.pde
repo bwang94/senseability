@@ -11,11 +11,10 @@ PFont F;
 int flt_index;
 int frt_index;
 
-
 color b1 = color(255);
-  color b2 = color(0);
-  color c1 = color(39, 170, 138);
-  color c2 = color(102, 224, 194);
+color b2 = color(0);
+color c1 = color(39, 170, 138);
+color c2 = color(102, 224, 194);
 
 
 float flt;
@@ -111,41 +110,49 @@ boolean isMain = true;
 boolean isFirstRun = true;
 
 //Variables defining button dimensions and locations
-int incforce_x = 180;
-int incforce_y = 300;
+int incforce_x = 300;
+int incforce_y = 110;
 int incforce_width = 200;
 int incforce_height = 100;
 
-int ranforce_x = 385;
+int ranforce_x = 300;
 int ranforce_y = 300;
 int ranforce_width = 200;
 int ranforce_height = 100;
 
-int cusforce_x = 590;
-int cusforce_y = 300;
+int cusforce_x = 700;
+int cusforce_y = 110;
 int cusforce_width = 200;
 int cusforce_height = 100;
 
-int freeforce_x = 795;
+int freeforce_x = 700;
 int freeforce_y = 300;
 int freeforce_width = 200;
 int freeforce_height = 100;
 
-int force_x = 275;
-int force_y = 350;
+int force_x = 300;
+int force_y = 300;
 int force_width = 200;
 int force_height = 100;
 
-int dist_x = 675;
-int dist_y = 350;
+int dist_x = 700;
+int dist_y = 300;
 int dist_width = 200;
 int dist_height = 100;
+
+int back_mid_x = 500;
+int back_mid_y = 535;
 
 int back_x = 1000;
 int back_y = 0;
 int back_width = 200;
 int back_height = 100;
 
+int text_x4_pad = 60;
+int text_x5_pad = 45;
+int text_x6_pad = 25;
+int text_x8_pad = 20;
+int text_x9_pad = 2;
 int text_x_pad = 25;
 int text_y_pad = 60;
 
@@ -160,8 +167,8 @@ void setup(){
   port.bufferUntil('\n');
   size(1200,700);
   frameRate(120);
-  f = createFont("InaiMathi",32,true);
-  F = createFont("Monaco",32,true);
+  f = createFont("EuphemiaUCAS",32,true);
+  F = createFont("EuphemiaUCAS Bold",32,true);
   //println(arduino.list());
   background(255);
   
