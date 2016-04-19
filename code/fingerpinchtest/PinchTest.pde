@@ -143,6 +143,9 @@ class PinchTest{
     if (currentround > numrounds){
       return true;
     }
+    else if (numskips > skipcutoff && skipcutoff != -1){
+      return true;
+    }
     else{
       return false;
     }
@@ -184,12 +187,12 @@ class PinchTest{
     if (type.equals("Force") && hand.equals("Left")){
       float drawtarget = map(currentroundtarget, 0, forcelimit, 0, height/2 - 50);
       fill(100);
-      rect(xposA - 30, height - drawtarget, 260, 5);
+      rect(xposA - 30, height - drawtarget, 260, 2);
     }
     else if (type.equals("Force") && hand.equals("Right")){
       float drawtarget = map(currentroundtarget, 0, forcelimit, 0, height/2 - 50);
       fill(100);
-      rect(xposB - 30, height - drawtarget, 260, 5);
+      rect(xposB - 30, height - drawtarget, 260, 2);
     }
     
   }
