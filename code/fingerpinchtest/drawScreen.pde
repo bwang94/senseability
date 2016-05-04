@@ -176,6 +176,7 @@ void drawScreen(String screen){
       makeButton(startx,starty,startwidth,startheight,"Start",70,129,105,60,144,160,255);
     }
     if (force_leftinc.isActive()){
+      //TODO - STOP BUTTON
       background(255);
       if (!force_leftinc.isRoundStarted()){
         force_leftinc.startRound();
@@ -210,7 +211,7 @@ void drawScreen(String screen){
     fill(0);
     
     fill(255);
-    rect(0,height/2-50,width/2, height/2+50);
+    rect(0,height/2-50,width, height/2+50);
     beginShape();
     noStroke();
     makeButton(dlh_textx,dist_texty,textwidth_dist,textheight_dist,"Left Hand",255,255,255,255,255,255,0);
@@ -218,11 +219,24 @@ void drawScreen(String screen){
     dlh_trun = truncate(dlh);
     text(str(dlh_trun) + " (deg)",dlh_textx + text_x_pad,dist_texty+90);
     endShape();
+    
+    beginShape();
+    noStroke();
+    makeButton(drh_textx,dist_texty,textwidth_dist,textheight_dist,"Right Hand",255,255,255,255,255,255,0);
+    fill(0);
+    drh_trun = truncate(drh);
+    text(str(drh_trun) + " (deg)",drh_textx + text_x_pad,dist_texty+90);
+    endShape();
         
     float temp_start = map(dlh,0,90,0,PI/2);
     distbar_left.changeAngleStart(2*PI - temp_start);
     distbar_left.changeColor(0,0,0);
     distbar_left.drawCurve();
+    
+    float temp_end = map(drh,0,90,0,PI/2);
+    distbar_right.changeAngleEnd(PI + temp_end);
+    distbar_right.changeColor(0,0,0);
+    distbar.right.drawCurve();
 
     // Line Graph for left hand
     stroke(255,153,153);
