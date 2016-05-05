@@ -104,6 +104,7 @@ class PinchTest{
   void startRound(){
     roundStarted = true;
     currentroundtarget = roundtargets.get(currentround - 1);
+    println(currentroundtarget);
     starttime = millis();
     resetstarttime = millis();
     roundPassed = false;
@@ -268,16 +269,17 @@ class PinchTest{
   void endTest(){
     testStarted = false;
     testCompleted = true;
+    roundStarted = false;
   }
   
   void resetTest(){
     roundtargets.clear();
     testCompleted = false;
     testStarted = false;
+    roundStarted = false;
     currentround = 1;
     passcounter = 0;
     numskips = 0;
-    currentroundtarget = 0;
   }
   
   void displaySummary(){

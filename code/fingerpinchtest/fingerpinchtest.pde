@@ -71,6 +71,9 @@ CurveBar distbar_right;
 CurveBar coverbar_left;
 CurveBar coverbar_right;
 
+ScrollBar minscrollbar;
+ScrollBar maxscrollbar;
+
 //Set up Tests
 PinchTest force_leftinc;
 PinchTest force_rightinc;
@@ -232,8 +235,12 @@ int num_height = 50;
 int num_width = 50;
 
 void setup(){
+<<<<<<< HEAD
   println(Serial.list());
   port = new Serial(this,Serial.list()[3],115200);
+=======
+  port = new Serial(this,Serial.list()[0],115200);
+>>>>>>> origin/master
   port.clear();
   port.bufferUntil('\n');
   size(1200,700);
@@ -245,10 +252,14 @@ void setup(){
   
   distbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_left, angleend_left);
   distbar_right = new CurveBar(drh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_right, angleend_right);
+  
   force_leftinc = new PinchTest("Force","Increment","Left",10,2000,.1,10000);
   force_leftinc.setBounds(2,20);
   force_rightinc = new PinchTest("Force","Increment","Right",10,2000,.1,10000);
   force_rightinc.setBounds(2,20);
+  
+  minscrollbar = new ScrollBar(690,150,20,200,1);
+  maxscrollbar = new ScrollBar(800,150,20,200,1);
   
   //coverbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, 3*PI/2, 2*PI);
   //coverbar_left.changeColor(255,255,255);

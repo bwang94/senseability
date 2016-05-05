@@ -250,7 +250,10 @@ void drawScreen(String screen){
       text("Rounds",420,100);
       text("Bounds",676,100);
       text("Position",908,100);
-      
+      minscrollbar.updateScrollBar();
+      maxscrollbar.updateScrollBar();
+      minscrollbar.updateDisplay();
+      maxscrollbar.updateDisplay();      
     }
     if (force_leftinc.isActive()){
       //println("Test active");
