@@ -71,8 +71,11 @@ CurveBar distbar_right;
 CurveBar coverbar_left;
 CurveBar coverbar_right;
 
-ScrollBar minscrollbar;
-ScrollBar maxscrollbar;
+ScrollBar startforcebar;
+ScrollBar endforcebar;
+
+ScrollBar startdistbar;
+ScrollBar enddistbar;
 
 //Set up Tests
 PinchTest force_leftinc;
@@ -235,10 +238,16 @@ int num_height = 50;
 int num_width = 50;
 
 void setup(){
+<<<<<<< HEAD
   println(Serial.list());
   port = new Serial(this,Serial.list()[3],115200);
   port.clear();
   port.bufferUntil('\n');
+=======
+  //port = new Serial(this,Serial.list()[0],115200);
+  //port.clear();
+  //port.bufferUntil('\n');
+>>>>>>> origin/master
   size(1200,700);
   frameRate(120);
   f = createFont("EuphemiaUCAS",32,true);
@@ -254,8 +263,10 @@ void setup(){
   force_rightinc = new PinchTest("Force","Increment","Right",10,2000,.1,10000);
   force_rightinc.setBounds(2,20);
   
-  minscrollbar = new ScrollBar(690,150,20,200,1);
-  maxscrollbar = new ScrollBar(800,150,20,200,1);
+  startforcebar = new ScrollBar(690,150,20,200,1);
+  endforcebar = new ScrollBar(800,150,20,200,1);
+  startdistbar = new ScrollBar(690,150,20,200,1);
+  enddistbar = new ScrollBar(800,150,20,200,1);
   
   //coverbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, 3*PI/2, 2*PI);
   //coverbar_left.changeColor(255,255,255);
