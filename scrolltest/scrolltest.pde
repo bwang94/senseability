@@ -81,7 +81,7 @@ class VScrollbar
 
   boolean over() {
     if(mouseX > xpos && mouseX < xpos+swidth &&
-    mouseY > ypos && mouseY < ypos+sheight) {
+    mouseY > ypos && mouseY < ypos+swidth) {
       return true;
     } else {
       return false;
