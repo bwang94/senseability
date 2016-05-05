@@ -107,6 +107,8 @@ boolean isForce = false;
 boolean isForceSelection = false;
 boolean isIncrement = false;
 boolean isDist = false;
+boolean isDistInc = false;
+boolean isDistFree = false;
 boolean isMain = true;
 boolean isFirstRun = true;
 
@@ -141,26 +143,74 @@ int dist_y = 300;
 int dist_width = 200;
 int dist_height = 100;
 
+int distinc_x = 200;
+int distinc_y = 200;
+int distinc_width = 200;
+int distinc_height = 100;
+
+int distfree_x = 400;
+int distfree_y = 200;
+int distfree_width = 200;
+int distfree_height = 100;
+
 int back_mid_x = 500;
 int back_mid_y = 535;
+
+int back_right_x = 675;
+int back_right_y = 535;
 
 int back_x = 1000;
 int back_y = 0;
 int back_width = 200;
 int back_height = 100;
 
+int text_x2_pad = 0;
+int text_x3_pad = 60;
 int text_x4_pad = 60;
 int text_x5_pad = 45;
 int text_x6_pad = 25;
 int text_x8_pad = 20;
 int text_x9_pad = 2;
+int text_x125_3pad = 35;
+int text_x125_4pad = 23;
+int text_x125_5pad = 13;
+int text_x130_3pad = 35;
+int text_x130_5pad = 9;
+int text_x130_6pad = 0;
 int text_x_pad = 25;
 int text_y_pad = 60;
+int text_y2_pad = 40;
+int text_y75_pad = 50;
 
-int startx = 0;
-int starty = 0;
-int startwidth = 150;
+int startx = 325;
+int starty = 535;
+int startwidth = 200;
 int startheight = 100;
+
+int left_x = 150;
+int left_y = 150;
+int right_x = 150;
+int right_y = 325;
+int handwidth = 125;
+int handheight = 100;
+
+int close_x = 920;
+int close_y = 150;
+int middle_x = 920;
+int middle_y = 250;
+int far_x = 920;
+int far_y = 350;
+int positionwidth = 130;
+int positionheight = 75;
+
+int x_10 = 460;
+int y_10 = 150;
+int x_20 = 460;
+int y_20 = 250;
+int x_30 = 460;
+int y_30 = 350;
+int num_height = 50;
+int num_width = 50;
 
 void setup(){
   port = new Serial(this,Serial.list()[3],57600);
@@ -209,10 +259,20 @@ void draw(){
   }
   
   else if (isDist){
+    resetScreen("dist");
+    drawScreen("dist");
+  }
+  else if (isDistFree){
     if (isFirstRun){  
       resetScreen("freedist");
     }
     drawScreen("freedist");
+  }
+  else if (isDistInc){
+    if (isFirstRun){
+    resetScreen("distinc");
+  }
+  drawScreen("distinc");
   }
   else{
     println("You broke the code :(");  

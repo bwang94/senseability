@@ -171,9 +171,33 @@ void drawScreen(String screen){
   
   if (screen.equals("increment")){
     if (!force_leftinc.isActive()){
-      noStroke();
-      fill(255);
+      background(255);
+    noStroke();
+    beginShape();
+    fill(70,129,105);
+    rect(0,50,1200,420);
+    endShape();
+    fill(0);
+    textFont(F,26);
+    text("The City College of New York | Department of Biomedical Engineering",10,35);
+    fill(255);
+    makeButton(back_right_x,back_right_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
       makeButton(startx,starty,startwidth,startheight,"Start",70,129,105,60,144,160,255);
+      
+      makeButton(left_x,left_y,handwidth, handheight,"Left",70,129,105,60,144,160,255);
+      makeButton(right_x,right_y,handwidth, handheight,"Right",70,129,105,60,144,160,255);
+      makeButton(x_10,y_10,num_width, num_height,"10",70,129,105,60,144,160,255);
+      makeButton(x_20,y_20,num_width, num_height,"20",70,129,105,60,144,160,255);
+      makeButton(x_30,y_30,num_width, num_height,"30",70,129,105,60,144,160,255);
+      makeButton(close_x,close_y,positionwidth, positionheight,"Close",70,129,105,60,144,160,255);
+      makeButton(middle_x,middle_y,positionwidth, positionheight,"Middle",70,129,105,60,144,160,255);
+      makeButton(far_x,far_y,positionwidth, positionheight,"Far",70,129,105,60,144,160,255);
+      
+      text("Hand",160,100);
+      text("Rounds",420,100);
+      text("Bounds",676,100);
+      text("Position",908,100);
+      
     }
     if (force_leftinc.isActive()){
       background(255);
@@ -200,7 +224,23 @@ void drawScreen(String screen){
     }
   }
   
+  if (screen.equals("dist")){
+   background(255);
+    noStroke();
+    beginShape();
+    fill(70,129,105);
+    rect(0,50,1200,420);
+    endShape();
+    fill(0);
+    textFont(F,26);
+    text("The City College of New York | Department of Biomedical Engineering",10,35);
+    makeButton(distinc_x,distinc_y,distinc_width,distinc_height,"Increment",70,129,105,60,144,160,255);
+    makeButton(distfree_x,distfree_y,distfree_width,distfree_height,"Free",70,129,105,60,144,160,255);
+    makeButton(back_x,back_y,back_width,back_height,"Go Back",70,129,105,60,144,160,255);
+  }
+  
   if (screen.equals("freedist")){
+    
     noStroke();
     fill(255);
     makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
@@ -223,7 +263,7 @@ void drawScreen(String screen){
     distbar_left.changeAngleStart(2*PI - temp_start);
     distbar_left.changeColor(0,0,0);
     distbar_left.drawCurve();
-
+    
     // Line Graph for left hand
     stroke(255,153,153);
     strokeWeight(2);
@@ -233,7 +273,7 @@ void drawScreen(String screen){
     if (xPos_dlh >= width){
     xPos_dlh = 0;
     lastxPos_dlh = 0;
-    background(255);
+    //background(255);
     }
     else{
     xPos_dlh++;
