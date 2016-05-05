@@ -122,6 +122,16 @@ boolean isDistFree = false;
 boolean isMain = true;
 boolean isFirstRun = true;
 
+//Coloring clicked on boxes
+boolean colorBox10 = false;
+boolean colorBox20 = false;
+boolean colorBox30 = false;
+boolean colorBoxLeft = false;
+boolean colorBoxRight = false;
+boolean colorBoxClose = false;
+boolean colorBoxMiddle = false;
+boolean colorBoxFar = false;
+
 //Variables defining button dimensions and locations
 int incforce_x = 300;
 int incforce_y = 110;

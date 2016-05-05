@@ -93,6 +93,52 @@ void update(){
     }
   }
   
+  //Increment Parameter Selection
+  else if (overTestButton(x_10,y_10,num_width,num_height) && (isIncrement || isDistInc)){
+    colorBox10 = !colorBox10;
+    colorBox20 = false;
+    colorBox30 = false;
+  }
+  else if (overTestButton(x_20,y_20,num_width,num_height) && (isIncrement || isDistInc)){
+    colorBox10 = false;
+    colorBox20 = !colorBox20;
+    colorBox30 = false;
+  }
+  else if (overTestButton(x_30,y_30,num_width,num_height) && (isIncrement || isDistInc)){
+    colorBox10 = false;
+    colorBox20 = false;
+    colorBox30 = !colorBox30;
+  }
+  else if (overTestButton(left_x,left_y,positionwidth,positionheight) && (isIncrement || isDistInc)){
+    colorBoxLeft = !colorBoxLeft;
+    colorBoxRight = false;
+  }
+  else if (overTestButton(right_x,right_y,positionwidth,positionheight) && (isIncrement || isDistInc)){
+    colorBoxLeft = false;
+    colorBoxRight = !colorBoxRight;
+  }
+  else if (overTestButton(close_x,close_y,positionwidth,positionheight) && (isIncrement)){
+    colorBoxClose = !colorBoxClose;
+    colorBoxMiddle = false;
+    colorBoxFar = false;
+  }
+  else if (overTestButton(middle_x,middle_y,positionwidth,positionheight) && (isIncrement)){
+    colorBoxClose = false;
+    colorBoxMiddle = !colorBoxMiddle;
+    colorBoxFar = false;
+  }
+  else if (overTestButton(far_x,far_y,positionwidth,positionheight) && (isIncrement)){
+    colorBoxClose = false;
+    colorBoxMiddle = false;
+    colorBoxFar = !colorBoxFar;
+  }
+  
+  
+  //text == "10" || text == "20" text == "30" || text == "Left" || text == "Right" || text == "Close" || text == "Middle" || text == "Far"){
+  //   if (overTestButton(x,y,w,h){
+       
+  // }
+  
   //BACK BUTTONS
   //Clicked back button on force selection screen --> go to main
   else if(overTestButton(back_mid_x, back_mid_y, back_width, back_height) && isForceSelection){
@@ -155,6 +201,15 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isDistIncRun = false;
+    
+    colorBox10 = false;
+    colorBox20 = false;
+    colorBox30 = false;
+    colorBoxLeft = false;
+    colorBoxRight = false;
+    colorBoxClose = false;
+    colorBoxMiddle = false;
+    colorBoxFar = false;
   }
   else if(overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun){
     isForce = false;
