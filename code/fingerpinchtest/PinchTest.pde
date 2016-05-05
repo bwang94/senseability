@@ -136,7 +136,6 @@ class PinchTest{
   void nextRound(){
     currentround++;
     roundStarted = false;
-    //TODO WHAT IF NUMSKIPS > SKIPCUTOFF
   }
   
   boolean checkTestComplete(){
@@ -186,7 +185,6 @@ class PinchTest{
   void drawCurrentTarget(){
     if (type.equals("Force") && hand.equals("Left")){
       float drawtarget = map(currentroundtarget, 0, forcelimit, 0, height/2 - 50);
-      fill(100);
       if (flt >= (currentroundtarget*(1-tolerance)) && flt <= (currentroundtarget*(1+tolerance))){
         fill(102,255,102);
       }
