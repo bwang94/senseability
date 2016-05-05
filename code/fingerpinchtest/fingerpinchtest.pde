@@ -233,8 +233,6 @@ void setup(){
   
   distbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_left, angleend_left);
   distbar_right = new CurveBar(drh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_right, angleend_right);
-  force_leftinc = new PinchTest("Force","Increment","Left",10,2000,5,2,.1,10000);
-  force_rightinc = new PinchTest("Force","Increment","Right",10,2000,5,2,.1,10000);
   force_leftinc = new PinchTest("Force","Increment","Left",10,2000,.1,10000);
   force_leftinc.setBounds(2,20);
   force_rightinc = new PinchTest("Force","Increment","Right",10,2000,.1,10000);
