@@ -75,14 +75,13 @@ void drawScreen(String screen){
     fill(0);
     textFont(F,26);
     text("The City College of New York | Department of Biomedical Engineering",10,35);
+    textFont(F,86);
+    fill(255);
+    text("Force Test",390,180);
     fill(255);
     makeButton(back_mid_x,back_mid_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
     fill(255);
-    makeButton(incforce_x,incforce_y,incforce_width,incforce_height,"Increment",70,129,105,60,144,160,255);
-    fill(255);
-    makeButton(ranforce_x,ranforce_y,ranforce_width,ranforce_height,"Random",70,129,105,60,144,160,255);
-    fill(255);
-    makeButton(cusforce_x,cusforce_y,cusforce_width,cusforce_height,"Custom",70,129,105,60,144,160,255);
+    makeButton(incforce_x,incforce_y,incforce_width,incforce_height,"Custom",70,129,105,60,144,160,255);
     fill(255);
     makeButton(freeforce_x,freeforce_y,freeforce_width,freeforce_height,"Free",70,129,105,60,144,160,255);
     fill(0);  
@@ -182,8 +181,14 @@ void drawScreen(String screen){
     text("The City College of New York | Department of Biomedical Engineering",10,35);
     fill(255);
     //println("Parameter selection screen");
-    makeButton(back_right_x,back_right_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
+      makeButton(back_right_x,back_right_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
       makeButton(startx,starty,startwidth,startheight,"Start",70,129,105,60,144,160,255);
+      
+      //Divider Lines
+    fill(255);  
+    rect(360,75,3,375);
+    rect(620,75,3,375);
+    rect(860,75,3,375);
       
       if (colorBoxLeft==false){
       makeButton(left_x,left_y,handwidth, handheight,"Left",70,129,105,60,144,160,255);
@@ -290,9 +295,12 @@ void drawScreen(String screen){
     textFont(F,26);
     text("The City College of New York | Department of Biomedical Engineering",10,35);
     fill(255); 
-    makeButton(distinc_x,distinc_y,distinc_width,distinc_height,"Increment",70,129,105,60,144,160,255);
+    makeButton(distinc_x,distinc_y,distinc_width,distinc_height,"Custom",70,129,105,60,144,160,255);
     makeButton(distfree_x,distfree_y,distfree_width,distfree_height,"Free",70,129,105,60,144,160,255);
     makeButton(back_mid_x,back_mid_y,back_width,back_height,"Go Back",70,129,105,60,144,160,255);
+    textFont(F,86);
+    fill(255);
+    text("Distance Test",320,180);
   }
   
   if (screen.equals("distinc")){
@@ -308,6 +316,12 @@ void drawScreen(String screen){
     fill(255);
       makeButton(back_right_x,back_right_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
       makeButton(startx,starty,startwidth,startheight,"Start",70,129,105,60,144,160,255);
+      
+      //Divider Lines
+    fill(255);  
+    rect(360,75,3,375);
+    rect(620,75,3,375);
+    rect(860,75,3,375);
       
       if (colorBoxLeft==false){
       makeButton(left_x,left_y,handwidth, handheight,"Left",70,129,105,60,144,160,255);

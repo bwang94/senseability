@@ -1,5 +1,4 @@
- 
-  import processing.serial.*;
+import processing.serial.*;
 import cc.arduino.*;
 Arduino arduino;
 
@@ -134,7 +133,7 @@ boolean colorBoxFar = false;
 
 //Variables defining button dimensions and locations
 int incforce_x = 300;
-int incforce_y = 110;
+int incforce_y = 275;
 int incforce_width = 200;
 int incforce_height = 100;
 
@@ -149,7 +148,7 @@ int cusforce_width = 200;
 int cusforce_height = 100;
 
 int freeforce_x = 700;
-int freeforce_y = 300;
+int freeforce_y = 275;
 int freeforce_width = 200;
 int freeforce_height = 100;
 
@@ -164,12 +163,12 @@ int dist_width = 200;
 int dist_height = 100;
 
 int distinc_x = 300;
-int distinc_y = 200;
+int distinc_y = 275;
 int distinc_width = 200;
 int distinc_height = 100;
 
 int distfree_x = 700;
-int distfree_y = 200;
+int distfree_y = 275;
 int distfree_width = 200;
 int distfree_height = 100;
 
@@ -234,7 +233,7 @@ int num_width = 50;
 
 void setup(){
   println(Serial.list());
-  port = new Serial(this,Serial.list()[0],115200);
+  port = new Serial(this,Serial.list()[3],115200);
   port.clear();
   port.bufferUntil('\n');
   size(1200,700);
