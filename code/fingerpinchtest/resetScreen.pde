@@ -1,5 +1,5 @@
 void resetScreen(String screen){
-  if (screen.equals("forceselect")){
+  if (screen.equals("forceselect") || screen.equals("dist") || screen.equals("distinc")){
     background(255);
   }
   if (screen.equals("freeforce") || screen.equals("increment")){
@@ -14,14 +14,11 @@ void resetScreen(String screen){
     maxflt = 0;
     maxfrt = 0;
   }
-  if (screen.equals("freedist") || screen.equals("distinc")){
+  if (screen.equals("freedist") || screen.equals("distincrun")){
     background(255);
     xPos_dlh = 1;
     lastxPos_dlh = 1;
     lastheight_dlh = 0;
     isFirstRun = false;
-  }
-  if (screen.equals("dist")){
-    background(255);
   }
 }

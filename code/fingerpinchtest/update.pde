@@ -9,6 +9,7 @@ void update(){
     isDist = false;
     isDistInc = false;
     isDistFree = false;
+    isDistIncRun = false;
   }
   //Clicked distance test button on main screen --> go to free distance 
   else if (overTestButton(dist_x, dist_y, dist_width, dist_height) && isMain){
@@ -20,6 +21,7 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isFirstRun = false;
+    isDistIncRun = false;
   }
   
   //DISTANCE SELECTION BUTTONS
@@ -32,6 +34,20 @@ void update(){
     isFirstRun = true;
     isDistInc = true;
     isDistFree = false;
+    isDistIncRun = false;
+  }
+  else if (overTestButton(startx, starty, startwidth, startheight) && isDistInc){    //DistIncRun
+    isForce = false;
+    isForceSelection = false;
+    isIncrement = false;
+    isMain = false;
+    isDist = false;
+    isFirstRun = true;
+    isDistInc = false;
+    isDistFree = false;
+    isDistIncRun = true;
+    
+    force_leftinc.startRound();
   }
   else if (overTestButton(distfree_x, distfree_y, distfree_width, distfree_height) && isDist){    //DistFree
     isForce = false;
@@ -42,6 +58,7 @@ void update(){
     isFirstRun = true;
     isDistInc = false;
     isDistFree = true;
+    isDistIncRun = false;
   }
   
   //FORCE SELECTION BUTTONS
@@ -54,6 +71,7 @@ void update(){
     isFirstRun = true;
     isDistInc = false;
     isDistFree = false;
+    isDistIncRun = false;
   }
   else if (overTestButton(incforce_x,incforce_y,incforce_width,incforce_height) && isForceSelection){
     isForce = false;
@@ -64,6 +82,7 @@ void update(){
     isFirstRun = true;
     isDistInc = false;
     isDistFree = false;
+    isDistIncRun = false;
   }
   
   else if(overTestButton(startx,starty,startwidth,startheight) && isIncrement && !force_leftinc.isActive()){
@@ -86,9 +105,10 @@ void update(){
     isIncrement = false;
     isDistInc = false;
     isDistFree = false;
+    isDistIncRun = false;
   }
   //Clicked back button during any force test --> go to force selection
-  else if(overTestButton(back_x, back_y, back_width, back_height) && (isForce || isIncrement)){
+  else if(overTestButton(back_x, back_y, back_width, back_height) && (isForce)){
     isForce = false;
     isMain = false;
     isDist = false;
@@ -97,6 +117,7 @@ void update(){
     isIncrement = false;
     isDistInc = false;
     isDistFree = false;
+    isDistIncRun = false;
   }
   //Clicked on back button on free distance --> go to main
   else if(overTestButton(back_x, back_y, back_width, back_height) && isDist){
@@ -108,7 +129,76 @@ void update(){
     isIncrement = false;
     isDistInc = false;
     isDistFree = false;
+    isDistIncRun = false;
   }
+  else if(overTestButton(back_x, back_y, back_width, back_height) && isDistFree){
+    isForce = false;
+    isMain = false;
+    isDist = true;
+    isForceSelection = false;
+    isFirstRun = true;
+    isIncrement = false;
+    isDistInc = false;
+    isDistFree = false;
+    isDistIncRun = false;
+  }
+  else if(overTestButton(back_right_x, back_right_y, back_width, back_height) && isDistInc){
+    isForce = false;
+    isMain = false;
+    isDist = true;
+    isForceSelection = false;
+    isFirstRun = true;
+    isIncrement = false;
+    isDistInc = false;
+    isDistFree = false;
+    isDistIncRun = false;
+  }
+  else if(overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun){
+    isForce = false;
+    isMain = false;
+    isDist = false;
+    isForceSelection = false;
+    isFirstRun = true;
+    isIncrement = false;
+    isDistInc = true;
+    isDistFree = false;
+    isDistIncRun = false;
+  }
+  else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && !force_leftinc.isActive()){
+    isForce = false;
+    isMain = false;
+    isDist = false;
+    isForceSelection = true;
+    isFirstRun = true;
+    isIncrement = false;
+    isDistInc = false;
+    isDistFree = false;
+    isDistIncRun = false;
+  }
+  else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && force_leftinc.isActive()){ //done button
+    isForce = false;
+    isMain = false;
+    isDist = false;
+    isForceSelection = false;
+    isFirstRun = true;
+    isIncrement = true;
+    isDistInc = false;
+    isDistFree = false;
+    isDistIncRun = false;
+    force_leftinc.endTest();
+  }
+  else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && force_leftinc.isCompleted()){
+    isForce = false;
+    isMain = false;
+    isDist = false;
+    isForceSelection = false;
+    isFirstRun = true;
+    isIncrement = true;
+    isDistInc = false;
+    isDistFree = false;
+    isDistIncRun = false;
+  }
+  
   else{
 
   }

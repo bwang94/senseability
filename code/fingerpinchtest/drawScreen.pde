@@ -208,6 +208,7 @@ void drawScreen(String screen){
       if (!force_leftinc.isRoundStarted()){
         force_leftinc.startRound();
       }
+      makeButton(back_x,back_y,back_width, back_height,"Done",70,129,105,60,144,160,255);
       force_leftinc.drawForceBar();
       force_leftinc.displayTimeElapsed();
       force_leftinc.drawCurrentTarget();
@@ -241,6 +242,37 @@ void drawScreen(String screen){
     makeButton(distinc_x,distinc_y,distinc_width,distinc_height,"Increment",70,129,105,60,144,160,255);
     makeButton(distfree_x,distfree_y,distfree_width,distfree_height,"Free",70,129,105,60,144,160,255);
     makeButton(back_x,back_y,back_width,back_height,"Go Back",70,129,105,60,144,160,255);
+  }
+  
+  if (screen.equals("distinc")){
+    background(255);
+    noStroke();
+    beginShape();
+    fill(70,129,105);
+    rect(0,50,1200,420);
+    endShape();
+    fill(0);
+    textFont(F,26);
+    text("The City College of New York | Department of Biomedical Engineering",10,35);
+    fill(255);
+    makeButton(back_right_x,back_right_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
+      makeButton(startx,starty,startwidth,startheight,"Start",70,129,105,60,144,160,255);
+      
+      makeButton(left_x,left_y,handwidth, handheight,"Left",70,129,105,60,144,160,255);
+      makeButton(right_x,right_y,handwidth, handheight,"Right",70,129,105,60,144,160,255);
+      makeButton(x_10,y_10,num_width, num_height,"10",70,129,105,60,144,160,255);
+      makeButton(x_20,y_20,num_width, num_height,"20",70,129,105,60,144,160,255);
+      makeButton(x_30,y_30,num_width, num_height,"30",70,129,105,60,144,160,255);
+      
+      text("Hand",160,100);
+      text("Rounds",420,100);
+      text("Bounds",676,100);
+  }
+  
+  if (screen.equals("distincrun")){
+    noStroke();
+    background(255);
+    makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
   }
   
   if (screen.equals("freedist")){
@@ -282,10 +314,6 @@ void drawScreen(String screen){
     distbar_right.changeAngleEnd(PI + temp_end);
     distbar_right.changeColor(0,0,0);
     distbar_right.drawCurve();
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 
     // Line Graph for left hand
     stroke(255,153,153);

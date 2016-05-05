@@ -116,6 +116,7 @@ boolean isForce = false;
 boolean isForceSelection = false;
 boolean isIncrement = false;
 boolean isDist = false;
+boolean isDistIncRun = false;
 boolean isDistInc = false;
 boolean isDistFree = false;
 boolean isMain = true;
@@ -278,6 +279,12 @@ void draw(){
       resetScreen("freedist");
     }
     drawScreen("freedist");
+  }
+  else if (isDistIncRun){
+    if (isFirstRun){
+      resetScreen("distincrun");
+    }
+    drawScreen("distincrun");
   }
   else if (isDistInc){
     if (isFirstRun){
