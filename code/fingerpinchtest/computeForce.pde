@@ -23,7 +23,6 @@ void computeForce(){
   }
   else{
   }
-  println(resist_flt);
   
   // Calculate max forces
   if (flt > maxflt){
