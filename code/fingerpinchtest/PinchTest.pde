@@ -76,7 +76,7 @@ class PinchTest{
   void setTargets(){
     if (this.testMode().equals("Increment")){
       roundtargets = new float[numrounds]; //Makes the roundtargets array of length rounds
-      increment = (maxbound - minbound)/numrounds;
+      increment = (maxbound - minbound)/(numrounds-1);
       for (int i = 0; i < numrounds; i++){
         roundtargets[i] = minbound + float(i) * increment;  //Sets each of the elements in the roundtargets array
       }

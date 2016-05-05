@@ -49,6 +49,7 @@ float xposB = 850;
 
 //Distance
 int dist_index;
+int distright_index;
 
 float dlh;
 float dlh_trun;
@@ -221,7 +222,7 @@ int num_height = 50;
 int num_width = 50;
 
 void setup(){
-  port = new Serial(this,Serial.list()[0],57600);
+  port = new Serial(this,Serial.list()[0],115200);
   port.clear();
   port.bufferUntil('\n');
   size(1200,700);

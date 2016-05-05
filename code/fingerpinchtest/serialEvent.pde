@@ -11,7 +11,7 @@ void serialEvent(Serial port){
   flt_index = inData.indexOf("FLT"); //Force Left Thumb
   frt_index = inData.indexOf("FRT"); //Force Right Thumb
   dist_index = inData.indexOf("DLH");
-  //println("Got indices");
+  distright_index = inData.indexOf("DRH");
   
   // Get the resistances and calculate the forces
   // Calculate force, mapped force, and max force values
@@ -21,10 +21,15 @@ void serialEvent(Serial port){
     computeForce(); 
   }
   if (isDist){
-    resist_dlh = float(inData.substring(dist_index + 3));
+    resist_dlh = float(inData.substring(dist_index + 3,distright_index));
     float temp_dlh = resist_dlh;
     if (Float.isNaN(temp_dlh)){
       resist_dlh = 0;
+    }
+    resist_drh = float(inData.substring(distright_index + 3));
+    float temp_drh = resist_drh;
+    if (Float.isNaN(temp_drh)){
+      resist_drh = 0;
     }
     computeDist();
   }
