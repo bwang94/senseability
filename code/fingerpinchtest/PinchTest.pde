@@ -14,7 +14,7 @@ class PinchTest{
   int currenttime; // In ms
   int numskips; //Number of rounds skipped;
   int skipcutoff; //Number of rounds that, when skipped, will cause test to end;
-  float[] roundtargets; //Array that holds targets of each round
+  FloatList roundtargets = new FloatList(); //Array that holds targets of each round
   float tolerance; // What tolerance level is in decimal form
   float minbound;
   float maxbound;
@@ -75,16 +75,14 @@ class PinchTest{
   
   void setTargets(){
     if (this.testMode().equals("Increment")){
-      roundtargets = new float[numrounds]; //Makes the roundtargets array of length rounds
       increment = (maxbound - minbound)/(numrounds-1);
       for (int i = 0; i < numrounds; i++){
-        roundtargets[i] = minbound + float(i) * increment;  //Sets each of the elements in the roundtargets array
+        roundtargets.append(minbound + float(i) * increment);  //Sets each of the elements in the roundtargets array
       }
     }
     if (this.testMode().equals("Custom")){
-      roundtargets = new float[numrounds];
       for (int i = 0; i < numrounds; i++){
-        roundtargets[i] = truncate(random(minbound,maxbound));
+        roundtargets.append(truncate(random(minbound,maxbound)));
       }
     }
   }
@@ -105,7 +103,7 @@ class PinchTest{
   
   void startRound(){
     roundStarted = true;
-    currentroundtarget = roundtargets[currentround - 1];
+    currentroundtarget = roundtargets.get(currentround - 1);
     starttime = millis();
     resetstarttime = millis();
     roundPassed = false;
@@ -270,6 +268,12 @@ class PinchTest{
   void endTest(){
     testStarted = false;
     testCompleted = true;
+  }
+  
+  void resetTest(){
+    roundtargets.clear();
+    testCompleted = false;
+    currentround = 1;
   }
   
   void displaySummary(){
