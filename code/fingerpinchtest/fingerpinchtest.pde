@@ -57,15 +57,23 @@ float resist_dlh;
 float maxdlh = 0;
 float maxdlh_trun;
 
-  //Set up curved bars
-  CurveBar distbar_left;
-  CurveBar distbar_right;
+float drh;
+float drh_trun;
+float drhdraw = 0;
+float resist_drh;
+float maxdrh = 0;
+float maxdrh_trun;
+
+//Set up curved bars
+CurveBar distbar_left;
+CurveBar distbar_right;
   
-  CurveBar coverbar_left;
-  CurveBar coverbar_right;
-  //Set up Tests
-  PinchTest force_leftinc;
-  PinchTest force_rightinc;
+CurveBar coverbar_left;
+CurveBar coverbar_right;
+
+//Set up Tests
+PinchTest force_leftinc;
+PinchTest force_rightinc;
 
 //Distance text boxes
 int textheight_dist = 100;
@@ -213,7 +221,7 @@ int num_height = 50;
 int num_width = 50;
 
 void setup(){
-  port = new Serial(this,Serial.list()[3],57600);
+  port = new Serial(this,Serial.list()[0],57600);
   port.clear();
   port.bufferUntil('\n');
   size(1200,700);
