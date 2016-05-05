@@ -153,12 +153,12 @@ int dist_y = 300;
 int dist_width = 200;
 int dist_height = 100;
 
-int distinc_x = 200;
+int distinc_x = 300;
 int distinc_y = 200;
 int distinc_width = 200;
 int distinc_height = 100;
 
-int distfree_x = 400;
+int distfree_x = 700;
 int distfree_y = 200;
 int distfree_width = 200;
 int distfree_height = 100;

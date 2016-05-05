@@ -273,7 +273,11 @@ class PinchTest{
   void resetTest(){
     roundtargets.clear();
     testCompleted = false;
+    testStarted = false;
     currentround = 1;
+    passcounter = 0;
+    numskips = 0;
+    currentroundtarget = 0;
   }
   
   void displaySummary(){

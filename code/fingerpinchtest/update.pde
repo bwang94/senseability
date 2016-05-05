@@ -46,8 +46,6 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isDistIncRun = true;
-    
-    force_leftinc.startRound();
   }
   else if (overTestButton(distfree_x, distfree_y, distfree_width, distfree_height) && isDist){    //DistFree
     isForce = false;
@@ -88,6 +86,7 @@ void update(){
   else if(overTestButton(startx,starty,startwidth,startheight) && isIncrement && !force_leftinc.isActive()){
     if (!force_leftinc.isCompleted()){
       force_leftinc.startTest();
+      println("Started Increment Test");
     }
     else{
       force_rightinc.startTest();  
@@ -120,7 +119,7 @@ void update(){
     isDistIncRun = false;
   }
   //Clicked on back button on free distance --> go to main
-  else if(overTestButton(back_x, back_y, back_width, back_height) && isDist){
+  else if(overTestButton(back_mid_x, back_mid_y, back_width, back_height) && isDist){
     isForce = false;
     isMain = true;
     isDist = false;
@@ -142,11 +141,15 @@ void update(){
     isDistFree = false;
     isDistIncRun = false;
   }
-  else if(overTestButton(back_right_x, back_right_y, back_width, back_height) && isDistInc){
+  else if(overTestButton(back_right_x, back_right_y, back_width, back_height) && (isDistInc || isIncrement)){
     isForce = false;
     isMain = false;
-    isDist = true;
-    isForceSelection = false;
+    if (isDistInc){
+      isDist = true;
+    }
+    if(isIncrement){
+      isForceSelection = true;
+    }
     isFirstRun = true;
     isIncrement = false;
     isDistInc = false;
@@ -164,17 +167,6 @@ void update(){
     isDistFree = false;
     isDistIncRun = false;
   }
-  else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && !force_leftinc.isActive()){
-    isForce = false;
-    isMain = false;
-    isDist = false;
-    isForceSelection = true;
-    isFirstRun = true;
-    isIncrement = false;
-    isDistInc = false;
-    isDistFree = false;
-    isDistIncRun = false;
-  }
   else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && force_leftinc.isActive()){ //done button
     isForce = false;
     isMain = false;
@@ -186,8 +178,10 @@ void update(){
     isDistFree = false;
     isDistIncRun = false;
     force_leftinc.endTest();
+    //println("Pressed Done Button");
   }
-  else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && force_leftinc.isCompleted()){
+  else if((overTestButton(back_x, back_y, back_width, back_height) && isIncrement) && force_leftinc.isCompleted()){
+    //println("Pressed go back button");
     isForce = false;
     isMain = false;
     isDist = false;
@@ -197,6 +191,8 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isDistIncRun = false;
+    force_leftinc.resetTest();
+    //println("Reset the Increment test");
   }
   
   else{

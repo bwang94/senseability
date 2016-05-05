@@ -181,6 +181,7 @@ void drawScreen(String screen){
     textFont(F,26);
     text("The City College of New York | Department of Biomedical Engineering",10,35);
     fill(255);
+    //println("Parameter selection screen");
     makeButton(back_right_x,back_right_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
       makeButton(startx,starty,startwidth,startheight,"Start",70,129,105,60,144,160,255);
       
@@ -200,6 +201,7 @@ void drawScreen(String screen){
       
     }
     if (force_leftinc.isActive()){
+      //println("Test active");
       if (force_leftinc.getCurrentRound() == 1){
         force_leftinc.setTargets();
       }
@@ -240,9 +242,10 @@ void drawScreen(String screen){
     fill(0);
     textFont(F,26);
     text("The City College of New York | Department of Biomedical Engineering",10,35);
+    fill(255); 
     makeButton(distinc_x,distinc_y,distinc_width,distinc_height,"Increment",70,129,105,60,144,160,255);
     makeButton(distfree_x,distfree_y,distfree_width,distfree_height,"Free",70,129,105,60,144,160,255);
-    makeButton(back_x,back_y,back_width,back_height,"Go Back",70,129,105,60,144,160,255);
+    makeButton(back_mid_x,back_mid_y,back_width,back_height,"Go Back",70,129,105,60,144,160,255);
   }
   
   if (screen.equals("distinc")){
