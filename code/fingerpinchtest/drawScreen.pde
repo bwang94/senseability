@@ -250,10 +250,11 @@ void drawScreen(String screen){
       text("Rounds",420,100);
       text("Bounds",676,100);
       text("Position",908,100);
-      minscrollbar.updateScrollBar();
-      maxscrollbar.updateScrollBar();
-      minscrollbar.updateDisplay();
-      maxscrollbar.updateDisplay();      
+      startforcebar.updateScrollBar();
+      endforcebar.updateScrollBar();
+      startforcebar.updateDisplay();
+      endforcebar.updateDisplay();    
+      fill(255);
     }
     if (force_leftinc.isActive()){
       //println("Test active");
@@ -361,10 +362,15 @@ void drawScreen(String screen){
       makeButton(x_30,y_30,num_width, num_height,"30",60,144,160,60,144,160,255);
       }
    
-      
+     
       text("Hand",160,100);
       text("Rounds",420,100);
       text("Bounds",676,100);
+      startdistbar.updateScrollBar();
+      enddistbar.updateScrollBar();
+      startdistbar.updateDisplay();
+      enddistbar.updateDisplay();
+      fill(255);
   }
   
   if (screen.equals("distincrun")){
