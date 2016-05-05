@@ -208,11 +208,12 @@ void drawScreen(String screen){
       if (!force_leftinc.isRoundStarted()){
         force_leftinc.startRound();
       }
-      makeButton(back_x,back_y,back_width, back_height,"Done",70,129,105,60,144,160,255);
       force_leftinc.drawForceBar();
       force_leftinc.displayTimeElapsed();
       force_leftinc.drawCurrentTarget();
       force_leftinc.checkTarget();
+      fill(255);
+      makeButton(back_x,back_y,back_width, back_height,"Done",70,129,105,60,144,160,255);
       if (force_leftinc.checkRoundComplete()){
         force_leftinc.nextRound();
         force_leftinc.displayMessage();
@@ -224,8 +225,8 @@ void drawScreen(String screen){
     else if (force_leftinc.isCompleted()){
       force_leftinc.displaySummary();
       noStroke();
-      makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
       fill(255);
+      makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
     }
   }
   
