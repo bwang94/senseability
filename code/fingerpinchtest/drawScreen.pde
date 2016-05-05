@@ -273,14 +273,14 @@ void drawScreen(String screen){
     distbar_left.changeColor(0,0,0);
     distbar_left.drawCurve();
     
-<<<<<<< HEAD
-=======
+
+
     float temp_end = map(drh,0,90,0,PI/2);
     distbar_right.changeAngleEnd(PI + temp_end);
     distbar_right.changeColor(0,0,0);
-    distbar.right.drawCurve();
+    distbar_right.drawCurve();
 
->>>>>>> origin/master
+
     // Line Graph for left hand
     stroke(255,153,153);
     strokeWeight(2);
