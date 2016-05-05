@@ -7,7 +7,7 @@ void computeDist(){
   }
   
   dlh = dist_intercept + dist_slope*(log(resist_dlh)/log(10)) + 30;
-  drh = dist_intercept + dist_slope*(log(resist_drh)/log(10))
+  drh = dist_intercept + dist_slope*(log(resist_drh)/log(10));
   
   if (dlh < 0){
     dlh = 0;

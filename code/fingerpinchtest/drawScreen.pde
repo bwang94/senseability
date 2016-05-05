@@ -176,6 +176,9 @@ void drawScreen(String screen){
       makeButton(startx,starty,startwidth,startheight,"Start",70,129,105,60,144,160,255);
     }
     if (force_leftinc.isActive()){
+      if (force_leftinc.getCurrentRound() == 1){
+        force_leftinc.setTargets();
+      }
       //TODO - STOP BUTTON
       background(255);
       if (!force_leftinc.isRoundStarted()){
@@ -185,9 +188,9 @@ void drawScreen(String screen){
       force_leftinc.displayTimeElapsed();
       force_leftinc.drawCurrentTarget();
       force_leftinc.checkTarget();
-      force_leftinc.displayMessage();
       if (force_leftinc.checkRoundComplete()){
         force_leftinc.nextRound();
+        force_leftinc.displayMessage();
       }
       if (force_leftinc.checkTestComplete()){
         force_leftinc.endTest();
@@ -236,7 +239,7 @@ void drawScreen(String screen){
     float temp_end = map(drh,0,90,0,PI/2);
     distbar_right.changeAngleEnd(PI + temp_end);
     distbar_right.changeColor(0,0,0);
-    distbar.right.drawCurve();
+    distbar_right.drawCurve();
 
     // Line Graph for left hand
     stroke(255,153,153);
