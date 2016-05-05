@@ -46,23 +46,40 @@ void loop() {
   r_frt = r_m * v_in/voltage_frt - r_m;
   r_dist = r_m * v_in/voltage_dist - r_m;
   r_drh = r_m * v_in/voltage_drh - r_m; 
-  if ((r_flt > r_cutoff) || (r_flt < 0)) //Ignore all resistance values above 100kohm
+  //Serial.println(r_flt);
+  if (r_flt > r_cutoff)
   {
     r_flt = 0;
   }
-  if ((r_frt > r_cutoff) || (r_frt < 0))
+  else if( r_flt < 0.0) //Ignore all resistance values above 100kohm
+  {
+    r_flt = 0;
+  }
+  if (r_frt > r_cutoff)
   {
     r_frt = 0;
   }
-  if (r_dist < 0)
+  if (r_frt < 0.0)
+  {
+    r_frt = 0;
+  }
+  if (r_dist < 0.0)
   {
     r_dist = 0;
   }
-  if ((r_drh < 0) || (r_drh == -26576))
+  else if (r_dist > r_cutoff)
+  {
+    r_dist = 0;
+  }
+  if (r_drh < 0.0)
   {
     r_drh = 0;
   }
-  toSerial = toSerial + "FLT" + (int) r_flt + "FRT" + (int) r_frt + "DLH" + (int) r_dist + "DRH" + (int) r_drh;
+  else if (r_drh > r_cutoff)
+  {
+    r_drh = 0;
+  }
+  toSerial = toSerial + "FLT" + (String) r_flt + "FRT" + (String) r_frt + "DLH" + (String) r_dist + "DRH" + (String) r_drh;
   Serial.println(toSerial);
   toSerial = "";
 }
