@@ -16,10 +16,14 @@ class PinchTest{
   int skipcutoff; //Number of rounds that, when skipped, will cause test to end;
   float[] roundtargets; //Array that holds targets of each round
   float tolerance; // What tolerance level is in decimal form
+  float minbound;
+  float maxbound;
+  float increment;
   int inthresholdstart; //Time in ms when the force/angle is within +/- of the threshold of currentroundtarget NOT USED
   boolean testStarted = false; //Has the test started
   boolean testCompleted = false; //Is the test complete
   boolean roundStarted = false; //Has the round started
+  boolean roundPassed = false;
   boolean meetingTarget = false; //IS the target currently being met
   int timemet = 0; ///How much time the target is being met in ms
   int timeelapsed = 0; //How much time has passed in ms since test started
@@ -32,8 +36,10 @@ class PinchTest{
   PinchTest(String t, String m){
     type = t;
     mode = m;
-    currentround = 0;
-    //Finish this
+    currentround = 1;
+    passcounter = 0;
+    numskips = 0;
+    skipcutoff = -1;
   }
   
   PinchTest(String t, String m, int rounds, int duration){
@@ -41,11 +47,14 @@ class PinchTest{
     mode = m;
     numrounds = rounds;
     roundduration = duration;
-    currentround = 0;
+    currentround = 1;
+    passcounter = 0;
+    numskips = 0;
+    skipcutoff = -1;
   }
   
-  //Force OR Angle Increment Test
-  PinchTest(String t, String m, String h, int rounds, int duration, float start, float increment, float tol, int tod){ 
+  //Force OR Angle Test
+  PinchTest(String t, String m, String h, int rounds, int duration, float tol, int tod){ 
     type = t;
     mode = m;
     hand = h;
@@ -57,11 +66,25 @@ class PinchTest{
     passcounter = 0;
     numskips = 0;
     skipcutoff = -1;
-    
-    if (this.testType().equals("Force")){
-      roundtargets = new float[rounds]; //Makes the roundtargets array of length rounds
-      for (int i = 0; i < rounds; i++){
-        roundtargets[i] = start + float(i) * increment;  //Sets each of the elements in the roundtargets array
+  }
+  
+  void setBounds(int min, int max){
+    minbound = min;
+    maxbound = max;
+  }
+  
+  void setTargets(){
+    if (this.testMode().equals("Increment")){
+      roundtargets = new float[numrounds]; //Makes the roundtargets array of length rounds
+      increment = (maxbound - minbound)/numrounds;
+      for (int i = 0; i < numrounds; i++){
+        roundtargets[i] = minbound + float(i) * increment;  //Sets each of the elements in the roundtargets array
+      }
+    }
+    if (this.testMode().equals("Custom")){
+      roundtargets = new float[numrounds];
+      for (int i = 0; i < numrounds; i++){
+        roundtargets[i] = truncate(random(minbound,maxbound));
       }
     }
   }
@@ -85,6 +108,7 @@ class PinchTest{
     currentroundtarget = roundtargets[currentround - 1];
     starttime = millis();
     resetstarttime = millis();
+    roundPassed = false;
   }
   
   void checkTarget(){
@@ -114,7 +138,14 @@ class PinchTest{
   }
   
   void displayMessage(){
-    //TODO - Will dynamically display a message based on what the current situation is  
+    fill(255);
+    rect(width/2-25,300-25,150,50);
+    if (this.didRoundPass()){
+      text("Round Passed!",width/2,300);
+    }
+    else{
+      text("Round Skipped.",width/2,300);
+    }
   }
   
   boolean checkRoundComplete(){
@@ -124,11 +155,13 @@ class PinchTest{
       isRoundComplete = true;
       numskips++;
       timemet = 0;
+      roundPassed = false;
     }
     if (timemet >= roundduration){
       isRoundComplete = true;  
       passcounter++;
       timemet = 0;
+      roundPassed = true;
     }
     return isRoundComplete;
   }
@@ -182,10 +215,25 @@ class PinchTest{
     }
   }
   
+  void drawDistCurve(){
+   if (type.equals("Distance") && hand.equals("Left")){
+    float temp_start = map(dlh,0,90,0,PI/2);
+    distbar_left.changeAngleStart(2*PI - temp_start);
+    distbar_left.changeColor(0,0,0);
+    distbar_left.drawCurve();
+   }
+   if (type.equals("Distance") && hand.equals("Right")){
+    float temp_end = map(drh,0,90,0,PI/2);
+    distbar_right.changeAngleEnd(PI + temp_end);
+    distbar_right.changeColor(0,0,0);
+    distbar_right.drawCurve();
+   }
+  }
+  
   void drawCurrentTarget(){
     if (type.equals("Force") && hand.equals("Left")){
       float drawtarget = map(currentroundtarget, 0, forcelimit, 0, height/2 - 50);
-      if (flt >= (currentroundtarget*(1-tolerance)) && flt <= (currentroundtarget*(1+tolerance))){
+      if (this.isMeetingTarget()){
         fill(102,255,102);
       }
       else{
@@ -195,7 +243,7 @@ class PinchTest{
     }
     else if (type.equals("Force") && hand.equals("Right")){
       float drawtarget = map(currentroundtarget, 0, forcelimit, 0, height/2 - 50);
-      if (frt >= (currentroundtarget*(1-tolerance)) && frt <= (currentroundtarget*(1+tolerance))){
+      if (this.isMeetingTarget()){
         fill(102,255,102);
       }
       else{
@@ -210,10 +258,13 @@ class PinchTest{
     timeelapsed = millis() - teststarttime;
     float timesec = truncate(float(timeelapsed/1000));
     if (type.equals("Force") && hand.equals("Left")){
-      text("Time (s)",30,470);
+      text("Time (s):",30,470);
       text(str(timesec),30,500);
     }
-    //TODO: Right Hand
+    else if (type.equals("Force") && hand.equals("Left")){
+      text("Time (s):",1100,470);
+      text(str(timesec),1100,500);
+    }
   }
   
   void endTest(){
@@ -237,12 +288,19 @@ class PinchTest{
     text(str(numskips),30,450);
   }
   
+  int getCurrentRound(){
+    return currentround;
+  }
   int getNumRounds(){
     return numrounds;
   }
   
   String testType(){
     return type;  
+  }
+  
+  String testMode(){
+    return mode;
   }
   
   String whichHand(){
@@ -254,5 +312,11 @@ class PinchTest{
   }
   boolean isCompleted(){
     return testCompleted;
+  }
+  boolean isMeetingTarget(){
+    return meetingTarget;
+  }
+  boolean didRoundPass(){
+    return roundPassed;
   }
 }
