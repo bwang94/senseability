@@ -370,13 +370,44 @@ void drawScreen(String screen){
       enddistbar.updateScrollBar();
       startdistbar.updateDisplay();
       enddistbar.updateDisplay();
+      fingerpinchtest.setBounds(startdistbar.getSliderValue(),enddistbar.getSliderValue());
       fill(255);
   }
   
   if (screen.equals("distincrun")){
     noStroke();
     background(255);
-    makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
+    if (fingerpinchtest.isActive()){
+      //println("Test active");
+      if (fingerpinchtest.getCurrentRound() == 1){
+        fingerpinchtest.setTargets();
+      }
+      //TODO - STOP BUTTON
+      background(255);
+      if (!fingerpinchtest.isRoundStarted()){
+        fingerpinchtest.startRound();
+      }
+      fill(255);
+      fingerpinchtest.drawDistCurve();
+      fingerpinchtest.displayTimeElapsed();
+      fingerpinchtest.drawCurrentTarget();
+      fingerpinchtest.checkTarget();
+      fill(255);
+      makeButton(back_x,back_y,back_width, back_height,"Done",70,129,105,60,144,160,255);
+      if (fingerpinchtest.checkRoundComplete()){
+        fingerpinchtest.nextRound();
+        fingerpinchtest.displayMessage();
+      }
+      if (fingerpinchtest.checkTestComplete()){
+        fingerpinchtest.endTest();
+      }
+    }
+    else if (fingerpinchtest.isCompleted()){
+      fingerpinchtest.displaySummary();
+      noStroke();
+      fill(255);
+      makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
+    }
   }
   
   if (screen.equals("freedist")){
@@ -412,8 +443,6 @@ void drawScreen(String screen){
     distbar_left.changeColor(0,0,0);
     distbar_left.drawCurve();
     
-
-
     float temp_end = map(drh,0,90,0,PI/2);
     distbar_right.changeAngleEnd(PI + temp_end);
     distbar_right.changeColor(0,0,0);

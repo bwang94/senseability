@@ -15,7 +15,7 @@ class PinchTest{
   int numskips; //Number of rounds skipped;
   int skipcutoff; //Number of rounds that, when skipped, will cause test to end;
   FloatList roundtargets = new FloatList(); //Array that holds targets of each round
-  float tolerance; // What tolerance level is in decimal form
+  float tolerance; // What tolerance level is 
   float startbound;
   float endbound;
   float increment;
@@ -58,14 +58,13 @@ class PinchTest{
   }
   
   //Force OR Angle Test
-  PinchTest(String t, String m, String h, int rounds, int duration, float tol, int tod){ 
+  PinchTest(String t, String m, String h, int rounds, int duration, int tod){ 
     type = t;
     mode = m;
     hand = h;
     numrounds = rounds;
     roundduration = duration;
     timeoutduration = tod;
-    tolerance = tol;
     currentround = 1;
     passcounter = 0;
     numskips = 0;
@@ -73,10 +72,9 @@ class PinchTest{
     forcetestpos = -1;
   }
   
-  PinchTest(int duration, float tol, int tod){
+  PinchTest(int duration, int tod){
     roundduration = duration;
     timeoutduration = tod;
-    tolerance = tol;
     currentround = 1;
     passcounter = 0;
     numskips = 0;
@@ -91,6 +89,15 @@ class PinchTest{
   void setBounds(float min, float max){
     startbound = min;
     endbound = max;
+  }
+  
+  void setTolerance(){
+    if (this.testType().equals("Distance")){
+      tolerance = 5;
+    }
+    else{
+      tolerance = 1;
+    }
   }
   
   void setTargets(){
@@ -152,7 +159,7 @@ class PinchTest{
   void checkTarget(){
     currenttime = millis();
     if (hand.equals("Left")){
-      if (flt >= (currentroundtarget*(1-tolerance)) && flt <= (currentroundtarget*(1+tolerance))){
+      if (flt >= (currentroundtarget-tolerance) && flt <= (currentroundtarget+tolerance)){
          meetingTarget =  true;
          timemet = currenttime - resetstarttime;
       }
@@ -163,7 +170,7 @@ class PinchTest{
       }          
     }
     if (hand.equals("Right")){
-      if (frt >= (currentroundtarget*(1-tolerance)) && frt <= (currentroundtarget*(1+tolerance))){
+      if (frt >= (currentroundtarget-tolerance) && frt <= (currentroundtarget+tolerance)){
          meetingTarget =  true;
          timemet = currenttime - resetstarttime;
       }
@@ -233,7 +240,7 @@ class PinchTest{
       flt_trun = truncate(flt);
       text(str(flt_trun),30,380);
       text("Target (N)",30,410);
-      text(str(currentroundtarget),30,440);
+      text(str(truncate(currentroundtarget)),30,440);
       drawBar(0,200,fltdraw);
     }
     if (type.equals("Force") && hand.equals("Right")){
@@ -247,12 +254,28 @@ class PinchTest{
       frt_trun = truncate(frt);
       text(str(frt_trun),630,380);
       text("Target (N)",630,410);
-      text(str(currentroundtarget),630,440);
+      text(str(truncate(currentroundtarget)),630,440);
       drawBar(1,200,frtdraw);
     }
   }
   
   void drawDistCurve(){
+    rect(0,height/2-50,width, height/2+50);
+    beginShape();
+    noStroke();
+    makeButton(dlh_textx,dist_texty,textwidth_dist,textheight_dist,"Left Hand",255,255,255,255,255,255,0);
+    fill(0);
+    dlh_trun = truncate(dlh);
+    text(str(dlh_trun) + " (deg)",dlh_textx + text_x_pad,dist_texty+90);
+    endShape();
+    
+    beginShape();
+    noStroke();
+    makeButton(drh_textx,dist_texty,textwidth_dist,textheight_dist,"Right Hand",255,255,255,255,255,255,0);
+    fill(0);
+    drh_trun = truncate(drh);
+    text(str(drh_trun) + " (deg)",drh_textx + text_x_pad,dist_texty+90);
+    endShape();
    if (type.equals("Distance") && hand.equals("Left")){
     float temp_start = map(dlh,0,90,0,PI/2);
     distbar_left.changeAngleStart(2*PI - temp_start);
@@ -320,7 +343,9 @@ class PinchTest{
     numskips = 0;
     hand = "";
     mode = "";
-    forcetestpos = -1;
+    if (this.testType().equals("Force")){
+      forcetestpos = -1;
+    }
     numrounds = 0;
     startbound = -1;
     endbound = -1;

@@ -16,7 +16,6 @@ color b2 = color(0);
 color c1 = color(39, 170, 138);
 color c2 = color(102, 224, 194);
 
-
 float flt;
 float flt_trun;
 float fltdraw;
@@ -266,9 +265,8 @@ void setup(){
   distbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_left, angleend_left);
   distbar_right = new CurveBar(drh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_right, angleend_right);
   
-  fingerpinchtest = new PinchTest(2000,.1,10000);
-  fingerpinchtest.setMode("Random");
-  fingerpinchtest.setBounds(2,20);
+  fingerpinchtest = new PinchTest(2000,10000);
+  fingerpinchtest.setMode("Increment");
   
   startforcebar = new ScrollBar(690,150,20,200,1);
   endforcebar = new ScrollBar(800,150,20,200,1);
