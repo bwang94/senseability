@@ -20,7 +20,7 @@ void serialEvent(Serial port){
     resist_frt = float(inData.substring(frt_index + 3,dist_index));
     computeForce(); 
   }
-  if (isDist){
+  if (isDistFree || isDistIncRun){
     resist_dlh = float(inData.substring(dist_index + 3,distright_index));
     float temp_dlh = resist_dlh;
     if (Float.isNaN(temp_dlh)){

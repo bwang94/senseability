@@ -16,7 +16,6 @@ color b2 = color(0);
 color c1 = color(39, 170, 138);
 color c2 = color(102, 224, 194);
 
-
 float flt;
 float flt_trun;
 float fltdraw;
@@ -93,7 +92,7 @@ int lastxPos_dlh = 1;
 int lastheight_dlh = 0;
 
 float dlh_xstart = 100;
-float drh_xstart = 300;
+float drh_xstart = 1100;
 float dist_ystart = 700;
 float distdraw_width = 700;
 float distdraw_height = 700;
@@ -105,7 +104,7 @@ float anglestart_right = PI;
 int default_thickness = 20;
 
 int dlh_textx = 20;
-int drh_textx = 1000;
+int drh_textx = 990;
 int dist_texty = 600;
 
 float dist_intercept = -253.0379;
@@ -135,6 +134,7 @@ boolean colorBoxRight = false;
 boolean colorBoxClose = false;
 boolean colorBoxMiddle = false;
 boolean colorBoxFar = false;
+boolean colorBoxRandom = false;
 
 //Variables defining button dimensions and locations
 int incforce_x = 300;
@@ -188,6 +188,11 @@ int back_y = 0;
 int back_width = 200;
 int back_height = 100;
 
+int random_x = 645;
+int random_y = 385;
+int randomwidth = 200;
+int randomheight = 50;
+
 int text_x2_pad = 0;
 int text_x3_pad = 60;
 int text_x4_pad = 60;
@@ -215,11 +220,6 @@ int left_x = 150;
 int left_y = 150;
 int right_x = 150;
 int right_y = 325;
-
-int leftd_x = 290;
-int leftd_y = 150;
-int rightd_x = 290;
-int rightd_y = 325;
 int handwidth = 125;
 int handheight = 100;
 
@@ -238,18 +238,10 @@ int x_20 = 460;
 int y_20 = 250;
 int x_30 = 460;
 int y_30 = 350;
-
-int x_10d = 600;
-int y_10d = 150;
-int x_20d = 600;
-int y_20d = 250;
-int x_30d = 600;
-int y_30d = 350;
 int num_height = 50;
 int num_width = 50;
 
 void setup(){
-  println(Serial.list());
   //port = new Serial(this,Serial.list()[3],115200);
   //port.clear();
   //port.bufferUntil('\n');
@@ -266,14 +258,13 @@ void setup(){
   distbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_left, angleend_left);
   distbar_right = new CurveBar(drh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_right, angleend_right);
   
-  fingerpinchtest = new PinchTest(2000,.1,10000);
-  fingerpinchtest.setMode("Random");
-  fingerpinchtest.setBounds(2,20);
+  fingerpinchtest = new PinchTest(2000,10000);
+  fingerpinchtest.setMode("Increment");
   
   startforcebar = new ScrollBar(690,150,20,200,1);
   endforcebar = new ScrollBar(800,150,20,200,1);
-  startdistbar = new ScrollBar(830,150,20,200,1);
-  enddistbar = new ScrollBar(940,150,20,200,1);
+  startdistbar = new ScrollBar(690,150,20,200,1);
+  enddistbar = new ScrollBar(800,150,20,200,1);
   
   //coverbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, 3*PI/2, 2*PI);
   //coverbar_left.changeColor(255,255,255);

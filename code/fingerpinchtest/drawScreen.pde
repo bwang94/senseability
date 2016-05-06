@@ -246,6 +246,13 @@ void drawScreen(String screen){
       makeButton(far_x,far_y,positionwidth, positionheight,"Far",60,144,160,60,144,160,255);
       }
       
+      if (!colorBoxRandom){
+        makeButton(random_x, random_y, randomwidth, randomheight,"Random",70,129,105,60,144,160,255);
+      }
+      if (colorBoxRandom){
+         makeButton(random_x, random_y, randomwidth, randomheight,"Random",60,144,160,60,144,160,255);
+      }
+      
       text("Hand",160,100);
       text("Rounds",420,100);
       text("Bounds",676,100);
@@ -275,6 +282,8 @@ void drawScreen(String screen){
       makeButton(back_x,back_y,back_width, back_height,"Done",70,129,105,60,144,160,255);
       if (fingerpinchtest.checkRoundComplete()){
         fingerpinchtest.nextRound();
+      }
+      if (fingerpinchtest.shouldDisplayMessage()){
         fingerpinchtest.displayMessage();
       }
       if (fingerpinchtest.checkTestComplete()){
@@ -324,59 +333,93 @@ void drawScreen(String screen){
       
       //Divider Lines
     fill(255);  
-    rect(500,75,3,375);
-    rect(760,75,3,375);
+    rect(360,75,3,375);
+    rect(620,75,3,375);
+    rect(860,75,3,375);
       
       if (colorBoxLeft==false){
-      makeButton(leftd_x,leftd_y,handwidth, handheight,"Left",70,129,105,60,144,160,255);
+      makeButton(left_x,left_y,handwidth, handheight,"Left",70,129,105,60,144,160,255);
       }
       if (colorBoxLeft==true){
-      makeButton(leftd_x,leftd_y,handwidth, handheight,"Left",60,144,160,60,144,160,255);
+      makeButton(left_x,left_y,handwidth, handheight,"Left",60,144,160,60,144,160,255);
       }
       
       if (colorBoxRight==false){
-      makeButton(rightd_x,rightd_y,handwidth, handheight,"Right",70,129,105,60,144,160,255);
+      makeButton(right_x,right_y,handwidth, handheight,"Right",70,129,105,60,144,160,255);
       }
       if (colorBoxRight==true){
-      makeButton(rightd_x,rightd_y,handwidth, handheight,"Right",60,144,160,60,144,160,255);
+      makeButton(right_x,right_y,handwidth, handheight,"Right",60,144,160,60,144,160,255);
       }
       
       if (colorBox10==false){
-      makeButton(x_10d,y_10d,num_width, num_height,"10",70,129,105,60,144,160,255);
+      makeButton(x_10,y_10,num_width, num_height,"10",70,129,105,60,144,160,255);
       }
       if (colorBox10==true){
-      makeButton(x_10d,y_10d,num_width, num_height,"10",60,144,160,60,144,160,255);
+      makeButton(x_10,y_10,num_width, num_height,"10",60,144,160,60,144,160,255);
       }
       
       if (colorBox20==false){
-      makeButton(x_20d,y_20d,num_width, num_height,"20",70,129,105,60,144,160,255);
+      makeButton(x_20,y_20,num_width, num_height,"20",70,129,105,60,144,160,255);
       }
       if (colorBox20==true){
-      makeButton(x_20d,y_20d,num_width, num_height,"20",60,144,160,60,144,160,255);
+      makeButton(x_20,y_20,num_width, num_height,"20",60,144,160,60,144,160,255);
       }
       
       if (colorBox30==false){
-      makeButton(x_30d,y_30d,num_width, num_height,"30",70,129,105,60,144,160,255);
+      makeButton(x_30,y_30,num_width, num_height,"30",70,129,105,60,144,160,255);
       }
       if (colorBox30==true){
-      makeButton(x_30d,y_30d,num_width, num_height,"30",60,144,160,60,144,160,255);
+      makeButton(x_30,y_30,num_width, num_height,"30",60,144,160,60,144,160,255);
       }
    
      
-      text("Hand",300,100);
-      text("Rounds",560,100);
-      text("Bounds",816,100);
+      text("Hand",160,100);
+      text("Rounds",420,100);
+      text("Bounds",676,100);
       startdistbar.updateScrollBar();
       enddistbar.updateScrollBar();
       startdistbar.updateDisplay();
       enddistbar.updateDisplay();
+      fingerpinchtest.setBounds(startdistbar.getSliderValue(),enddistbar.getSliderValue());
       fill(255);
   }
   
   if (screen.equals("distincrun")){
     noStroke();
     background(255);
-    makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
+    if (fingerpinchtest.isActive()){
+      //println("Test active");
+      if (fingerpinchtest.getCurrentRound() == 1){
+        fingerpinchtest.setTargets();
+      }
+      //TODO - STOP BUTTON
+      background(255);
+      if (!fingerpinchtest.isRoundStarted()){
+        fingerpinchtest.startRound();
+      }
+      fingerpinchtest.drawDistCurve();
+      fingerpinchtest.displayTimeElapsed();
+      fingerpinchtest.drawCurrentTarget();
+      fingerpinchtest.checkTarget();
+      fill(255);
+      noStroke();
+      makeButton(back_x,back_y,back_width, back_height,"Done",70,129,105,60,144,160,255);
+      if (fingerpinchtest.checkRoundComplete()){
+        fingerpinchtest.nextRound();        
+      }
+      if (fingerpinchtest.shouldDisplayMessage()){
+        fingerpinchtest.displayMessage();
+      }
+      if (fingerpinchtest.checkTestComplete()){
+        fingerpinchtest.endTest();
+      }
+    }
+    else if (fingerpinchtest.isCompleted()){
+      fingerpinchtest.displaySummary();
+      noStroke();
+      fill(255);
+      makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);
+    }
   }
   
   if (screen.equals("freedist")){
@@ -396,15 +439,16 @@ void drawScreen(String screen){
     makeButton(dlh_textx,dist_texty,textwidth_dist,textheight_dist,"Left Hand",255,255,255,255,255,255,0);
     fill(0);
     dlh_trun = truncate(dlh);
-    text(str(dlh_trun) + " (deg)",dlh_textx + text_x_pad,dist_texty+90);
+    text(str(dlh_trun) + "\u00b0",dlh_textx + text_x_pad,dist_texty+90);
     endShape();
     
+    fill(255);
     beginShape();
     noStroke();
     makeButton(drh_textx,dist_texty,textwidth_dist,textheight_dist,"Right Hand",255,255,255,255,255,255,0);
     fill(0);
     drh_trun = truncate(drh);
-    text(str(drh_trun) + " (deg)",drh_textx + text_x_pad,dist_texty+90);
+    text(str(drh_trun) + "\u00b0",drh_textx + text_x_pad,dist_texty+90);
     endShape();
         
     float temp_start = map(dlh,0,90,0,PI/2);
@@ -412,8 +456,6 @@ void drawScreen(String screen){
     distbar_left.changeColor(0,0,0);
     distbar_left.drawCurve();
     
-
-
     float temp_end = map(drh,0,90,0,PI/2);
     distbar_right.changeAngleEnd(PI + temp_end);
     distbar_right.changeColor(0,0,0);
