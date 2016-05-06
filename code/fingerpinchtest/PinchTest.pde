@@ -16,8 +16,8 @@ class PinchTest{
   int skipcutoff; //Number of rounds that, when skipped, will cause test to end;
   FloatList roundtargets = new FloatList(); //Array that holds targets of each round
   float tolerance; // What tolerance level is in decimal form
-  float minbound;
-  float maxbound;
+  float startbound;
+  float endbound;
   float increment;
   int inthresholdstart; //Time in ms when the force/angle is within +/- of the threshold of currentroundtarget NOT USED
   boolean testStarted = false; //Has the test started
@@ -31,6 +31,8 @@ class PinchTest{
   int resetstarttime = 0; //Time of the last reset (when the force/angle fell out of threshold)
   int teststarttime = 0; //Time when test started in ms
   
+  int forcetestpos;
+  
   //TODO - PAUSE DURATION
   
   PinchTest(String t, String m){
@@ -40,6 +42,7 @@ class PinchTest{
     passcounter = 0;
     numskips = 0;
     skipcutoff = -1;
+    forcetestpos = -1;
   }
   
   PinchTest(String t, String m, int rounds, int duration){
@@ -51,6 +54,7 @@ class PinchTest{
     passcounter = 0;
     numskips = 0;
     skipcutoff = -1;
+    forcetestpos = -1;
   }
   
   //Force OR Angle Test
@@ -66,25 +70,61 @@ class PinchTest{
     passcounter = 0;
     numskips = 0;
     skipcutoff = -1;
+    forcetestpos = -1;
+  }
+  
+  PinchTest(int duration, float tol, int tod){
+    roundduration = duration;
+    timeoutduration = tod;
+    tolerance = tol;
+    currentround = 1;
+    passcounter = 0;
+    numskips = 0;
+    skipcutoff = -1;
+    forcetestpos = -1;
+    hand = "";
+    type = "";
+    mode = "";
+    numrounds = 0;
   }
   
   void setBounds(int min, int max){
-    minbound = min;
-    maxbound = max;
+    startbound = min;
+    endbound = max;
   }
   
   void setTargets(){
     if (this.testMode().equals("Increment")){
-      increment = (maxbound - minbound)/(numrounds-1);
+      increment = (endbound - startbound)/(numrounds-1);
       for (int i = 0; i < numrounds; i++){
-        roundtargets.append(minbound + float(i) * increment);  //Sets each of the elements in the roundtargets array
+        roundtargets.append(startbound + float(i) * increment);  //Sets each of the elements in the roundtargets array
       }
     }
-    if (this.testMode().equals("Custom")){
+    if (this.testMode().equals("Random")){
       for (int i = 0; i < numrounds; i++){
-        roundtargets.append(truncate(random(minbound,maxbound)));
+        roundtargets.append(truncate(random(startbound,endbound)));
       }
     }
+  }
+  
+  void setHand(String h){
+    hand = h;
+  }
+  
+  void  setType(String t){
+    type = t;
+  }
+  
+  void setMode(String m){
+    mode = m;
+  }
+  
+  void setForceTestPosition(int p){
+    forcetestpos = p;
+  }
+  
+  void setNumRounds(int r){
+    numrounds = r;
   }
   
   void startTest(){
@@ -207,9 +247,8 @@ class PinchTest{
       text("Force (N)",630,350);
       frt_trun = truncate(frt);
       text(str(frt_trun),630,380);
-      text("Max (N)",630,410);
-      maxfrt_trun = truncate(maxfrt);
-      text(str(maxfrt_trun),630,440);
+      text("Target (N)",630,410);
+      text(str(currentroundtarget),630,440);
       drawBar(1,200,frtdraw);
     }
   }
@@ -260,9 +299,9 @@ class PinchTest{
       text("Time (s):",30,470);
       text(str(timesec),30,500);
     }
-    else if (type.equals("Force") && hand.equals("Left")){
-      text("Time (s):",1100,470);
-      text(str(timesec),1100,500);
+    else if (type.equals("Force") && hand.equals("Right")){
+      text("Time (s):",630,470);
+      text(str(timesec),630,500);
     }
   }
   
@@ -280,6 +319,13 @@ class PinchTest{
     currentround = 1;
     passcounter = 0;
     numskips = 0;
+    hand = "";
+    type = "";
+    mode = "";
+    forcetestpos = -1;
+    numrounds = 0;
+    startbound = -1;
+    endbound = -1;
   }
   
   void displaySummary(){
@@ -328,5 +374,26 @@ class PinchTest{
   }
   boolean didRoundPass(){
     return roundPassed;
+  }
+  boolean isReadyToStart(){
+    if (numrounds > 0 && hand.length() > 0 && type.length() > 0 && mode.length() > 0 && startbound > -1 && endbound > -1 && !this.areBoundsEqual()){
+      if ((type.equals("Force") && forcetestpos > 0) || type.equals("Distance")){ 
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    else{
+      return false;
+    }
+  }
+  boolean areBoundsEqual(){
+    if (startbound == endbound){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }

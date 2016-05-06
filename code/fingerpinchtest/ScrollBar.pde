@@ -62,7 +62,7 @@ class ScrollBar{
     fill(255);
     stroke(255);
     strokeWeight(1);
-    rect(barx, bary, barwidth + barthickness, barheight);
+    rect(barx, bary, barwidth + barthickness, barheight,3);
     noStroke();
     fill(255);
     textFont(F,26);
@@ -73,6 +73,6 @@ class ScrollBar{
     else{
       fill(70,129,105);
     }
-    rect(barx + barthickness, slidery, barwidth, barwidth);
+    rect(barx + barthickness, slidery, barwidth, barwidth,3);
   }
 }

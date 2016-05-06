@@ -169,7 +169,7 @@ void drawScreen(String screen){
   }
   
   if (screen.equals("increment")){
-    if (!force_leftinc.isActive()){
+    if (!fingerpinchtest.isActive()){
       background(255);
     noStroke();
     beginShape();
@@ -258,32 +258,32 @@ void drawScreen(String screen){
       println();
       fill(255);
     }
-    if (force_leftinc.isActive()){
+    if (fingerpinchtest.isActive()){
       //println("Test active");
-      if (force_leftinc.getCurrentRound() == 1){
-        force_leftinc.setTargets();
+      if (fingerpinchtest.getCurrentRound() == 1){
+        fingerpinchtest.setTargets();
       }
       //TODO - STOP BUTTON
       background(255);
-      if (!force_leftinc.isRoundStarted()){
-        force_leftinc.startRound();
+      if (!fingerpinchtest.isRoundStarted()){
+        fingerpinchtest.startRound();
       }
-      force_leftinc.drawForceBar();
-      force_leftinc.displayTimeElapsed();
-      force_leftinc.drawCurrentTarget();
-      force_leftinc.checkTarget();
+      fingerpinchtest.drawForceBar();
+      fingerpinchtest.displayTimeElapsed();
+      fingerpinchtest.drawCurrentTarget();
+      fingerpinchtest.checkTarget();
       fill(255);
       makeButton(back_x,back_y,back_width, back_height,"Done",70,129,105,60,144,160,255);
-      if (force_leftinc.checkRoundComplete()){
-        force_leftinc.nextRound();
-        force_leftinc.displayMessage();
+      if (fingerpinchtest.checkRoundComplete()){
+        fingerpinchtest.nextRound();
+        fingerpinchtest.displayMessage();
       }
-      if (force_leftinc.checkTestComplete()){
-        force_leftinc.endTest();
+      if (fingerpinchtest.checkTestComplete()){
+        fingerpinchtest.endTest();
       }
     }
-    else if (force_leftinc.isCompleted()){
-      force_leftinc.displaySummary();
+    else if (fingerpinchtest.isCompleted()){
+      fingerpinchtest.displaySummary();
       noStroke();
       fill(255);
       makeButton(back_x,back_y,back_width, back_height,"Go Back",70,129,105,60,144,160,255);

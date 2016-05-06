@@ -10,6 +10,7 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isDistIncRun = false;
+    fingerpinchtest.setType("Force");
   }
   //Clicked distance test button on main screen --> go to free distance 
   else if (overTestButton(dist_x, dist_y, dist_width, dist_height) && isMain){
@@ -22,6 +23,8 @@ void update(){
     isDistFree = false;
     isFirstRun = false;
     isDistIncRun = false;
+    fingerpinchtest.setType("Distance");
+    fingerpinchtest.setForceTestPosition(-1);  
   }
   
   //DISTANCE SELECTION BUTTONS
@@ -83,13 +86,12 @@ void update(){
     isDistIncRun = false;
   }
   
-  else if(overTestButton(startx,starty,startwidth,startheight) && isIncrement && !force_leftinc.isActive()){
-    if (!force_leftinc.isCompleted()){
-      force_leftinc.startTest();
-      println("Started Increment Test");
+  else if(overTestButton(startx,starty,startwidth,startheight) && isIncrement && !fingerpinchtest.isActive()){
+    if (!fingerpinchtest.isCompleted() && fingerpinchtest.isReadyToStart()){
+      fingerpinchtest.startTest();
     }
     else{
-      force_rightinc.startTest();  
+      println("Please select an option from each column");
     }
   }
   
@@ -98,39 +100,47 @@ void update(){
     colorBox10 = !colorBox10;
     colorBox20 = false;
     colorBox30 = false;
+    fingerpinchtest.setNumRounds(10);
   }
   else if (overTestButton(x_20,y_20,num_width,num_height) && (isIncrement || isDistInc)){
     colorBox10 = false;
     colorBox20 = !colorBox20;
     colorBox30 = false;
+    fingerpinchtest.setNumRounds(20);
   }
   else if (overTestButton(x_30,y_30,num_width,num_height) && (isIncrement || isDistInc)){
     colorBox10 = false;
     colorBox20 = false;
     colorBox30 = !colorBox30;
+    fingerpinchtest.setNumRounds(30);
   }
   else if (overTestButton(left_x,left_y,positionwidth,positionheight) && (isIncrement || isDistInc)){
     colorBoxLeft = !colorBoxLeft;
     colorBoxRight = false;
+    fingerpinchtest.setHand("Left");
   }
   else if (overTestButton(right_x,right_y,positionwidth,positionheight) && (isIncrement || isDistInc)){
     colorBoxLeft = false;
     colorBoxRight = !colorBoxRight;
+    fingerpinchtest.setHand("Right");
   }
   else if (overTestButton(close_x,close_y,positionwidth,positionheight) && (isIncrement)){
     colorBoxClose = !colorBoxClose;
     colorBoxMiddle = false;
     colorBoxFar = false;
+    fingerpinchtest.setForceTestPosition(1);  
   }
   else if (overTestButton(middle_x,middle_y,positionwidth,positionheight) && (isIncrement)){
     colorBoxClose = false;
     colorBoxMiddle = !colorBoxMiddle;
     colorBoxFar = false;
+    fingerpinchtest.setForceTestPosition(2);  
   }
   else if (overTestButton(far_x,far_y,positionwidth,positionheight) && (isIncrement)){
     colorBoxClose = false;
     colorBoxMiddle = false;
     colorBoxFar = !colorBoxFar;
+    fingerpinchtest.setForceTestPosition(3);  
   }
   
   
@@ -222,7 +232,7 @@ void update(){
     isDistFree = false;
     isDistIncRun = false;
   }
-  else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && force_leftinc.isActive()){ //done button
+  else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && fingerpinchtest.isActive()){ //done button
     isForce = false;
     isMain = false;
     isDist = false;
@@ -232,10 +242,10 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isDistIncRun = false;
-    force_leftinc.endTest();
+    fingerpinchtest.endTest();
     //println("Pressed Done Button");
   }
-  else if((overTestButton(back_x, back_y, back_width, back_height) && isIncrement) && force_leftinc.isCompleted()){
+  else if((overTestButton(back_x, back_y, back_width, back_height) && isIncrement) && fingerpinchtest.isCompleted()){
     //println("Pressed go back button");
     isForce = false;
     isMain = false;
@@ -246,7 +256,7 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isDistIncRun = false;
-    force_leftinc.resetTest();
+    fingerpinchtest.resetTest();
     //println("Reset the Increment test");
   }
   

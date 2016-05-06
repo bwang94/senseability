@@ -78,8 +78,7 @@ ScrollBar startdistbar;
 ScrollBar enddistbar;
 
 //Set up Tests
-PinchTest force_leftinc;
-PinchTest force_rightinc;
+PinchTest fingerpinchtest;
 
 //Distance text boxes
 int textheight_dist = 100;
@@ -255,10 +254,9 @@ void setup(){
   distbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_left, angleend_left);
   distbar_right = new CurveBar(drh_xstart, dist_ystart, distdraw_width, distdraw_height, anglestart_right, angleend_right);
   
-  force_leftinc = new PinchTest("Force","Increment","Left",10,2000,.1,10000);
-  force_leftinc.setBounds(2,20);
-  force_rightinc = new PinchTest("Force","Increment","Right",10,2000,.1,10000);
-  force_rightinc.setBounds(2,20);
+  fingerpinchtest = new PinchTest(2000,.1,10000);
+  fingerpinchtest.setMode("Random");
+  fingerpinchtest.setBounds(2,20);
   
   startforcebar = new ScrollBar(690,150,20,200,1);
   endforcebar = new ScrollBar(800,150,20,200,1);
