@@ -404,6 +404,10 @@ class PinchTest{
     testStarted = false;
     testCompleted = true;
     roundStarted = false;
+    timeelapsed = millis() - teststarttime;
+    if (currentround < numrounds){
+      numskips++;
+    }
   }
   
   void resetTest(){
@@ -430,11 +434,15 @@ class PinchTest{
     beginShape();
     noStroke();
     fill(255);
-    rect(0,300,300,200);
+    rect(0,0,300,height);
     endShape();
     fill(0);
+    text("Time Elapsed (s)",30,240);
+    float timefloat = float(timeelapsed);
+    float conversion = 1000.0;
+    text(str(truncate(timefloat/conversion)),30,270);
     text("Total Rounds:",30,300);
-    text(str(numrounds),30,330);
+    text(str(currentround),30,330);
     text("Rounds Passed:",30,360);
     text(str(passcounter),30,390);
     text("Rounds Skipped:",30,420);    
