@@ -222,6 +222,14 @@ void update(){
     isDistInc = true;
     isDistFree = false;
     isDistIncRun = false;
+    colorBox10 = false;
+    colorBox20 = false;
+    colorBox30 = false;
+    colorBoxLeft = false;
+    colorBoxRight = false;
+    colorBoxClose = false;
+    colorBoxMiddle = false;
+    colorBoxFar = false;
   }
   else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && fingerpinchtest.isActive()){ //done button
     isForce = false;
