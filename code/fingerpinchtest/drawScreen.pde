@@ -323,49 +323,48 @@ void drawScreen(String screen){
       
       //Divider Lines
     fill(255);  
-    rect(360,75,3,375);
-    rect(620,75,3,375);
-    rect(860,75,3,375);
+    rect(500,75,3,375);
+    rect(760,75,3,375);
       
       if (colorBoxLeft==false){
-      makeButton(left_x,left_y,handwidth, handheight,"Left",70,129,105,60,144,160,255);
+      makeButton(leftd_x,leftd_y,handwidth, handheight,"Left",70,129,105,60,144,160,255);
       }
       if (colorBoxLeft==true){
-      makeButton(left_x,left_y,handwidth, handheight,"Left",60,144,160,60,144,160,255);
+      makeButton(leftd_x,leftd_y,handwidth, handheight,"Left",60,144,160,60,144,160,255);
       }
       
       if (colorBoxRight==false){
-      makeButton(right_x,right_y,handwidth, handheight,"Right",70,129,105,60,144,160,255);
+      makeButton(rightd_x,rightd_y,handwidth, handheight,"Right",70,129,105,60,144,160,255);
       }
       if (colorBoxRight==true){
-      makeButton(right_x,right_y,handwidth, handheight,"Right",60,144,160,60,144,160,255);
+      makeButton(rightd_x,rightd_y,handwidth, handheight,"Right",60,144,160,60,144,160,255);
       }
       
       if (colorBox10==false){
-      makeButton(x_10,y_10,num_width, num_height,"10",70,129,105,60,144,160,255);
+      makeButton(x_10d,y_10d,num_width, num_height,"10",70,129,105,60,144,160,255);
       }
       if (colorBox10==true){
-      makeButton(x_10,y_10,num_width, num_height,"10",60,144,160,60,144,160,255);
+      makeButton(x_10d,y_10d,num_width, num_height,"10",60,144,160,60,144,160,255);
       }
       
       if (colorBox20==false){
-      makeButton(x_20,y_20,num_width, num_height,"20",70,129,105,60,144,160,255);
+      makeButton(x_20d,y_20d,num_width, num_height,"20",70,129,105,60,144,160,255);
       }
       if (colorBox20==true){
-      makeButton(x_20,y_20,num_width, num_height,"20",60,144,160,60,144,160,255);
+      makeButton(x_20d,y_20d,num_width, num_height,"20",60,144,160,60,144,160,255);
       }
       
       if (colorBox30==false){
-      makeButton(x_30,y_30,num_width, num_height,"30",70,129,105,60,144,160,255);
+      makeButton(x_30d,y_30d,num_width, num_height,"30",70,129,105,60,144,160,255);
       }
       if (colorBox30==true){
-      makeButton(x_30,y_30,num_width, num_height,"30",60,144,160,60,144,160,255);
+      makeButton(x_30d,y_30d,num_width, num_height,"30",60,144,160,60,144,160,255);
       }
    
      
-      text("Hand",160,100);
-      text("Rounds",420,100);
-      text("Bounds",676,100);
+      text("Hand",300,100);
+      text("Rounds",560,100);
+      text("Bounds",816,100);
       startdistbar.updateScrollBar();
       enddistbar.updateScrollBar();
       startdistbar.updateDisplay();
