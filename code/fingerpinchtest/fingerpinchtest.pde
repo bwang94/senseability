@@ -220,11 +220,6 @@ int left_x = 150;
 int left_y = 150;
 int right_x = 150;
 int right_y = 325;
-
-int leftd_x = 290;
-int leftd_y = 150;
-int rightd_x = 290;
-int rightd_y = 325;
 int handwidth = 125;
 int handheight = 100;
 
@@ -243,13 +238,6 @@ int x_20 = 460;
 int y_20 = 250;
 int x_30 = 460;
 int y_30 = 350;
-
-int x_10d = 600;
-int y_10d = 150;
-int x_20d = 600;
-int y_20d = 250;
-int x_30d = 600;
-int y_30d = 350;
 int num_height = 50;
 int num_width = 50;
 
@@ -275,8 +263,8 @@ void setup(){
   
   startforcebar = new ScrollBar(690,150,20,200,1);
   endforcebar = new ScrollBar(800,150,20,200,1);
-  startdistbar = new ScrollBar(830,150,20,200,1);
-  enddistbar = new ScrollBar(940,150,20,200,1);
+  startdistbar = new ScrollBar(690,150,20,200,1);
+  enddistbar = new ScrollBar(800,150,20,200,1);
   
   //coverbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, 3*PI/2, 2*PI);
   //coverbar_left.changeColor(255,255,255);

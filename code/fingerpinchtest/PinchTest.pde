@@ -351,6 +351,16 @@ class PinchTest{
       this.chooseTargetColor();
       line(targetstart_x,targetstart_y,targetend_x,targetend_y);
     }
+    else if (type.equals("Distance") && hand.equals("Right")){
+      float targetcenter_x = drh_xstart - distdraw_width/2*cos(radians(currentroundtarget));
+      float targetcenter_y = height - distdraw_height/2*sin(radians(currentroundtarget));
+      float targetstart_x = targetcenter_x - 50*cos(radians(currentroundtarget));
+      float targetstart_y = targetcenter_y - 50*sin(radians(currentroundtarget));
+      float targetend_x = targetcenter_x + 50*cos(radians(currentroundtarget));
+      float targetend_y = targetcenter_y + 50*sin(radians(currentroundtarget)); 
+      this.chooseTargetColor();
+      line(targetstart_x,targetstart_y,targetend_x,targetend_y);
+    }
     
   }
   
