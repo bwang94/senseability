@@ -291,6 +291,7 @@ class PinchTest{
   }
   
   void drawDistCurve(){
+   if (type.equals("Distance") && hand.equals("Left")){
     fill(255);
     rect(0,height/2-50,width, height/2+50);
     beginShape();
@@ -299,8 +300,13 @@ class PinchTest{
     fill(0);
     dlh_trun = truncate(dlh);
     text(str(dlh_trun) + "\u00b0",dlh_textx + text_x_pad,dist_texty+90);
-    endShape();
-    
+    endShape(); 
+    float temp_start = map(dlh,0,90,0,PI/2);
+    distbar_left.changeAngleStart(2*PI - temp_start);
+    distbar_left.changeColor(0,0,0);
+    distbar_left.drawCurve();
+   }
+   if (type.equals("Distance") && hand.equals("Right")){
     fill(255);
     beginShape();
     noStroke();
@@ -308,14 +314,7 @@ class PinchTest{
     fill(0);
     drh_trun = truncate(drh);
     text(str(drh_trun) + "\u00b0",drh_textx + text_x_pad,dist_texty+90);
-    endShape();
-   if (type.equals("Distance") && hand.equals("Left")){
-    float temp_start = map(dlh,0,90,0,PI/2);
-    distbar_left.changeAngleStart(2*PI - temp_start);
-    distbar_left.changeColor(0,0,0);
-    distbar_left.drawCurve();
-   }
-   if (type.equals("Distance") && hand.equals("Right")){
+    endShape(); 
     float temp_end = map(drh,0,90,0,PI/2);
     distbar_right.changeAngleEnd(PI + temp_end);
     distbar_right.changeColor(0,0,0);
