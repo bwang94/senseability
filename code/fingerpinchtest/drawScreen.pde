@@ -246,6 +246,13 @@ void drawScreen(String screen){
       makeButton(far_x,far_y,positionwidth, positionheight,"Far",60,144,160,60,144,160,255);
       }
       
+      if (!colorBoxRandom){
+        makeButton(random_x, random_y, randomwidth, randomheight,"Random",70,129,105,60,144,160,255);
+      }
+      if (colorBoxRandom){
+         makeButton(random_x, random_y, randomwidth, randomheight,"Random",60,144,160,60,144,160,255);
+      }
+      
       text("Hand",160,100);
       text("Rounds",420,100);
       text("Bounds",676,100);
@@ -275,6 +282,8 @@ void drawScreen(String screen){
       makeButton(back_x,back_y,back_width, back_height,"Done",70,129,105,60,144,160,255);
       if (fingerpinchtest.checkRoundComplete()){
         fingerpinchtest.nextRound();
+      }
+      if (fingerpinchtest.shouldDisplayMessage()){
         fingerpinchtest.displayMessage();
       }
       if (fingerpinchtest.checkTestComplete()){
@@ -387,15 +396,17 @@ void drawScreen(String screen){
       if (!fingerpinchtest.isRoundStarted()){
         fingerpinchtest.startRound();
       }
-      fill(255);
       fingerpinchtest.drawDistCurve();
       fingerpinchtest.displayTimeElapsed();
       fingerpinchtest.drawCurrentTarget();
       fingerpinchtest.checkTarget();
       fill(255);
+      noStroke();
       makeButton(back_x,back_y,back_width, back_height,"Done",70,129,105,60,144,160,255);
       if (fingerpinchtest.checkRoundComplete()){
-        fingerpinchtest.nextRound();
+        fingerpinchtest.nextRound();        
+      }
+      if (fingerpinchtest.shouldDisplayMessage()){
         fingerpinchtest.displayMessage();
       }
       if (fingerpinchtest.checkTestComplete()){
@@ -427,15 +438,16 @@ void drawScreen(String screen){
     makeButton(dlh_textx,dist_texty,textwidth_dist,textheight_dist,"Left Hand",255,255,255,255,255,255,0);
     fill(0);
     dlh_trun = truncate(dlh);
-    text(str(dlh_trun) + " (deg)",dlh_textx + text_x_pad,dist_texty+90);
+    text(str(dlh_trun) + "\u00b0",dlh_textx + text_x_pad,dist_texty+90);
     endShape();
     
+    fill(255);
     beginShape();
     noStroke();
     makeButton(drh_textx,dist_texty,textwidth_dist,textheight_dist,"Right Hand",255,255,255,255,255,255,0);
     fill(0);
     drh_trun = truncate(drh);
-    text(str(drh_trun) + " (deg)",drh_textx + text_x_pad,dist_texty+90);
+    text(str(drh_trun) + "\u00b0",drh_textx + text_x_pad,dist_texty+90);
     endShape();
         
     float temp_start = map(dlh,0,90,0,PI/2);

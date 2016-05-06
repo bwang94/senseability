@@ -6,7 +6,7 @@ void computeDist(){
     resist_drh = 0;
   }
   
-  dlh = dist_intercept + dist_slope*(log(resist_dlh)/log(10)) + 30;
+  dlh = dist_intercept + dist_slope*(log(resist_dlh)/log(10)-29.34);
   drh = dist_intercept + dist_slope*(log(resist_drh)/log(10));
   
   if (dlh < 0){
@@ -28,4 +28,5 @@ void computeDist(){
   else{
   }
   drhdraw = map(drh,0,90,0,height/2-100);
+  //println(resist_dlh);
 }

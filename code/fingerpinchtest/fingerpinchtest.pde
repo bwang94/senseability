@@ -92,7 +92,7 @@ int lastxPos_dlh = 1;
 int lastheight_dlh = 0;
 
 float dlh_xstart = 100;
-float drh_xstart = 300;
+float drh_xstart = 1100;
 float dist_ystart = 700;
 float distdraw_width = 700;
 float distdraw_height = 700;
@@ -104,7 +104,7 @@ float anglestart_right = PI;
 int default_thickness = 20;
 
 int dlh_textx = 20;
-int drh_textx = 1000;
+int drh_textx = 990;
 int dist_texty = 600;
 
 float dist_intercept = -253.0379;
@@ -134,6 +134,7 @@ boolean colorBoxRight = false;
 boolean colorBoxClose = false;
 boolean colorBoxMiddle = false;
 boolean colorBoxFar = false;
+boolean colorBoxRandom = false;
 
 //Variables defining button dimensions and locations
 int incforce_x = 300;
@@ -186,6 +187,11 @@ int back_x = 1000;
 int back_y = 0;
 int back_width = 200;
 int back_height = 100;
+
+int random_x = 645;
+int random_y = 385;
+int randomwidth = 200;
+int randomheight = 50;
 
 int text_x2_pad = 0;
 int text_x3_pad = 60;
@@ -248,7 +254,6 @@ int num_height = 50;
 int num_width = 50;
 
 void setup(){
-  println(Serial.list());
   //port = new Serial(this,Serial.list()[3],115200);
   //port.clear();
   //port.bufferUntil('\n');

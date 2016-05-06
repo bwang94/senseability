@@ -12,8 +12,12 @@
    fill(textshade);
    textFont(F,40);
    
+   
    if (w == 130 && text.length() == 3){
       text(text,x + text_x130_3pad,y + text_y75_pad);
+  }
+  else if (w == 200 && h == 50){
+    text(text,x+text_x6_pad,y+text_y2_pad);
   }
    else if (w == 130 && text.length() == 5){
       text(text,x + text_x130_5pad,y + text_y75_pad);
