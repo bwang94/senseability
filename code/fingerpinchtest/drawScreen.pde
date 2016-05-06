@@ -250,10 +250,12 @@ void drawScreen(String screen){
       text("Rounds",420,100);
       text("Bounds",676,100);
       text("Position",908,100);
+      
       startforcebar.updateScrollBar();
       endforcebar.updateScrollBar();
       startforcebar.updateDisplay();
-      endforcebar.updateDisplay();    
+      endforcebar.updateDisplay(); 
+      println();
       fill(255);
     }
     if (force_leftinc.isActive()){

@@ -238,16 +238,13 @@ int num_height = 50;
 int num_width = 50;
 
 void setup(){
-<<<<<<< HEAD
   println(Serial.list());
   port = new Serial(this,Serial.list()[3],115200);
   port.clear();
   port.bufferUntil('\n');
-=======
   //port = new Serial(this,Serial.list()[0],115200);
   //port.clear();
   //port.bufferUntil('\n');
->>>>>>> origin/master
   size(1200,700);
   frameRate(120);
   f = createFont("EuphemiaUCAS",32,true);
