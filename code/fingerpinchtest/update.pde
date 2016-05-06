@@ -380,6 +380,10 @@ void update(){
     fingerpinchtest.resetTest();
     fingerpinchtest.setMode("Increment");
     //println("Reset the Increment test");
+    println("rounds " + fingerpinchtest.getNumRounds());
+    println("hand " + fingerpinchtest.whichHand());
+    println("mode " + fingerpinchtest.testMode());
+    println("are bounds equal " +fingerpinchtest.areBoundsEqual());
   }
   else if((overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun) && fingerpinchtest.isCompleted()){
     //println("Pressed go back button");
@@ -392,13 +396,17 @@ void update(){
     isDistInc = true;
     isDistFree = false;
     isDistIncRun = false;
-    colorBox10 = false;
-    colorBox20 = false;
-    colorBox30 = false;
-    colorBoxLeft = false;
-    colorBoxRight = false;
+    colorBox10d = false;
+    colorBox20d = false;
+    colorBox30d = false;
+    colorBoxLeftd = false;
+    colorBoxRightd = false;
     fingerpinchtest.resetTest();
     fingerpinchtest.setMode("Increment");
+    println("rounds " + fingerpinchtest.getNumRounds());
+    println("hand " + fingerpinchtest.whichHand());
+    println("mode " + fingerpinchtest.testMode());
+    println("are bounds equal " +fingerpinchtest.areBoundsEqual());
     //println("Reset the Increment test");
   }
   
