@@ -211,15 +211,6 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isDistIncRun = false;
-    
-    colorBox10 = false;
-    colorBox20 = false;
-    colorBox30 = false;
-    colorBoxLeft = false;
-    colorBoxRight = false;
-    colorBoxClose = false;
-    colorBoxMiddle = false;
-    colorBoxFar = false;
   }
   else if(overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun){
     isForce = false;
@@ -256,6 +247,14 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isDistIncRun = false;
+    colorBox10 = false;
+    colorBox20 = false;
+    colorBox30 = false;
+    colorBoxLeft = false;
+    colorBoxRight = false;
+    colorBoxClose = false;
+    colorBoxMiddle = false;
+    colorBoxFar = false;
     fingerpinchtest.resetTest();
     //println("Reset the Increment test");
   }
