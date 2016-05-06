@@ -287,7 +287,6 @@ void update(){
     colorBoxLeftd = false;
     colorBoxRightd = false;
   }
-<<<<<<< Updated upstream
   //else if(overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun){
   //  isForce = false;
   //  isMain = false;
@@ -309,7 +308,7 @@ void update(){
   //  fingerpinchtest.resetTest();
   //  println("WRONG DONE");
   //}
-=======
+
   else if(overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun){
     isForce = false;
     isMain = false;
@@ -331,7 +330,7 @@ void update(){
     colorBoxFar = false;
     fingerpinchtest.resetTest();
   }
->>>>>>> Stashed changes
+
   else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && fingerpinchtest.isActive()){ //done button for Force
     isForce = false;
     isMain = false;
