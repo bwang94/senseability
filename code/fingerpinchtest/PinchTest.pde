@@ -305,6 +305,8 @@ class PinchTest{
     dlh_trun = truncate(dlh);
     text(str(dlh_trun) + "\u00b0",dlh_textx + text_x_pad,dist_texty+90);
     endShape(); 
+    text("Target (\u00b0)",30,590);
+    text(str(truncate(currentroundtarget)),30,625);
     float temp_start = map(dlh,0,90,0,PI/2);
     distbar_left.changeAngleStart(2*PI - temp_start);
     distbar_left.changeColor(0,0,0);
@@ -317,7 +319,9 @@ class PinchTest{
     makeButton(drh_textx,dist_texty,textwidth_dist,textheight_dist,"Right Hand",255,255,255,255,255,255,0);
     fill(0);
     drh_trun = truncate(drh);
-    text(str(drh_trun) + "\u00b0",drh_textx + text_x_pad,dist_texty+90);
+    text("Target (\u00b0)",1000,590);
+    text(str(dlh_trun) + "\u00b0",drh_textx + text_x_pad,dist_texty+90);
+    text(str(truncate(currentroundtarget)),1000,625);
     endShape(); 
     float temp_end = map(drh,0,90,0,PI/2);
     distbar_right.changeAngleEnd(PI + temp_end);
@@ -390,13 +394,30 @@ class PinchTest{
   void displayTimeElapsed(){
     timeelapsed = millis() - teststarttime;
     float timesec = truncate(float(timeelapsed/1000));
-    if (type.equals("Force") && hand.equals("Left")){
-      text("Time (s):",30,470);
-      text(str(timesec),30,500);
+    if (hand.equals("Left")){
+      int y = 0;
+      if (type.equals("Force")){
+        y = 470;
+      }
+      else{
+        y = 530;
+      }
+      text("Time (s):",30,y);
+      text(str(timesec),30,y+30);
     }
-    else if (type.equals("Force") && hand.equals("Right")){
-      text("Time (s):",630,470);
-      text(str(timesec),630,500);
+    else if (hand.equals("Right")){     
+      int x = 0;
+      int y = 0;
+      if (type.equals("Force")){
+        x = 630;
+        y = 470;
+      }
+      else{
+        x = 1000;
+        y = 530;
+      }
+      text("Time (s):",x,y);
+      text(str(timesec),x,y+30);
     }
   }
   
