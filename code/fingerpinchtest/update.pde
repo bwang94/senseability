@@ -40,15 +40,26 @@ void update(){
     isDistIncRun = false;
   }
   else if (overTestButton(startx, starty, startwidth, startheight) && isDistInc){    //DistIncRun
-    isForce = false;
-    isForceSelection = false;
-    isIncrement = false;
-    isMain = false;
-    isDist = false;
-    isFirstRun = true;
-    isDistInc = false;
-    isDistFree = false;
-    isDistIncRun = true;
+    if (!fingerpinchtest.isCompleted() && fingerpinchtest.isReadyToStart()){
+      fingerpinchtest.startTest();
+      isForce = false;
+      isForceSelection = false;
+      isIncrement = false;
+      isMain = false;
+      isDist = false;
+      isFirstRun = true;
+      isDistInc = false;
+      isDistFree = false;
+      isDistIncRun = true;
+    }
+    else{
+      if (fingerpinchtest.areBoundsEqual()){
+        println("Please make sure start/stop bounds are not the same");
+      } 
+      else{
+          println("Please select an option from each column");
+      }
+    }
   }
   else if (overTestButton(distfree_x, distfree_y, distfree_width, distfree_height) && isDist){    //DistFree
     isForce = false;
@@ -91,7 +102,12 @@ void update(){
       fingerpinchtest.startTest();
     }
     else{
-      println("Please select an option from each column");
+      if (fingerpinchtest.areBoundsEqual()){
+        println("Please make sure start/stop bounds are not the same");
+      } 
+      else{
+          println("Please select an option from each column");
+      }
     }
   }
   
@@ -222,6 +238,7 @@ void update(){
     isDistInc = true;
     isDistFree = false;
     isDistIncRun = false;
+<<<<<<< HEAD
     colorBox10 = false;
     colorBox20 = false;
     colorBox30 = false;
@@ -230,6 +247,9 @@ void update(){
     colorBoxClose = false;
     colorBoxMiddle = false;
     colorBoxFar = false;
+=======
+    fingerpinchtest.resetTest();
+>>>>>>> origin/master
   }
   else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && fingerpinchtest.isActive()){ //done button
     isForce = false;
