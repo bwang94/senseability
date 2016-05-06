@@ -64,9 +64,6 @@ class ScrollBar{
     strokeWeight(1);
     rect(barx, bary, barwidth + barthickness, barheight,3);
     noStroke();
-    fill(255);
-    textFont(F,26);
-    text(String.valueOf(round((-slidery+330)*.111111))+"N",barx-5,bary + 225);
     if (isOver || isLocked){
       fill(60, 144, 160);
     }
