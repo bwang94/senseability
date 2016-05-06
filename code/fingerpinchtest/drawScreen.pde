@@ -263,6 +263,9 @@ void drawScreen(String screen){
       endforcebar.updateDisplay(); 
       fingerpinchtest.setBounds(startforcebar.getSliderValue(),endforcebar.getSliderValue());
       fill(255);
+      if (fingerpinchtest.shouldDisplayError()){
+        fingerpinchtest.displayErrorMessage();
+      }
     }
     if (fingerpinchtest.isActive()){
       //println("Test active");
@@ -380,6 +383,9 @@ void drawScreen(String screen){
       startdistbar.updateDisplay();
       enddistbar.updateDisplay();
       fingerpinchtest.setBounds(startdistbar.getSliderValue(),enddistbar.getSliderValue());
+      if (fingerpinchtest.shouldDisplayError()){
+        fingerpinchtest.displayErrorMessage();
+      }
       fill(255);
   }
   

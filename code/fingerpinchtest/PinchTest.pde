@@ -26,6 +26,7 @@ class PinchTest{
   boolean roundStarted = false; //Has the round started
   boolean roundPassed = false;
   boolean meetingTarget = false; //IS the target currently being met
+  boolean goodtostart = false;
   int timemet = 0; ///How much time the target is being met in ms
   int timeelapsed = 0; //How much time has passed in ms since test started
   int mettimestart = 0; //What time the target started to be met in ms NOT USED
@@ -34,6 +35,8 @@ class PinchTest{
   int lastroundcompletetime = 0;
   int timesinceroundcomplete = 0;
   int messagedisplaytime = 0;
+  int errorstarttime = 0;
+  int errordisplaytime = 0;
   
   int forcetestpos;
   
@@ -89,6 +92,7 @@ class PinchTest{
     mode = "";
     numrounds = 0;
     messagedisplaytime = 3000;
+    errordisplaytime = 3000;
   }
   
   void setBounds(float min, float max){
@@ -436,6 +440,34 @@ class PinchTest{
     text("Rounds Skipped:",30,420);    
     text(str(numskips),30,450);
   }
+  void displayErrorMessageOn(){
+    errorstarttime = millis();  
+  }
+  int getErrorStartTime(){
+    return errorstarttime;
+  }
+  boolean shouldDisplayError(){
+    if (millis() - this.getErrorStartTime() <= errordisplaytime && !goodtostart){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  void displayErrorMessage(){
+    if (fingerpinchtest.areBoundsEqual()){
+        fill(0);
+        textFont(F,32);
+        text("Please make sure start/stop bounds are not the same",220,507);
+        fill(255);
+      } 
+      else{
+        fill(0);
+        textFont(F,32);
+        text("Please select an option from each column",305,507);
+        fill(255);
+      }  
+  }
   
   int getCurrentRound(){
     return currentround;
@@ -470,15 +502,18 @@ class PinchTest{
   }
   boolean isReadyToStart(){
     if (numrounds > 0 && hand.length() > 0 && type.length() > 0 && mode.length() > 0 && startbound > -1 && endbound > -1 && !this.areBoundsEqual()){
-      if ((type.equals("Force") && forcetestpos > 0) || type.equals("Distance")){ 
-        return true;
+      if ((type.equals("Force") && forcetestpos > 0) || type.equals("Distance")){
+        goodtostart = true;
+        return goodtostart;
       }
       else{
-        return false;
+        goodtostart = false;
+        return goodtostart;
       }
     }
     else{
-      return false;
+      goodtostart = false;
+      return goodtostart;
     }
   }
   boolean areBoundsEqual(){

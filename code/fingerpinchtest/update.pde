@@ -55,12 +55,7 @@ void update(){
       isDistIncRun = true;
     }
     else{
-      if (fingerpinchtest.areBoundsEqual()){
-        println("Please make sure start/stop bounds are not the same");
-      } 
-      else{
-          println("Please select an option from each column");
-      }
+      fingerpinchtest.displayErrorMessageOn();
     }
   }
   else if (overTestButton(distfree_x, distfree_y, distfree_width, distfree_height) && isDist){    //DistFree
@@ -104,12 +99,7 @@ void update(){
       fingerpinchtest.startTest();
     }
     else{
-      if (fingerpinchtest.areBoundsEqual()){
-        println("Please make sure start/stop bounds are not the same");
-      } 
-      else{
-          println("Please select an option from each column");
-      }
+      fingerpinchtest.displayErrorMessageOn();
     }
   }
   
