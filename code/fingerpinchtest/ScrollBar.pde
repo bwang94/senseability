@@ -87,4 +87,12 @@ class ScrollBar{
   float getSliderValue(){
     return slidervalue;
   }
+  
+  int getBarX(){
+    return barx;
+  }
+  
+  int getBarY(){
+    return bary;
+  }
 }
