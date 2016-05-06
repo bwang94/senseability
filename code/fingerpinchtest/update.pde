@@ -287,26 +287,27 @@ void update(){
     colorBoxLeftd = false;
     colorBoxRightd = false;
   }
-  else if(overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun){
-    isForce = false;
-    isMain = false;
-    isDist = false;
-    isForceSelection = false;
-    isFirstRun = true;
-    isIncrement = false;
-    isDistInc = true;
-    isDistFree = false;
-    isDistIncRun = false;
-    colorBox10 = false;
-    colorBox20 = false;
-    colorBox30 = false;
-    colorBoxLeft = false;
-    colorBoxRight = false;
-    colorBoxClose = false;
-    colorBoxMiddle = false;
-    colorBoxFar = false;
-    fingerpinchtest.resetTest();
-  }
+  //else if(overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun){
+  //  isForce = false;
+  //  isMain = false;
+  //  isDist = false;
+  //  isForceSelection = false;
+  //  isFirstRun = true;
+  //  isIncrement = false;
+  //  isDistInc = true;
+  //  isDistFree = false;
+  //  isDistIncRun = false;
+  //  colorBox10 = false;
+  //  colorBox20 = false;
+  //  colorBox30 = false;
+  //  colorBoxLeft = false;
+  //  colorBoxRight = false;
+  //  colorBoxClose = false;
+  //  colorBoxMiddle = false;
+  //  colorBoxFar = false;
+  //  fingerpinchtest.resetTest();
+  //  println("WRONG DONE");
+  //}
   else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && fingerpinchtest.isActive()){ //done button for Force
     isForce = false;
     isMain = false;
@@ -327,9 +328,9 @@ void update(){
     isForceSelection = false;
     isFirstRun = true;
     isIncrement = false;
-    isDistInc = true;
+    isDistInc = false;
     isDistFree = false;
-    isDistIncRun = false;
+    isDistIncRun = true;
     fingerpinchtest.endTest();
     //println("Pressed Done Button");
   }
