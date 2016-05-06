@@ -104,30 +104,30 @@ void update(){
   }
   
   //Increment Parameter Selection
-  else if (overTestButton(x_10,y_10,num_width,num_height) && (isIncrement || isDistInc)){
+  else if (overTestButton(x_10,y_10,num_width,num_height) && (isIncrement)){
     colorBox10 = !colorBox10;
     colorBox20 = false;
     colorBox30 = false;
     fingerpinchtest.setNumRounds(10);
   }
-  else if (overTestButton(x_20,y_20,num_width,num_height) && (isIncrement || isDistInc)){
+  else if (overTestButton(x_20,y_20,num_width,num_height) && (isIncrement)){
     colorBox10 = false;
     colorBox20 = !colorBox20;
     colorBox30 = false;
     fingerpinchtest.setNumRounds(20);
   }
-  else if (overTestButton(x_30,y_30,num_width,num_height) && (isIncrement || isDistInc)){
+  else if (overTestButton(x_30,y_30,num_width,num_height) && (isIncrement)){
     colorBox10 = false;
     colorBox20 = false;
     colorBox30 = !colorBox30;
     fingerpinchtest.setNumRounds(30);
   }
-  else if (overTestButton(left_x,left_y,positionwidth,positionheight) && (isIncrement || isDistInc)){
+  else if (overTestButton(left_x,left_y,positionwidth,positionheight) && (isIncrement)){
     colorBoxLeft = !colorBoxLeft;
     colorBoxRight = false;
     fingerpinchtest.setHand("Left");
   }
-  else if (overTestButton(right_x,right_y,positionwidth,positionheight) && (isIncrement || isDistInc)){
+  else if (overTestButton(right_x,right_y,positionwidth,positionheight) && (isIncrement)){
     colorBoxLeft = false;
     colorBoxRight = !colorBoxRight;
     fingerpinchtest.setHand("Right");
@@ -160,6 +160,38 @@ void update(){
       fingerpinchtest.setMode("Random");
     }
   }
+    
+    
+    else if (overTestButton(x_10d,y_10d,num_width,num_height) && (isDistInc)){
+    colorBox10d = !colorBox10d;
+    colorBox20d = false;
+    colorBox30d = false;
+    fingerpinchtest.setNumRounds(10);
+  }
+  else if (overTestButton(x_20d,y_20d,num_width,num_height) && (isDistInc)){
+    colorBox10d = false;
+    colorBox20d = !colorBox20d;
+    colorBox30d = false;
+    fingerpinchtest.setNumRounds(20);
+  }
+  else if (overTestButton(x_30d,y_30d,num_width,num_height) && (isDistInc)){
+    colorBox10d = false;
+    colorBox20d = false;
+    colorBox30d = !colorBox30d;
+    fingerpinchtest.setNumRounds(30);
+  }
+  else if (overTestButton(leftd_x,leftd_y,positionwidth,positionheight) && (isDistInc)){
+    colorBoxLeftd = !colorBoxLeftd;
+    colorBoxRightd = false;
+    fingerpinchtest.setHand("Left");
+  }
+  else if (overTestButton(rightd_x,rightd_y,positionwidth,positionheight) && (isDistInc)){
+    colorBoxLeftd = false;
+    colorBoxRightd = !colorBoxRightd;
+    fingerpinchtest.setHand("Right");
+  }
+    
+    
   else if (overTestButton(random_xdist, random_y, randomwidth,randomheight) && (isDistInc)){
     if (colorBoxRandom){
       colorBoxRandom = false;
@@ -239,6 +271,21 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isDistIncRun = false;
+    colorBox10 = false;
+    colorBox20 = false;
+    colorBox30 = false;
+    colorBoxLeft = false;
+    colorBoxRight = false;
+    colorBoxClose = false;
+    colorBoxMiddle = false;
+    colorBoxFar = false;
+    colorBoxRandom = false;
+
+    colorBox10d = false;
+    colorBox20d = false;
+    colorBox30d = false;
+    colorBoxLeftd = false;
+    colorBoxRightd = false;
   }
   else if(overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun){
     isForce = false;

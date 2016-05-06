@@ -339,38 +339,38 @@ void drawScreen(String screen){
     rect(455,75,3,375);
     rect(750,75,3,375);
       
-      if (colorBoxLeft==false){
+      if (colorBoxLeftd==false){
       makeButton(leftd_x,leftd_y,handwidth, handheight,"Left",70,129,105,60,144,160,255);
       }
-      if (colorBoxLeft==true){
+      if (colorBoxLeftd==true){
       makeButton(leftd_x,leftd_y,handwidth, handheight,"Left",60,144,160,60,144,160,255);
       }
       
-      if (colorBoxRight==false){
+      if (colorBoxRightd==false){
       makeButton(rightd_x,rightd_y,handwidth, handheight,"Right",70,129,105,60,144,160,255);
       }
-      if (colorBoxRight==true){
+      if (colorBoxRightd==true){
       makeButton(rightd_x,rightd_y,handwidth, handheight,"Right",60,144,160,60,144,160,255);
       }
       
-      if (colorBox10==false){
+      if (colorBox10d==false){
       makeButton(x_10d,y_10d,num_width, num_height,"10",70,129,105,60,144,160,255);
       }
-      if (colorBox10==true){
+      if (colorBox10d==true){
       makeButton(x_10d,y_10d,num_width, num_height,"10",60,144,160,60,144,160,255);
       }
       
-      if (colorBox20==false){
+      if (colorBox20d==false){
       makeButton(x_20d,y_20d,num_width, num_height,"20",70,129,105,60,144,160,255);
       }
-      if (colorBox20==true){
+      if (colorBox20d==true){
       makeButton(x_20d,y_20d,num_width, num_height,"20",60,144,160,60,144,160,255);
       }
       
-      if (colorBox30==false){
+      if (colorBox30d==false){
       makeButton(x_30d,y_30d,num_width, num_height,"30",70,129,105,60,144,160,255);
       }
-      if (colorBox30==true){
+      if (colorBox30d==true){
       makeButton(x_30d,y_30d,num_width, num_height,"30",60,144,160,60,144,160,255);
       }
       

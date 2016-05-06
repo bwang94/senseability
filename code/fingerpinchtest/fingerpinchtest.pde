@@ -136,6 +136,12 @@ boolean colorBoxMiddle = false;
 boolean colorBoxFar = false;
 boolean colorBoxRandom = false;
 
+boolean colorBox10d = false;
+boolean colorBox20d = false;
+boolean colorBox30d = false;
+boolean colorBoxLeftd = false;
+boolean colorBoxRightd = false;
+
 //Variables defining button dimensions and locations
 int incforce_x = 300;
 int incforce_y = 275;
