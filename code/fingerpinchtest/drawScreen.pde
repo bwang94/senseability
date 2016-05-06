@@ -373,6 +373,13 @@ void drawScreen(String screen){
       if (colorBox30==true){
       makeButton(x_30d,y_30d,num_width, num_height,"30",60,144,160,60,144,160,255);
       }
+      
+      if (!colorBoxRandom){
+        makeButton(random_xdist, random_y, randomwidth, randomheight,"Random",70,129,105,60,144,160,255);
+      }
+      if (colorBoxRandom){
+         makeButton(random_xdist, random_y, randomwidth, randomheight,"Random",60,144,160,60,144,160,255);
+      }
    
      
       text("Hand",270,100);

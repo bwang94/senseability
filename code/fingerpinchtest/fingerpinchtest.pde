@@ -189,6 +189,7 @@ int back_width = 200;
 int back_height = 100;
 
 int random_x = 645;
+int random_xdist = 795;
 int random_y = 385;
 int randomwidth = 200;
 int randomheight = 50;

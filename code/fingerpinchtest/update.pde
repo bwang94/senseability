@@ -160,6 +160,16 @@ void update(){
       fingerpinchtest.setMode("Random");
     }
   }
+  else if (overTestButton(random_xdist, random_y, randomwidth,randomheight) && (isDistInc)){
+    if (colorBoxRandom){
+      colorBoxRandom = false;
+      fingerpinchtest.setMode("Increment");
+    }
+    else{
+      colorBoxRandom = true;
+      fingerpinchtest.setMode("Random");
+    }
+  }
   
   
   //text == "10" || text == "20" text == "30" || text == "Left" || text == "Right" || text == "Close" || text == "Middle" || text == "Far"){
