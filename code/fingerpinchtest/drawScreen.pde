@@ -253,7 +253,8 @@ void drawScreen(String screen){
       startforcebar.updateScrollBar();
       endforcebar.updateScrollBar();
       startforcebar.updateDisplay();
-      endforcebar.updateDisplay();    
+      endforcebar.updateDisplay(); 
+      fingerpinchtest.setBounds(startforcebar.getSliderValue(),endforcebar.getSliderValue());
       fill(255);
     }
     if (fingerpinchtest.isActive()){
