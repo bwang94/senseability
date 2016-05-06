@@ -88,7 +88,7 @@ class PinchTest{
     numrounds = 0;
   }
   
-  void setBounds(int min, int max){
+  void setBounds(float min, float max){
     startbound = min;
     endbound = max;
   }
@@ -144,7 +144,6 @@ class PinchTest{
   void startRound(){
     roundStarted = true;
     currentroundtarget = roundtargets.get(currentround - 1);
-    println(currentroundtarget);
     starttime = millis();
     resetstarttime = millis();
     roundPassed = false;
@@ -320,7 +319,6 @@ class PinchTest{
     passcounter = 0;
     numskips = 0;
     hand = "";
-    type = "";
     mode = "";
     forcetestpos = -1;
     numrounds = 0;

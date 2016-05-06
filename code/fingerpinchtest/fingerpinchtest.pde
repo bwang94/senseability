@@ -238,9 +238,9 @@ int num_width = 50;
 
 void setup(){
   println(Serial.list());
-  port = new Serial(this,Serial.list()[3],115200);
-  port.clear();
-  port.bufferUntil('\n');
+  //port = new Serial(this,Serial.list()[3],115200);
+  //port.clear();
+  //port.bufferUntil('\n');
   //port = new Serial(this,Serial.list()[0],115200);
   //port.clear();
   //port.bufferUntil('\n');

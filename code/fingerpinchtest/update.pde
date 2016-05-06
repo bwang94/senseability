@@ -238,7 +238,6 @@ void update(){
     isDistInc = true;
     isDistFree = false;
     isDistIncRun = false;
-<<<<<<< HEAD
     colorBox10 = false;
     colorBox20 = false;
     colorBox30 = false;
@@ -247,9 +246,7 @@ void update(){
     colorBoxClose = false;
     colorBoxMiddle = false;
     colorBoxFar = false;
-=======
     fingerpinchtest.resetTest();
->>>>>>> origin/master
   }
   else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && fingerpinchtest.isActive()){ //done button
     isForce = false;

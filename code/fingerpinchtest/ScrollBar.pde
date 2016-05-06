@@ -8,6 +8,7 @@ class ScrollBar{
   boolean isLocked; //is slider locked
   int barthickness;
   float ratio;
+  float slidervalue;
   
   ScrollBar (int xpos, int ypos, int barw, int barh, int loose){
     barwidth = barw;
@@ -66,7 +67,14 @@ class ScrollBar{
     noStroke();
     fill(255);
     textFont(F,26);
-    text(String.valueOf(round((-slidery+330)*.111111))+"N",barx-5,bary + 225);
+    if (fingerpinchtest.testType().equals("Force")){
+      slidervalue = round((-slidery+330)*.111111);
+      text(String.valueOf(round(slidervalue))+"N",barx-5,bary + 225);
+    }
+    else{
+      slidervalue = round((-slidery+330)*.5);
+      text(String.valueOf(round(slidervalue))+"\u00b0",barx-5,bary + 225);
+    }
     if (isOver || isLocked){
       fill(60, 144, 160);
     }
@@ -74,5 +82,9 @@ class ScrollBar{
       fill(70,129,105);
     }
     rect(barx + barthickness, slidery, barwidth, barwidth,3);
+  }
+  
+  float getSliderValue(){
+    return slidervalue;
   }
 }
