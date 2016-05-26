@@ -31,4 +31,7 @@ void computeForce(){
   if (frt > maxfrt){
     maxfrt = frt;
   }
+  if (frt < .5){
+    frt = 0;
+  }
 }

@@ -172,28 +172,57 @@ class PinchTest{
   
   void checkTarget(){
     currenttime = millis();
-    if (hand.equals("Left")){
-      if (flt >= (currentroundtarget-tolerance) && flt <= (currentroundtarget+tolerance)){
-         meetingTarget =  true;
-         timemet = currenttime - resetstarttime;
+    if (type.equals("Force")){
+      if (hand.equals("Left")){
+        if (flt >= (currentroundtarget-tolerance) && flt <= (currentroundtarget+tolerance)){
+           meetingTarget =  true;
+           timemet = currenttime - resetstarttime;
+        }
+        else{
+          meetingTarget = false;
+          timemet = 0;
+          resetstarttime = currenttime;
+        }          
       }
-      else{
-        meetingTarget = false;
-        timemet = 0;
-        resetstarttime = currenttime;
-      }          
+      if (hand.equals("Right")){
+        if (frt >= (currentroundtarget-tolerance) && frt <= (currentroundtarget+tolerance)){
+           meetingTarget =  true;
+           timemet = currenttime - resetstarttime;
+        }
+        else{
+          meetingTarget = false;
+          timemet = 0;
+          resetstarttime = currenttime;
+        }          
+      }
     }
-    if (hand.equals("Right")){
-      if (frt >= (currentroundtarget-tolerance) && frt <= (currentroundtarget+tolerance)){
-         meetingTarget =  true;
-         timemet = currenttime - resetstarttime;
+    else if (type.equals("Distance")){
+      if (hand.equals("Left")){
+        if (dlh >= (currentroundtarget-tolerance) && dlh <= (currentroundtarget+tolerance)){
+             meetingTarget =  true;
+             timemet = currenttime - resetstarttime;
+          }
+          else{
+            meetingTarget = false;
+            timemet = 0;
+            resetstarttime = currenttime;
+          }          
+        }
+      if (hand.equals("Right")){
+        if (drh >= (currentroundtarget-tolerance) && drh <= (currentroundtarget+tolerance)){
+           meetingTarget =  true;
+           timemet = currenttime - resetstarttime;
+        }
+        else{
+          meetingTarget = false;
+          timemet = 0;
+          resetstarttime = currenttime;
+        }
       }
-      else{
-        meetingTarget = false;
-        timemet = 0;
-        resetstarttime = currenttime;
-      }          
-    }      
+    }
+    else{
+      
+    }
   }
   
   void displayMessage(){
@@ -320,7 +349,7 @@ class PinchTest{
     fill(0);
     drh_trun = truncate(drh);
     text("Target (\u00b0)",1000,590);
-    text(str(dlh_trun) + "\u00b0",drh_textx + text_x_pad,dist_texty+90);
+    text(str(drh_trun) + "\u00b0",drh_textx + text_x_pad,dist_texty+90);
     text(str(truncate(currentroundtarget)),1000,625);
     endShape(); 
     float temp_end = map(drh,0,90,0,PI/2);
@@ -331,15 +360,16 @@ class PinchTest{
   }
   
   void drawCurrentTarget(){
+    float thickness = 10;
     if (type.equals("Force") && hand.equals("Left")){
       float drawtarget = map(currentroundtarget, 0, forcelimit, 0, height/2 - 50);
       this.chooseTargetColor();
-      rect(xposA - 30, height - drawtarget, 260, 2);
+      rect(xposA - 30, height - drawtarget - thickness/2, 260, thickness);
     }
     else if (type.equals("Force") && hand.equals("Right")){
       float drawtarget = map(currentroundtarget, 0, forcelimit, 0, height/2 - 50);
       this.chooseTargetColor();
-      rect(xposB - 30, height - drawtarget, 260, 2);
+      rect(xposB - 30, height - drawtarget - thickness/2, 260, thickness);
     }
     //For Distance
     //We know radius of the curvebar is 700 units
@@ -356,7 +386,9 @@ class PinchTest{
       float targetend_x = targetcenter_x + 50*cos(radians(currentroundtarget));
       float targetend_y = targetcenter_y - 50*sin(radians(currentroundtarget)); 
       this.chooseTargetColor();
+      strokeWeight(15);
       line(targetstart_x,targetstart_y,targetend_x,targetend_y);
+      noStroke();
     }
     else if (type.equals("Distance") && hand.equals("Right")){
       float targetcenter_x = drh_xstart - distdraw_width/2*cos(radians(currentroundtarget));
@@ -366,7 +398,9 @@ class PinchTest{
       float targetend_x = targetcenter_x + 50*cos(radians(currentroundtarget));
       float targetend_y = targetcenter_y + 50*sin(radians(currentroundtarget)); 
       this.chooseTargetColor();
+      strokeWeight(15);
       line(targetstart_x,targetstart_y,targetend_x,targetend_y);
+      noStroke();
     }
     
   }
@@ -463,11 +497,26 @@ class PinchTest{
     float conversion = 1000.0;
     text(str(truncate(timefloat/conversion)),30,270);
     text("Total Rounds:",30,300);
-    text(str(currentround),30,330);
+    text(str(passcounter+numskips),30,330);
     text("Rounds Passed:",30,360);
     text(str(passcounter),30,390);
     text("Rounds Skipped:",30,420);    
     text(str(numskips),30,450);
+    String postext = "";
+    if (type.equals("Force")){
+      if (forcetestpos == 1){
+        postext = "Close";
+      }
+      else if (forcetestpos == 2){
+        postext = "Middle";
+      }
+      else{
+        postext = "Far";
+      }
+      text("Test Position:",30,480);    
+      text(postext,30,510);
+    }
+    
   }
   void displayErrorMessageOn(){
     errorstarttime = millis();  

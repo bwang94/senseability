@@ -287,50 +287,6 @@ void update(){
     colorBoxLeftd = false;
     colorBoxRightd = false;
   }
-  //else if(overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun){
-  //  isForce = false;
-  //  isMain = false;
-  //  isDist = false;
-  //  isForceSelection = false;
-  //  isFirstRun = true;
-  //  isIncrement = false;
-  //  isDistInc = true;
-  //  isDistFree = false;
-  //  isDistIncRun = false;
-  //  colorBox10 = false;
-  //  colorBox20 = false;
-  //  colorBox30 = false;
-  //  colorBoxLeft = false;
-  //  colorBoxRight = false;
-  //  colorBoxClose = false;
-  //  colorBoxMiddle = false;
-  //  colorBoxFar = false;
-  //  fingerpinchtest.resetTest();
-  //  println("WRONG DONE");
-  //}
-
-  //else if(overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun){
-  //  isForce = false;
-  //  isMain = false;
-  //  isDist = false;
-  //  isForceSelection = false;
-  //  isFirstRun = true;
-  //  isIncrement = false;
-  //  isDistInc = true;
-  //  isDistFree = false;
-  //  isDistIncRun = false;
-    
-  //  colorBox10 = false;
-  //  colorBox20 = false;
-  //  colorBox30 = false;
-  //  colorBoxLeft = false;
-  //  colorBoxRight = false;
-  //  colorBoxClose = false;
-  //  colorBoxMiddle = false;
-  //  colorBoxFar = false;
-  //  fingerpinchtest.resetTest();
-  //}
-
   else if(overTestButton(back_x, back_y, back_width, back_height) && isIncrement && fingerpinchtest.isActive()){ //done button for Force
     isForce = false;
     isMain = false;
@@ -379,11 +335,6 @@ void update(){
     colorBoxRandom = false;
     fingerpinchtest.resetTest();
     fingerpinchtest.setMode("Increment");
-    //println("Reset the Increment test");
-    println("rounds " + fingerpinchtest.getNumRounds());
-    println("hand " + fingerpinchtest.whichHand());
-    println("mode " + fingerpinchtest.testMode());
-    println("are bounds equal " +fingerpinchtest.areBoundsEqual());
   }
   else if((overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun) && fingerpinchtest.isCompleted()){
     //println("Pressed go back button");
@@ -403,11 +354,6 @@ void update(){
     colorBoxRightd = false;
     fingerpinchtest.resetTest();
     fingerpinchtest.setMode("Increment");
-    println("rounds " + fingerpinchtest.getNumRounds());
-    println("hand " + fingerpinchtest.whichHand());
-    println("mode " + fingerpinchtest.testMode());
-    println("are bounds equal " +fingerpinchtest.areBoundsEqual());
-    //println("Reset the Increment test");
   }
   
   else{

@@ -473,22 +473,22 @@ void drawScreen(String screen){
     distbar_right.changeColor(0,0,0);
     distbar_right.drawCurve();
 
-    // Line Graph for left hand
-    stroke(255,153,153);
-    strokeWeight(2);
-    line(lastxPos_dlh, lastheight_dlh, xPos_dlh,height/2 - 100 - dlhdraw);
-    lastxPos_dlh = xPos_dlh;
-    lastheight_dlh = int(height/2 - 100 - dlhdraw);
-    if (xPos_dlh >= width){
-    xPos_dlh = 0;
-    lastxPos_dlh = 0;
-    //background(255);
-    }
-    else{
-    xPos_dlh++;
-    }
-    if (dlhdraw == 0){
-     lastheight_dlh = height/2-100;
-    }
+    //// Line Graph for left hand
+    //stroke(255,153,153);
+    //strokeWeight(2);
+    //line(lastxPos_dlh, lastheight_dlh, xPos_dlh,height/2 - 100 - dlhdraw);
+    //lastxPos_dlh = xPos_dlh;
+    //lastheight_dlh = int(height/2 - 100 - dlhdraw);
+    //if (xPos_dlh >= width){
+    //xPos_dlh = 0;
+    //lastxPos_dlh = 0;
+    ////background(255);
+    //}
+    //else{
+    //xPos_dlh++;
+    //}
+    //if (dlhdraw == 0){
+    // lastheight_dlh = height/2-100;
+    //}
   }
 }

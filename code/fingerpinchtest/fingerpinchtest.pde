@@ -40,7 +40,7 @@ int lastheight_rt = 350;
 
 float k = 54725.2;
 float c = 1.2054;
-int forcelimit = 50;
+float forcelimit = 50;
 
 float xposA = 200;
 float xposB = 850;
@@ -262,9 +262,9 @@ void setup(){
   //port = new Serial(this,Serial.list()[3],115200);
   //port.clear();
   //port.bufferUntil('\n');
-  //port = new Serial(this,Serial.list()[0],115200);
-  //port.clear();
-  //port.bufferUntil('\n');
+  port = new Serial(this,Serial.list()[0],115200);
+  port.clear();
+  port.bufferUntil('\n');
   size(1200,700);
   frameRate(120);
   f = createFont("EuphemiaUCAS",32,true);
@@ -331,9 +331,9 @@ void draw(){
   }
   else if (isDistInc){
     if (isFirstRun){
-    resetScreen("distinc");
-  }
-  drawScreen("distinc");
+      resetScreen("distinc");
+    }
+    drawScreen("distinc");
   }
   else{
     println("You broke the code :(");  
