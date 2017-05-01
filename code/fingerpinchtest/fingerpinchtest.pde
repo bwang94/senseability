@@ -2,9 +2,18 @@ import processing.serial.*;
 import cc.arduino.*;
 Arduino arduino;
 
-Serial port;
+Serial port = null;
 PFont f;
 PFont F;
+
+Button btn_serial_up;              // move up through the serial port list
+Button btn_serial_dn;              // move down through the serial port list
+Button btn_serial_connect;         // connect to the selected serial port
+Button btn_serial_disconnect;      // disconnect from the serial port
+Button btn_serial_list_refresh;    // refresh the serial port list
+String serial_list;                // list of serial ports
+int serial_list_index = 0;         // currently selected serial port 
+int num_serial_ports = 0;          // number of serial ports in the list
 
 //Variables for calculating/processing forces and distances
 //Force
@@ -54,14 +63,18 @@ float dlh_trun;
 float dlhdraw = 0;
 float resist_dlh;
 float maxdlh = 0;
+float mindlh = 90;
 float maxdlh_trun;
+float mindlh_trun;
 
 float drh;
 float drh_trun;
 float drhdraw = 0;
 float resist_drh;
 float maxdrh = 0;
+float mindrh = 90 ;
 float maxdrh_trun;
+float mindrh_trun;
 
 //Set up curved bars
 CurveBar distbar_left;
@@ -122,8 +135,9 @@ boolean isDist = false;
 boolean isDistIncRun = false;
 boolean isDistInc = false;
 boolean isDistFree = false;
-boolean isMain = true;
+boolean isMain = false;
 boolean isFirstRun = true;
+boolean isPortSelect = true;
 
 //Coloring clicked on boxes
 boolean colorBox10 = false;
@@ -257,14 +271,16 @@ int x_30d = 575;
 int y_30d = 350;
 int num_height = 50;
 int num_width = 50;
-
 void setup(){
-  //port = new Serial(this,Serial.list()[3],115200);
-  //port.clear();
-  //port.bufferUntil('\n');
-  port = new Serial(this,Serial.list()[0],115200);
-  port.clear();
-  port.bufferUntil('\n');
+  // get the list of serial ports on the computer
+  serial_list = Serial.list()[serial_list_index];
+  
+  //println(Serial.list());
+  //println(Serial.list().length);
+  
+  // get the number of serial ports in the list
+  num_serial_ports = Serial.list().length;
+  //port = new Serial(this,Serial.list()[0],115200);
   size(1200,700);
   frameRate(120);
   f = createFont("EuphemiaUCAS",32,true);
@@ -282,16 +298,18 @@ void setup(){
   endforcebar = new ScrollBar(800,150,20,200,1);
   startdistbar = new ScrollBar(833,150,20,200,1);
   enddistbar = new ScrollBar(950,150,20,200,1);
-  
-  //coverbar_left = new CurveBar(dlh_xstart, dist_ystart, distdraw_width, distdraw_height, 3*PI/2, 2*PI);
-  //coverbar_left.changeColor(255,255,255);
-  //coverbar_right = new CurveBar(drh_xstart, dist_ystart, distdraw_width, distdraw_height, PI, 3*PI/2);
-  //coverbar_right.changeColor(255,255,255);
+  btn_serial_up = new Button("^",force_x,force_y,50,30);
+  btn_serial_dn = new Button("v",force_x, force_y +40, 50, 30);
+  btn_serial_connect = new Button("Connect", force_x + 200, force_y-50, 150, 75);
+  btn_serial_list_refresh = new Button("Refresh",force_x + 200, force_y+50, 150,75); 
 }
 
 void draw(){
   textFont(f,32);
-  if (isMain){
+  if (isPortSelect){
+    drawScreen("portselect");  
+  }
+  else if (isMain){
     drawScreen("main");
   }
   
@@ -339,3 +357,52 @@ void draw(){
     println("You broke the code :(");  
   }
 }
+
+class Button {
+  String label;
+  float x;    // top left corner x position
+  float y;    // top left corner y position
+  float w;    // width of button
+  float h;    // height of button
+  
+  // constructor
+  Button(String labelB, float xpos, float ypos, float widthB, float heightB) {
+    label = labelB;
+    x = xpos;
+    y = ypos;
+    w = widthB;
+    h = heightB;
+  }
+  
+  // draw the button in the window
+  void Draw() {
+    if (mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h){
+      fill(60,144,160);
+    }
+    else{
+      fill(70,129,105);
+    }    
+    rect(x, y, w, h, 10);
+    textAlign(CENTER, CENTER);
+    fill(255);
+    text(label, x + (w / 2), y + (h / 2));
+  }
+  
+  // returns true if the mouse cursor is over the button
+  boolean MouseIsOver() {
+    if (mouseX > x && mouseX < (x + w) && mouseY > y && mouseY < (y + h)) {
+      return true;
+    }
+    return false;
+  }
+}
+void DrawTextBox(String title, String str, int x, int y, int w, int h){
+    fill(255);
+    rect(x, y, w, h);
+    fill(0);
+    textAlign(LEFT);
+    textSize(14);
+    text(title, x + 10, y + 10, w - 20, 20);
+    textSize(12);  
+    text(str, x + 10, y + 40, w - 20, h - 10);
+  }

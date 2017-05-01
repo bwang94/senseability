@@ -297,7 +297,7 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isDistIncRun = false;
-    fingerpinchtest.endTest();
+    fingerpinchtest.forceEndTest();
     //println("Pressed Done Button");
   }
   else if(overTestButton(back_x, back_y, back_width, back_height) && isDistIncRun && fingerpinchtest.isActive()){ //done button for Dist
@@ -310,7 +310,7 @@ void update(){
     isDistInc = false;
     isDistFree = false;
     isDistIncRun = true;
-    fingerpinchtest.endTest();
+    fingerpinchtest.forceEndTest();
     //println("Pressed Done Button");
   }
   else if((overTestButton(back_x, back_y, back_width, back_height) && isIncrement) && fingerpinchtest.isCompleted()){

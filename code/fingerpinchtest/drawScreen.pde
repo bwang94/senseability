@@ -1,36 +1,47 @@
 void drawScreen(String screen){
-  if (screen.equals("main")){
+  if (screen.equals("portselect")){
     background(255);
     noStroke();
-    //beginShape();
-    //fill(39, 170, 138);
-    //rect(0,150,1200,350);
-    //endShape();
-     //noFill();
 
-  //if (axis == Y_AXIS) {  // Top to bottom gradient
-    //for (int i = 50; i <= 500; i++) {
-      //float inter = map(i, 50, 200, 0, 1);
-      //color c = lerpColor(c1, c2, inter);
-      //stroke(c);
-      //line(0, i, 1200, i);
-    //}
-    
-    //fill(225);
-    //rect(0,175,150,325);
-    
-    //fill(225);
-    //rect(1050,175,150,325);
-    
     fill(70,129,105);
     rect(0,50,1200,420);
     
-    //fill(255);
-    //rect(225,300,675,200);
+    noStroke();
+    fill(255);
     
-    //fill(c1,50);
-    //rect(225,300,675,200);
+    btn_serial_up.Draw();
+    btn_serial_dn.Draw();
+    btn_serial_connect.Draw();
+    btn_serial_list_refresh.Draw();
+    fill(255);
+    PImage logo;
+    logo = loadImage("BurkeLogo.png");
+    image(logo,400,390);
+    
+    beginShape();
+    //fill(0);
+    //rect(0,0,1200,200);
+    fill(255);
+    rect(0,0,1200,50);
+    endShape();
+    
+    stroke(0);
+    textFont(F,96);
+    fill(255);
+    //text("A Custom Device for",550,600);
+    //text("Finger-Pinch Rehabilitation",550,650);
+    textFont(F,26);
+    fill(0);
+    textAlign(BASELINE);
+    text("The City College of New York | Department of Biomedical Engineering",10,35);
+    DrawTextBox("Select the serial port",serial_list,force_x,force_y - 100,240,60);
+  }
+  if (screen.equals("main")){
+    background(255);
+    noStroke();
 
+    fill(70,129,105);
+    rect(0,50,1200,420);
     
     noStroke();
     fill(255);
@@ -48,11 +59,6 @@ void drawScreen(String screen){
     fill(255);
     rect(0,0,1200,50);
     endShape();
-    
-    //void setGradient(int x, int y, float w, float h, color c1, color c2, int axis ) {
-
- 
-  //}  
     
     stroke(0);
     textFont(F,96);
@@ -448,19 +454,33 @@ void drawScreen(String screen){
     rect(0,height/2-50,width, height/2+50);
     beginShape();
     noStroke();
-    makeButton(dlh_textx,dist_texty,textwidth_dist,textheight_dist,"Left Hand",255,255,255,255,255,255,0);
+    makeButton(dlh_textx,dist_texty-90,textwidth_dist,textheight_dist,"Left Hand",255,255,255,255,255,255,0);
     fill(0);
     dlh_trun = truncate(dlh);
-    text(str(dlh_trun) + "\u00b0",dlh_textx + text_x_pad,dist_texty+90);
+    
+    //NEW 6.23
+    computeMaxDist(1);
+    String maxdlhdisp = "Max: " + str(maxdlh_trun) + "\u00b0";
+    text(maxdlhdisp,dlh_textx + text_x_pad,dist_texty+90);
+    //END NEW 6.23
+    
+    text(str(dlh_trun) + "\u00b0",dlh_textx + text_x_pad,dist_texty);
     endShape();
     
     fill(255);
     beginShape();
     noStroke();
-    makeButton(drh_textx,dist_texty,textwidth_dist,textheight_dist,"Right Hand",255,255,255,255,255,255,0);
+    makeButton(drh_textx,dist_texty-90,textwidth_dist,textheight_dist,"Right Hand",255,255,255,255,255,255,0);
     fill(0);
     drh_trun = truncate(drh);
-    text(str(drh_trun) + "\u00b0",drh_textx + text_x_pad,dist_texty+90);
+    
+    //NEW 6.23
+    computeMaxDist(2);
+    String maxdrhdisp = "Max: " + str(maxdrh_trun) + "\u00b0";
+    text(maxdrhdisp,drh_textx + text_x_pad,dist_texty+90);
+    //END NEW 6.23
+    
+    text(str(drh_trun) + "\u00b0",drh_textx + text_x_pad,dist_texty);
     endShape();
         
     float temp_start = map(dlh,0,90,0,PI/2);
@@ -472,6 +492,11 @@ void drawScreen(String screen){
     distbar_right.changeAngleEnd(PI + temp_end);
     distbar_right.changeColor(0,0,0);
     distbar_right.drawCurve();
+    
+    //NEW 6.23
+    drawMinMaxBar(1,maxdlh_trun);
+    drawMinMaxBar(2,maxdrh_trun);
+    //END NEW 6.23
 
     //// Line Graph for left hand
     //stroke(255,153,153);

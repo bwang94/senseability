@@ -1,3 +1,5 @@
 void mouseClicked(){
-  update();
+  if (!isPortSelect){
+    update();
+  }
 }

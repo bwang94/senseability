@@ -20,5 +20,7 @@ void resetScreen(String screen){
     lastxPos_dlh = 1;
     lastheight_dlh = 0;
     isFirstRun = false;
+    maxdrh = 0;
+    maxdlh = 0;
   }
 }

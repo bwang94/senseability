@@ -10,7 +10,7 @@ class PinchTest{
   boolean passround; //Has the current round passed
   int roundduration; // In milliseconds, how much time a user needs to hold the force/angle within tolerance of currentroundtarget to pass the round
   int timeoutduration; // In milliseconds, how long each round will last before moving on
-  int starttime; // In ms;
+  int starttime; // In ms; Start time of the current round
   int currenttime; // In ms
   int numskips; //Number of rounds skipped;
   int skipcutoff; //Number of rounds that, when skipped, will cause test to end;
@@ -40,6 +40,7 @@ class PinchTest{
   
   int forcetestpos;
   
+  Table testdata; //Columns headers: round #, target, was target met, time spent on target, total elapsed time
   //TODO - PAUSE DURATION
   
   PinchTest(String t, String m){
@@ -50,6 +51,12 @@ class PinchTest{
     numskips = 0;
     skipcutoff = -1;
     forcetestpos = -1;
+    testdata = new Table();
+    testdata.addColumn("Round");
+    testdata.addColumn("Target");
+    testdata.addColumn("PassSkip");
+    testdata.addColumn("TimeOnTarget");
+    testdata.addColumn("TotalTime");
   }
   
   PinchTest(String t, String m, int rounds, int duration){
@@ -151,6 +158,7 @@ class PinchTest{
   void startTest(){
     testStarted = true;
     teststarttime = millis();
+    testdata.addRow();
   }
   
   boolean isRoundStarted(){
@@ -259,7 +267,14 @@ class PinchTest{
       timemet = 0;
       roundPassed = false;
       roundresults.append("Skip");
-      println("Round results size " + roundresults.size());
+      //NEW 7.1.16
+      testdata.setInt(currentround - 1, "Round", currentround);
+      testdata.setFloat(currentround - 1, "Target", currentroundtarget);
+      testdata.setString(currentround - 1, "PassSkip", "Skip");
+      testdata.setInt(currentround - 1, "TimeOnTarget", timeoutduration);
+      testdata.setInt(currentround - 1, "TotalTime", currenttime - teststarttime);
+      //END NEW 7.1.16
+      //println("Round results size " + roundresults.size());
     }
     if (timemet >= roundduration){
       isRoundComplete = true;  
@@ -267,7 +282,14 @@ class PinchTest{
       timemet = 0;
       roundPassed = true;
       roundresults.append("Pass");
-      println("Round results size " + roundresults.size());
+      //NEW 7.1.16
+      testdata.setInt(currentround - 1, "Round", currentround);
+      testdata.setFloat(currentround - 1, "Target", currentroundtarget);
+      testdata.setString(currentround - 1, "PassSkip", "Pass");
+      testdata.setInt(currentround - 1, "TimeOnTarget", currenttime - starttime);
+      testdata.setInt(currentround - 1, "TotalTime", currenttime - teststarttime);
+      //NEW 7.1.16
+      //println("Round results size " + roundresults.size());
     }
     if (isRoundComplete){
       lastroundcompletetime = millis();
@@ -371,8 +393,7 @@ class PinchTest{
       this.chooseTargetColor();
       rect(xposB - 30, height - drawtarget - thickness/2, 260, thickness);
     }
-    //For Distance
-    //We know radius of the curvebar is 700 units
+    //we know radius of the curvebar is 700 units
     //We know xpos of curvebars are 100 and 1100, respectively
     //Center of currenttarget line should be at ypos of 700*sin(angle) from bottom and xpos of 700*cos(angle) from xpos start of curvebar
     //Start of line should be at centerx - 50*sin(angle), center y - 50*cos(angle)
@@ -465,6 +486,24 @@ class PinchTest{
     }
   }
   
+  void forceEndTest(){
+    currenttime = millis();
+    testStarted = false;
+    testCompleted = true;
+    roundStarted = false;
+    timeelapsed = millis() - teststarttime;
+    if (currentround < numrounds){
+      numskips++;
+    }
+    //NEW 7.1.16
+    testdata.setInt(currentround - 1, "Round", currentround);
+    testdata.setFloat(currentround - 1, "Target", currentroundtarget);
+    testdata.setString(currentround - 1, "PassSkip", "Skip");
+    testdata.setInt(currentround - 1, "TimeOnTarget", currenttime - starttime);
+    testdata.setInt(currentround - 1, "TotalTime", currenttime - teststarttime);
+    //NEW 7.1.16
+  }
+  
   void resetTest(){
     roundtargets.clear();
     testCompleted = false;
@@ -482,6 +521,7 @@ class PinchTest{
     startbound = -1;
     endbound = -1;
     roundresults.clear();
+    testdata.clearRows();
   }
   
   void displaySummary(){
@@ -489,7 +529,7 @@ class PinchTest{
     beginShape();
     noStroke();
     fill(255);
-    rect(0,0,300,height);
+    rect(0,0,800,height);
     endShape();
     fill(0);
     text("Time Elapsed (s)",30,240);
@@ -516,7 +556,19 @@ class PinchTest{
       text("Test Position:",30,480);    
       text(postext,30,510);
     }
-    
+    //NEW 7.1.16
+    String filename;
+    String fulltype;
+    if (type.equals("Force")){
+      fulltype = mode + type + postext;
+    }
+    else{
+      fulltype = mode + type;
+    }
+    filename = String.valueOf(month()) + "_" + String.valueOf(day()) + "_" + String.valueOf(year()) + "_" + String.valueOf(hour()) + "_" + String.valueOf(minute()) + "_" + String.valueOf(second()) + "_" + fulltype + ".csv";
+    saveTable(testdata, filename);
+    text("Data saved to: " + filename, 30, 540);
+    //END NEW 7.1.16
   }
   void displayErrorMessageOn(){
     errorstarttime = millis();  

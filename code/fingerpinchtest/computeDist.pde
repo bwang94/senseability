@@ -32,5 +32,64 @@ void computeDist(){
     drh = 0;
   }
   drhdraw = map(drh,0,90,0,height/2-100);
-  println(resist_dlh);
+  //println(resist_dlh);
+}
+
+//void computeMinDist(int hand){
+//    //1 = left, 2 = right
+//    if (hand == 1){
+//      if (dlh < mindlh){
+//        mindlh = dlh;
+//      }
+//    }
+//    else{
+//      if (drh < mindrh){
+//        mindrh = drh;
+//      }
+//    }
+//}
+
+void computeMaxDist(int hand){
+   //1 = left, 2 = right
+   if (hand == 1){
+     if (dlh > mindlh){
+       maxdlh = dlh;
+       maxdlh_trun = truncate(maxdlh);
+     }
+   }
+   else{
+     if (drh > mindrh){
+       maxdrh = drh;
+       maxdrh_trun = truncate(maxdrh);
+     }
+   }
+}
+
+void drawMinMaxBar(int hand, float value){
+  //1 = left, 2 = right
+  if (hand == 1){
+      float targetcenter_x = dlh_xstart + distdraw_width/2*cos(radians(value));
+      float targetcenter_y = height - distdraw_height/2*sin(radians(value));
+      float targetstart_x = targetcenter_x - 50*cos(radians(value));
+      float targetstart_y = targetcenter_y + 50*sin(radians(value));
+      float targetend_x = targetcenter_x + 50*cos(radians(value));
+      float targetend_y = targetcenter_y - 50*sin(radians(value)); 
+      strokeWeight(15);
+      stroke(102,255,102);
+      line(targetstart_x,targetstart_y,targetend_x,targetend_y);
+      noStroke();
+    }
+    else{
+      float targetcenter_x = drh_xstart - distdraw_width/2*cos(radians(value));
+      float targetcenter_y = height - distdraw_height/2*sin(radians(value));
+      float targetstart_x = targetcenter_x - 50*cos(radians(value));
+      float targetstart_y = targetcenter_y - 50*sin(radians(value));
+      float targetend_x = targetcenter_x + 50*cos(radians(value));
+      float targetend_y = targetcenter_y + 50*sin(radians(value)); 
+      strokeWeight(15);
+      stroke(102,255,102);
+      line(targetstart_x,targetstart_y,targetend_x,targetend_y);
+      noStroke();
+    }
+  
 }
